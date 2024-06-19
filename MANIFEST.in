@@ -1,0 +1,28 @@
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include HISTORY.rst
+include LICENSE
+include README.rst
+
+recursive-include tests *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
+
+
+include setup.py
+include nlptools/VERSION
+include nlptools/utils/*.py
+include nlptools/arabiner/*.py
+include nlptools/arabert/*.py
+include nlptools/DataDownload/*.py
+include nlptools/morphology/*.py
+include nlptools/salma/*.py
+include nlptools/CLI/arabiner/bin/*.py
+include nlptools/CLI/morphology/*.py
+include nlptools/CLI/salma/*.py
+include nlptools/CLI/utils/*.py
+include nlptools/CLI/DataDownload/*.py
+include tests/*.py
+global-exclude *~
