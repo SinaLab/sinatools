@@ -1,0 +1,18 @@
+[console_scripts]
+arabi_ner = nlptools.CLI.arabiner.bin.infer:main
+arabi_ner2 = nlptools.CLI.arabiner.bin.infer2:main
+install_env = nlptools.install_env:main
+sina_alma_multi_word = nlptools.CLI.morphology.ALMA_multi_word:main
+sina_appdatadir = nlptools.CLI.DataDownload.get_appdatadir:main
+sina_arStrip = nlptools.CLI.utils.arStrip:main
+sina_corpus_tokenizer = nlptools.CLI.utils.corpus_tokenizer:main
+sina_download_files = nlptools.CLI.DataDownload.download_files:main
+sina_implication = nlptools.CLI.utils.implication:main
+sina_jaccard_similarity = nlptools.CLI.utils.jaccard:main
+sina_morph_analyze = nlptools.CLI.morphology.morph_analyzer:main
+sina_remove_latin = nlptools.CLI.utils.latin_remove:main
+sina_remove_punctuation = nlptools.CLI.utils.remove_Punc:main
+sina_salma = nlptools.CLI.salma.salma_tools:main
+sina_sentence_tokenize = nlptools.CLI.utils.sentence_tokenizer:main
+sina_transliterate = nlptools.CLI.utils.text_transliteration:main
+
