@@ -1,8 +1,8 @@
-nlptools.CLI.morphology
+sinatools.CLI.morphology
 =======================
 
 
-.. automodule:: nlptools.CLI.morphology
+.. automodule:: sinatools.CLI.morphology
    :members:
    :undoc-members:
    :show-inheritance:

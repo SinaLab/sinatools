@@ -1,5 +1,5 @@
-nlptools.utils.implication
+sinatools.utils.implication
 ++++++++++++++++++++++++++
 
-.. automodule:: nlptools.utils.implication
+.. automodule:: sinatools.utils.implication
    :members:

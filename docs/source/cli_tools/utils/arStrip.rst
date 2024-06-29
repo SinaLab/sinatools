@@ -1,5 +1,5 @@
-nlptools.CLI.utils.arStrip
+sinatools.CLI.utils.arStrip
 ++++++++++++++++++++++++++
 
-.. automodule:: nlptools.CLI.utils.arStrip
+.. automodule:: sinatools.CLI.utils.arStrip
    :members:

@@ -1,5 +1,5 @@
-nlptools.utils.text_transliteration
+sinatools.utils.text_transliteration
 +++++++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.utils.text_transliteration
+.. automodule:: sinatools.utils.text_transliteration
    :members:

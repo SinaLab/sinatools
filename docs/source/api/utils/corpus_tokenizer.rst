@@ -1,5 +1,5 @@
-nlptools.utils.corpus_tokenizer
+sinatools.utils.corpus_tokenizer
 +++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.utils.corpus_tokenizer
+.. automodule:: sinatools.utils.corpus_tokenizer
    :members:

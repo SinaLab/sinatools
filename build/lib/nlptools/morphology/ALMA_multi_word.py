@@ -1,13 +1,13 @@
-from nlptools.morphology import settings 
-from nlptools.utils.parser import arStrip
+from sinatools.utils.parser import arStrip
 import json
+from . import dictionary
 
 
 def ALMA_multi_word(multi_word):
     undiac_multi_word = arStrip(multi_word, True, True, True, False, True, False)  # diacs , smallDiacs , shaddah ,  digit , alif , specialChars
     result_word = []
-    if undiac_multi_word in settings.div_dic.keys():
-        result_word = settings.div_dic[undiac_multi_word]
+    if undiac_multi_word in dictionary.keys():
+        result_word = dictionary[undiac_multi_word]
     
     my_json = {}
     glosses_list = []

@@ -1,7 +1,7 @@
-nlptools.utils.parser
+sinatools.utils.parser
 +++++++++++++++++++++
 
-.. automodule:: nlptools.utils.parser
+.. automodule:: sinatools.utils.parser
    :members:
    :show-inheritance:
 

@@ -1,8 +1,8 @@
-nlptools.CLI.utils
+sinatools.CLI.utils
 ==================
 
 
-.. automodule:: nlptools.CLI.utils
+.. automodule:: sinatools.CLI.utils
    :members:
    :undoc-members:
    :show-inheritance:

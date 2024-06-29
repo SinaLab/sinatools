@@ -14,13 +14,13 @@ You will need Python 3.10.8 (64-bit) as well as
 Install using pip
 ^^^^^^^^^^^^^^^^^
 
-To install nlptools, run this command in your terminal:
+To install sinatools, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install nlptools
+    $ pip install sinatools
 
-This is the preferred method to install nlptools, as it will always install the most recent stable release.
+This is the preferred method to install sinatools, as it will always install the most recent stable release.
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
 you through the process.
@@ -32,19 +32,19 @@ you through the process.
 Install from source
 ^^^^^^^^^^^^^^^^^^^
 
-The sources for nlptools can be downloaded from the `Github repo`_
+The sources for sinatools can be downloaded from the `Github repo`_
 
 You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/SinaLab/nlptools/
+    $ git clone git://github.com/SinaLab/sinatools/
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl -OJL https://github.com/SinaLab/nlptools/tarball/master
+    $ curl -OJL https://github.com/SinaLab/sinatools/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -53,8 +53,8 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/SinaLab/nlptools/
-.. _tarball: https://github.com/SinaLab/nlptools/tarball/master
+.. _Github repo: https://github.com/SinaLab/sinatools/
+.. _tarball: https://github.com/SinaLab/sinatools/tarball/master
 
 
 Installing data
@@ -64,7 +64,7 @@ To install the data sets required by SinaTools See :doc:`reference/packages`.
 
 
 By default, data is stored in
-``C:\Users\your_user_name\AppData\Roaming\nlptools``.
+``C:\Users\your_user_name\AppData\Roaming\sinatools``.
 
 
 Next Steps

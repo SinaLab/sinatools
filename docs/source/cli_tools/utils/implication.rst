@@ -1,5 +1,5 @@
-nlptools.CLI.utils.implication
+sinatools.CLI.utils.implication
 ++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.CLI.utils.implication
+.. automodule:: sinatools.CLI.utils.implication
    :members:

@@ -1,8 +1,8 @@
-nlptools.utils
+sinatools.utils
 ==============
 
 
-.. automodule:: nlptools.utils
+.. automodule:: sinatools.utils
    :members:
    :undoc-members:
    :show-inheritance:

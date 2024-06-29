@@ -1,8 +1,8 @@
-nlptools.arabiner
+sinatools.arabiner
 =================
 
 
-.. automodule:: nlptools.arabiner
+.. automodule:: sinatools.arabiner
    :members:
    :undoc-members:
    :show-inheritance:

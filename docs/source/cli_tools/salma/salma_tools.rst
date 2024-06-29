@@ -1,8 +1,8 @@
-nlptools.CLI.salma.salma_tools
+sinatools.CLI.salma.salma_tools
 ==============================
 
 
-.. automodule:: nlptools.CLI.salma.salma_tools
+.. automodule:: sinatools.CLI.salma.salma_tools
    :members:
    :show-inheritance:
 

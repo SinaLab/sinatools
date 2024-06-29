@@ -1,5 +1,5 @@
-nlptools.CLI.utils.jaccard
+sinatools.CLI.utils.jaccard
 +++++++++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.CLI.utils.jaccard
+.. automodule:: sinatools.CLI.utils.jaccard
    :members:

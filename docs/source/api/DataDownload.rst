@@ -1,8 +1,8 @@
-nlptools.DataDownload
+sinatools.DataDownload
 =====================
 
 
-.. automodule:: nlptools.DataDownload
+.. automodule:: sinatools.DataDownload
    :members:
    :undoc-members:
    :show-inheritance:

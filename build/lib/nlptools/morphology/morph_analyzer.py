@@ -1,9 +1,9 @@
 
-from nlptools.morphology import settings 
+from . import dictionary
 import re
-from nlptools.morphology.tokenizers_words import simple_word_tokenize
-from nlptools.utils.parser import arStrip
-from nlptools.morphology.charsets import AR_CHARSET, AR_DIAC_CHARSET
+from sinatools.morphology.tokenizers_words import simple_word_tokenize
+from sinatools.utils.parser import arStrip
+from sinatools.morphology.charsets import AR_CHARSET, AR_DIAC_CHARSET
 
 _IS_AR_RE = re.compile(u'^[' + re.escape(u''.join(AR_CHARSET)) + u']+$')
 def find_solution(token, language, task):
@@ -24,9 +24,9 @@ def find_solution(token, language, task):
         If no sloution is found for this token, an empty list is returned.
     """
     
-    if token in settings.div_dic.keys():
+    if token in dictionary.keys():
         resulted_solutions = [] 
-        solutions = settings.div_dic[token]
+        solutions = dictionary[token]
         for solution in solutions:
             resulted_solutions.append([token, solution[0], solution[1], solution[3]])
         return resulted_solutions
@@ -57,7 +57,7 @@ def analyze(text, language ='MSA', task ='full'):
      .. highlight:: python
      .. code-block:: python
      
-          from nlptools.morphology import morph_analyzer
+          from sinatools.morphology import morph_analyzer
      
           #Return the morpological solution for each token in this text
           #Example: task = full 

@@ -1,5 +1,5 @@
-nlptools.CLI.DataDownload.download_files
+sinatools.CLI.DataDownload.download_files
 ++++++++++++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.CLI.DataDownload.download_files
+.. automodule:: sinatools.CLI.DataDownload.download_files
    :members:

@@ -1,5 +1,5 @@
-nlptools.CLI.morphology.morph_analyzer
+sinatools.CLI.morphology.morph_analyzer
 ++++++++++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.CLI.morphology.morph_analyzer
+.. automodule:: sinatools.CLI.morphology.morph_analyzer
    :members:

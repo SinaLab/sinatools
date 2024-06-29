@@ -1,6 +1,6 @@
-from nlptools.morphology import settings 
+from sinatools.morphology import settings 
 import pickle
-from nlptools.DataDownload import downloader
+from sinatools.DataDownload import downloader
 import os 
 
 #filename = 'ALMA27012000.pickle'

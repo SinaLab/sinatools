@@ -1,8 +1,8 @@
-nlptools.CLI.DataDownload
+sinatools.CLI.DataDownload
 =========================
 
 
-.. automodule:: nlptools.CLI.DataDownload
+.. automodule:: sinatools.CLI.DataDownload
    :members:
    :undoc-members:
    :show-inheritance:

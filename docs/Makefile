@@ -5,7 +5,7 @@
 SOURCEDIR     = source
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build -c $(SOURCEDIR) -c $(SOURCEDIR)/config
-SPHINXPROJ    = nlptools
+SPHINXPROJ    = sinatools
 BUILDDIR      = _build
 
 # Put it first so that "make" without argument is like "make help".

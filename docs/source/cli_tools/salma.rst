@@ -1,8 +1,8 @@
-nlptools.CLI.salma
+sinatools.CLI.salma
 ==================
 
 
-.. automodule:: nlptools.CLI.salma
+.. automodule:: sinatools.CLI.salma
    :members:
    :undoc-members:
    :show-inheritance:

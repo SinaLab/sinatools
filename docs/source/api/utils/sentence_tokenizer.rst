@@ -1,5 +1,5 @@
-nlptools.utils.sentence_tokenizer
+sinatools.utils.sentence_tokenizer
 +++++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.utils.sentence_tokenizer
+.. automodule:: sinatools.utils.sentence_tokenizer
    :members:

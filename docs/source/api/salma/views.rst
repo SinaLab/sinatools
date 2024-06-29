@@ -1,8 +1,8 @@
-nlptools.salma.views
+sinatools.salma.views
 ++++++++++++++++++++
 
 
-.. automodule:: nlptools.salma.views
+.. automodule:: sinatools.salma.views
    :members:
    :show-inheritance:
 

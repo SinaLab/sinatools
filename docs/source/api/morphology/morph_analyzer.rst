@@ -1,7 +1,7 @@
-nlptools.morphology.morph_analyzer
+sinatools.morphology.morph_analyzer
 ++++++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.morphology.morph_analyzer
+.. automodule:: sinatools.morphology.morph_analyzer
    :members:
 
 

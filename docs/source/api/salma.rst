@@ -1,8 +1,8 @@
-nlptools.salma
+sinatools.salma
 ==============
 
 
-.. automodule:: nlptools.salma
+.. automodule:: sinatools.salma
    :members:
    :show-inheritance:
 

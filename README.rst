@@ -1,15 +1,15 @@
 ========
-nlptools
+sinatools
 ========
 
 
-.. image:: https://img.shields.io/pypi/v/nlptools.svg
+.. image:: https://img.shields.io/pypi/v/sinatools.svg
         :target: https://pypi.python.org/pypi/SinaTools
 
-.. image:: https://img.shields.io/travis/sina_institute/nlptools.svg
+.. image:: https://img.shields.io/travis/sina_institute/sinatools.svg
         :target: https://travis-ci.com/sina_institute/SinaTools
 
-.. image:: https://readthedocs.org/projects/nlptools/badge/?version=latest
+.. image:: https://readthedocs.org/projects/sinatools/badge/?version=latest
         :target: https://SinaTools.readthedocs.io/en/latest/?version=latest
         :alt: Documentation Status
 

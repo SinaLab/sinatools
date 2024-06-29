@@ -1,52 +1,62 @@
-Metadata-Version: 1.0
+Metadata-Version: 2.1
 Name: SinaTools
 Version: 0.1.4
-Summary: UNKNOWN
-Home-page: https://github.com/SinaLab/nlptools
-Author: UNKNOWN
-Author-email: UNKNOWN
+Home-page: https://github.com/SinaLab/sinatools
 License: MIT license
-Description: ========
-        nlptools
-        ========
-        
-        
-        .. image:: https://img.shields.io/pypi/v/nlptools.svg
-                :target: https://pypi.python.org/pypi/SinaTools
-        
-        .. image:: https://img.shields.io/travis/sina_institute/nlptools.svg
-                :target: https://travis-ci.com/sina_institute/SinaTools
-        
-        .. image:: https://readthedocs.org/projects/nlptools/badge/?version=latest
-                :target: https://SinaTools.readthedocs.io/en/latest/?version=latest
-                :alt: Documentation Status
-        
-        
-        
-        
-        Python Boilerplate contains all the boilerplate you need to create a Python package.
-        
-        
-        * Free software: MIT license
-        * Documentation: https://sina.birzeit.edu/sinatools/
-        
-        
-        Credits
-        -------
-        
-        This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
-        
-        .. _Cookiecutter: https://github.com/audreyr/cookiecutter
-        .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
-        
-        
-        =======
-        History
-        =======
-        
-        0.1.2 (2024-06-04)
-        ------------------
-        
-        
-Keywords: nlptools
-Platform: UNKNOWN
+Keywords: sinatools
+License-File: LICENSE
+License-File: AUTHORS.rst
+Requires-Dist: six
+Requires-Dist: farasapy
+Requires-Dist: tqdm
+Requires-Dist: requests
+Requires-Dist: regex
+Requires-Dist: pathlib
+Requires-Dist: torch==1.13.0
+Requires-Dist: transformers==4.24.0
+Requires-Dist: torchtext==0.14.0
+Requires-Dist: torchvision==0.14.0
+Requires-Dist: seqeval==1.2.2
+Requires-Dist: natsort==7.1.1
+
+========
+sinatools
+========
+
+
+.. image:: https://img.shields.io/pypi/v/sinatools.svg
+        :target: https://pypi.python.org/pypi/SinaTools
+
+.. image:: https://img.shields.io/travis/sina_institute/sinatools.svg
+        :target: https://travis-ci.com/sina_institute/SinaTools
+
+.. image:: https://readthedocs.org/projects/sinatools/badge/?version=latest
+        :target: https://SinaTools.readthedocs.io/en/latest/?version=latest
+        :alt: Documentation Status
+
+
+
+
+Python Boilerplate contains all the boilerplate you need to create a Python package.
+
+
+* Free software: MIT license
+* Documentation: https://sina.birzeit.edu/sinatools/
+
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+
+=======
+History
+=======
+
+0.1.2 (2024-06-04)
+------------------
+

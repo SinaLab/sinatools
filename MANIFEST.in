@@ -12,17 +12,17 @@ recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
 
 
 include setup.py
-include nlptools/VERSION
-include nlptools/utils/*.py
-include nlptools/arabiner/*.py
-include nlptools/arabert/*.py
-include nlptools/DataDownload/*.py
-include nlptools/morphology/*.py
-include nlptools/salma/*.py
-include nlptools/CLI/arabiner/bin/*.py
-include nlptools/CLI/morphology/*.py
-include nlptools/CLI/salma/*.py
-include nlptools/CLI/utils/*.py
-include nlptools/CLI/DataDownload/*.py
+include sinatools/VERSION
+include sinatools/utils/*.py
+include sinatools/arabiner/*.py
+include sinatools/arabert/*.py
+include sinatools/DataDownload/*.py
+include sinatools/morphology/*.py
+include sinatools/salma/*.py
+include sinatools/CLI/arabiner/bin/*.py
+include sinatools/CLI/morphology/*.py
+include sinatools/CLI/salma/*.py
+include sinatools/CLI/utils/*.py
+include sinatools/CLI/DataDownload/*.py
 include tests/*.py
 global-exclude *~

@@ -1,7 +1,7 @@
-nlptools.DataDownload.downloader
+sinatools.DataDownload.downloader
 ++++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.DataDownload.downloader
+.. automodule:: sinatools.DataDownload.downloader
    :members:
 
 

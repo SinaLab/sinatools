@@ -1,5 +1,5 @@
-nlptools.CLI.morphology.ALMA_multi_word
+sinatools.CLI.morphology.ALMA_multi_word
 +++++++++++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.CLI.morphology.ALMA_multi_word
+.. automodule:: sinatools.CLI.morphology.ALMA_multi_word
    :members:

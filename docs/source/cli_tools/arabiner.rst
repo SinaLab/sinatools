@@ -1,8 +1,8 @@
-nlptools.CLI.arabiner.bin
+sinatools.CLI.arabiner.bin
 =========================
 
 
-.. automodule:: nlptools.CLI.arabiner.bin
+.. automodule:: sinatools.CLI.arabiner.bin
    :members:
    :undoc-members:
    :show-inheritance:

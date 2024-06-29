@@ -4,8 +4,8 @@
 
 
 import re
-from nlptools.morphology.charsets import UNICODE_PUNCT_SYMBOL_CHARSET
-from nlptools.morphology.charsets import UNICODE_LETTER_MARK_NUMBER_CHARSET
+from sinatools.morphology.charsets import UNICODE_PUNCT_SYMBOL_CHARSET
+from sinatools.morphology.charsets import UNICODE_LETTER_MARK_NUMBER_CHARSET
 
 
 _ALL_PUNCT = u''.join(UNICODE_PUNCT_SYMBOL_CHARSET)

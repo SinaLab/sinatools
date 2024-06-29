@@ -18,11 +18,11 @@ import sys
 # # Path to the parent directory of the documentation directory
 # parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-# # Path to the nlptools package directory
-# nlptools_dir = os.path.join(parent_dir, 'nlptools')
+# # Path to the sinatools package directory
+# sinatools_dir = os.path.join(parent_dir, 'sinatools')
 
-# # Insert the nlptools directory at the beginning of the system path
-# #sys.path.insert(0, nlptools_dir)
+# # Insert the sinatools directory at the beginning of the system path
+# #sys.path.insert(0, sinatools_dir)
 sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Extension Imports -------------------------------------------------------
@@ -32,7 +32,7 @@ from recommonmark.parser import CommonMarkParser
 
 # -- Project information -----------------------------------------------------
 
-project = 'nlptools'
+project = 'sinatools'
 copyright = '2023, Birzeit University'
 author = 'SinaLab'
 
@@ -127,7 +127,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'nlptools_doc'
+htmlhelp_basename = 'sinatools_doc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -154,7 +154,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'nlptools.tex', 'NLP Tools Documentation',
+    (master_doc, 'sinatools.tex', 'NLP Tools Documentation',
      'SinaLab', 'manual'),
 ]
 
@@ -164,7 +164,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'nlptools', 'nlptools Documentation',
+    (master_doc, 'sinatools', 'sinatools Documentation',
      [author], 1)
 ]
 
@@ -175,8 +175,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'nlptools', 'nlptools Documentation',
-     author, 'nlptools',
+    (master_doc, 'sinatools', 'sinatools Documentation',
+     author, 'sinatools',
      'Arabic NLP tools'
      ,
      'Miscellaneous'),

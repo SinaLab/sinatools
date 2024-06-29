@@ -1,8 +1,8 @@
-nlptools.arabiner.bin.infer
+sinatools.arabiner.bin.infer
 +++++++++++++++++++++++++++
 
 
-.. automodule:: nlptools.arabiner.bin.infer
+.. automodule:: sinatools.arabiner.bin.infer
    :members:
    :show-inheritance:
 

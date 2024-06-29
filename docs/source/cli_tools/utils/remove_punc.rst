@@ -1,5 +1,5 @@
-nlptools.CLI.utils.remove_punc
+sinatools.CLI.utils.remove_punc
 ++++++++++++++++++++++++++++++
 
-.. automodule:: nlptools.CLI.utils.remove_punc
+.. automodule:: sinatools.CLI.utils.remove_punc
    :members:
