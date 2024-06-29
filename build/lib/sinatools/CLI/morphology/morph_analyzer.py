@@ -1,7 +1,7 @@
 """
 About:
 ------
-The sina_morph_analyze tool is designed to provide morphological analysis for Arabic text using the SinaTools' `analyze` utility. Users can specify the language and desired analysis task (e.g., lemmatization, part-of-speech tagging, or a full morphological analysis).
+This sina_morph_analyze command processes an input text/file and returns morphological analysis for each token within the text, based on the specified language, task, and flag.
 
 Usage:
 ------
@@ -29,29 +29,22 @@ Options:
 
   --task TASK [default=full]
         Determines the specific type of morphological analysis to be performed. Available options are:
-          - lemmatizer: Provides lemmatization results.
-          - pos: Provides part-of-speech tagging.
-          - full: Provides a comprehensive morphological analysis.
-        The default is a full morphological analysis.
+          - lemmatization: the morphological solution includes only the lemma_id, lemma, token, and token frequency.
+          - pos: the morphological solution includes only the part-of-speech, token, and token frequency.
+          - root: the morphological solution includes only the root, token, and token frequency.
+          - full: the morphological solution includes the lemma_id, lemma, part-of-speech, root, token, and token frequency.
+        The default is full.
+  
+  --flag FLAG [default=1]
+        The flag to filter the returned results. If the flag is `1`, the solution with the highest frequency will be returned. If the flag is `*`, all solutions will be returned, ordered descendingly, with the highest frequency solution first. The default flag if not specified is `1`.
 
 Examples:
 ---------
 
 .. code-block:: none
 
-  sina_morph_analyze --text "Your Arabic text here" --language MSA --task full
-  sina_morph_analyze --text "Your Arabic text here" --task lemmatizer
-  sina_morph_analyze --file "path/to/your/file.txt" --language MSA --task full
-  sina_morph_analyze --file "path/to/your/file.txt" --task lemmatizer
-
-Note:
------
-
-.. code-block:: none
-  
-  - Ensure that the text input is appropriately encoded in UTF-8 or compatible formats.
-  - The quality and accuracy of the analysis depend on the underlying capabilities of the SinaTools' `analyze` utility.
-  - The analysis can be influenced by the choice of language. Ensure you are using the correct language setting.
+  sina_morph_analyze --text "Your Arabic text here" --language MSA --task full --flag 1
+  sina_morph_analyze --file "path/to/your/file.txt" --language MSA --task full --flag 1
 
 """
 
@@ -66,8 +59,8 @@ def main():
     parser.add_argument('--text', type=str, help='Text to be morphologically analyzed')
     parser.add_argument('--file', type=str, help='File containing the text to be morphologically analyzed')
     parser.add_argument('--language', type=str, default='MSA', help='Language for analysis (default: MSA)')
-    parser.add_argument('--task', type=str, default='full', choices=['lemmatizer', 'pos', 'full'], 
-                        help='Task for the result filter [lemmatizer, pos, full] (default: full)')
+    parser.add_argument('--task', type=str, default='full', choices=['lemmatization', 'pos', 'root', 'full'], help='Task for the result filter [lemmatization, pos, root, full] (default: full)')
+    parser.add_argument('--flag', type=str, default='1', choices=['1','*'], help='The flag to filter the returned results')
 
     args = parser.parse_args()
 
@@ -79,13 +72,11 @@ def main():
     input_text = args.text if args.text else " ".join(read_file(args.file))
 
     # Perform morphological analysis
-    results = analyze(input_text, args.language, args.task)
-    
+    results = analyze(input_text, args.language, args.task, args.flag)
+
     # Print the results
     for result in results:
         print(result)
 
 if __name__ == '__main__':
     main()
-#sina_morph_analyze --text "Your Arabic text here" --language MSA --task full
-#sina_morph_analyze --file "path/to/your/file.txt" --language MSA --task full
