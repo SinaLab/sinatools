@@ -1,7 +1,7 @@
 """
 About:
 ------
-This sina_morph_analyze command processes an input text/file and returns morphological analysis for each token within the text, based on the specified language, task, and flag.
+The sina_morph_analyze command is designed to provide morphological analysis for Arabic text using the SinaTools morph_analyzer component. Users can specify the language and desired analysis task (lemmatization, part-of-speech tagging, or full morphological analysis), and flag.
 
 Usage:
 ------
@@ -24,8 +24,7 @@ Options:
         File containing the text to be morphologically analyzed
 
   --language LANGUAGE [default=MSA]
-        Specifies the language for the analysis. The default is MSA (Modern Standard Arabic). 
-        Use other codes as appropriate for your requirements.
+        Specifies the language for the analysis. In the current version, MSA is only supported.
 
   --task TASK [default=full]
         Determines the specific type of morphological analysis to be performed. Available options are:
@@ -54,8 +53,7 @@ from sinatools.utils.readfile import read_file
 
 def main():
     parser = argparse.ArgumentParser(description='Morphological Analysis using SinaTools')
-    
-    # Adding arguments for the text, file, language, and task
+      
     parser.add_argument('--text', type=str, help='Text to be morphologically analyzed')
     parser.add_argument('--file', type=str, help='File containing the text to be morphologically analyzed')
     parser.add_argument('--language', type=str, default='MSA', help='Language for analysis (default: MSA)')
