@@ -1,5 +1,5 @@
-sinatools.CLI.arabiner.bin.infer
+sinatools.CLI.ner.entity_extractor
 +++++++++++++++++++++++++++++++
 
-.. automodule:: sinatools.CLI.arabiner.bin.infer
+.. automodule:: sinatools.CLI.ner.entity_extractor
    :members:

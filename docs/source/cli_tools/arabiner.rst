@@ -1,8 +1,8 @@
-sinatools.CLI.arabiner.bin
+sinatools.CLI.ner
 =========================
 
 
-.. automodule:: sinatools.CLI.arabiner.bin
+.. automodule:: sinatools.CLI.ner
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,7 +12,7 @@ sinatools.CLI.arabiner.bin
    :maxdepth: 1
    :caption: Modules:
 
-   arabiner/infer
+   ner
      
    
    

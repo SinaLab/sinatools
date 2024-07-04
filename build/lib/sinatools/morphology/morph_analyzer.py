@@ -1,22 +1,25 @@
 import re
-from sinatools.morphology.tokenizers_words import simple_word_tokenize
+from sinatools.utils.tokenizers_words import simple_word_tokenize
 from sinatools.utils.parser import arStrip
-from sinatools.morphology.charsets import AR_CHARSET, AR_DIAC_CHARSET
+from sinatools.utils.charsets import AR_CHARSET, AR_DIAC_CHARSET
 from sinatools.DataDownload.downloader import get_appdatadir
 from . import dictionary
 
 _IS_AR_RE = re.compile(u'^[' + re.escape(u''.join(AR_CHARSET)) + u']+$')
 
-def find_solution(token, language):    
+def find_solution(token, language, flag):    
     if token in dictionary.keys():
         resulted_solutions = [] 
         solutions = dictionary[token]
+        if flag == '1':
+           solutions = [solutions[0]]
         for solution in solutions:
             # token, freq, lemma, lemma_id, root, pos
             resulted_solutions.append([token, solution[0], solution[1], solution[2], solution[3], solution[4]])
         return resulted_solutions
     else:
         return []
+
 
 
 def analyze(text, language ='MSA', task ='full', flag="1"):
@@ -105,43 +108,43 @@ def analyze(text, language ='MSA', task ='full', flag="1"):
             solution[5] = "Foreign" #pos
 
          else:
-            result_token = find_solution(token,language)
+            result_token = find_solution(token,language,flag)
             
             if result_token == []:
                token_without_al = re.sub(r'^[ﻝ]','',re.sub(r'^[ﺍ]','',token))
                if len(token_without_al) > 5  :
-                  result_token = find_solution(token_without_al, language)
+                  result_token = find_solution(token_without_al, language, flag)
 
             if result_token == []:
               # try with replace ﻩ with ﺓ
-               result_token = find_solution(re.sub(r'[ﻩ]$','ﺓ',token), language)
+               result_token = find_solution(re.sub(r'[ﻩ]$','ﺓ',token), language, flag)
                
 
             if result_token == []:
                # try with unify Alef
                word_with_unify_alef = arStrip(token , False , False , False , False , True , False) # Unify Alef
-               result_token = find_solution(word_with_unify_alef, language)
+               result_token = find_solution(word_with_unify_alef, language, flag)
             
             if result_token == []:
                # try with remove diac
                word_undiac = arStrip(token , True , False , True , True , False , False) # remove diacs, shaddah ,  digit
-               result_token = find_solution(word_undiac, language)
+               result_token = find_solution(word_undiac, language, flag)
 
             if result_token == []:
                # try with remove diac and unify alef
                word_undiac = arStrip(token , True , True , True , False, True , False) # diacs , smallDiacs , shaddah ,  alif
-               result_token = find_solution(word_undiac, language)
+               result_token = find_solution(word_undiac, language, flag)
 
          if result_token != []:
                output_list += result_token
          else:
             output_list += [solution]
         
-   return filter_results(output_list, task, flag)
+   return filter_results(output_list, task)
 
 
-def filter_results(data, task, flag):
-    result = []
+def filter_results(data, task):
+    filtered_data = []
     # token, freq, lemma, lemma_id, root, pos
     if task == 'lemmatization':
         filtered_data = [{'token': item[0], 'lemma': item[2], 'lemma_id': item[3], 'frequency': item[1]} for item in data]
@@ -152,14 +155,7 @@ def filter_results(data, task, flag):
     else:
         filtered_data = [{'token': item[0], 'lemma': item[2], 'lemma_id': item[3], 'root': item[4], 'pos':item[5], 'frequency': item[1]} for item in data]
     
-    if flag == '1':
-        result = [filtered_data[0]] 
-    elif flag == '*':
-        result = filtered_data 
-    else:
-        raise ValueError("Invalid flag. Flag must be either '1' or '*'.")
-    
-    return result
+    return filtered_data
 
 
 def _is_ar(word):

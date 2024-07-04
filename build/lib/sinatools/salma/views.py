@@ -3,10 +3,10 @@ from sinatools.salma import settings
 from sinatools.salma.wsd import normalizearabert
 from sinatools.salma.wsd import GlossPredictor
 from sinatools.utils.parser import arStrip
-from sinatools.morphology.tokenizers_words import simple_word_tokenize
+from sinatools.utils.tokenizers_words import simple_word_tokenize
 from sinatools.morphology.ALMA_multi_word import ALMA_multi_word
 from sinatools.morphology.morph_analyzer import analyze
-#from sinatools.arabiner.bin.infer import ner
+#from sinatools.ner.entity_extractor import ner
 
 def delete_form_list(position, word_lemma):
     #"""

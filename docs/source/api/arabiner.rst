@@ -1,8 +1,8 @@
-sinatools.arabiner
+sinatools.ner
 =================
 
 
-.. automodule:: sinatools.arabiner
+.. automodule:: sinatools.ner
    :members:
    :undoc-members:
    :show-inheritance:
@@ -12,4 +12,4 @@ sinatools.arabiner
    :maxdepth: 1
    :caption: Modules:
 
-   arabiner/bin/infer
+   ner/entity_extractor

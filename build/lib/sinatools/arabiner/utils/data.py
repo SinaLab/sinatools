@@ -6,7 +6,7 @@ import re
 import itertools
 from sinatools.arabiner.utils.helpers import load_object
 from sinatools.arabiner.data.datasets import Token
-from sinatools.morphology.tokenizers_words import simple_word_tokenize
+from sinatools.utils.tokenizers_words import simple_word_tokenize
 
 logger = logging.getLogger(__name__)
 

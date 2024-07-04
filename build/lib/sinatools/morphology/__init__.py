@@ -7,7 +7,6 @@ filename = 'lemmas_dic.pickle'
 path = downloader.get_appdatadir()
 file_path = os.path.join(path, filename)
 with open(file_path, 'rb') as f:
-    #Load the serialized data from the file
     dictionary = pickle.load(f)
 
 #filename_five = 'five_grams.pickle'

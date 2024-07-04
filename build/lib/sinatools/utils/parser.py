@@ -1,20 +1,19 @@
 import re 
 import argparse
 
-def arStrip(text , diacs=True , smallDiacs=True , shaddah=True , digit=True, alif=True , specialChars=True ):
+def arStrip(text , diacs=True , small_diacs=True , shaddah=True , digit=True, alif=True , special_chars=True ):
     
     """
-    This method removes Arabic diacritics, small diacritcs, shaddah, Latin and Arabic digits, and unify alif.
-    And remove special characters, spaces, underscore and Arabic tatwelah from the input text.
+    This method removes Arabic diacritics, small diacritcs, shaddah, Latin and Arabic digits, unify alif, remove special characters, extra spaces, underscore and Arabic tatwelah from the input text.
 
     Args:
         text (:obj:`str`): Arabic text to be processed.
         diacs (:obj:`bool`): flag to remove Arabic diacretics [ ًٌٍَُِْ] (default is True).
-        smallDiacs (:obj:`bool`): flag to remove small diacretics (default is True).
+        small_diacs (:obj:`bool`): flag to remove small diacretics (default is True).
         shaddah (:obj:`bool`): flag to remove shaddah (default is True).
         digit (:obj:`bool`): flag to remove Latin and Arabic digits (default is True).
         alif (:obj:`bool`): flag to unify alif (default is True).
-        specialChars (:obj:`bool`): flag to remove special characters (default is True).
+        special_chars (:obj:`bool`): flag to remove special characters (default is True).
 
     Returns:
         :obj:`str`: stripped text.
@@ -25,18 +24,16 @@ def arStrip(text , diacs=True , smallDiacs=True , shaddah=True , digit=True, ali
     .. code-block:: python
 
         from sinatools.utils import parser
-        processed_text =parser.arStrip('2023الجو جميلُ')
-        print(processed_text)
+        output = parser.arStrip('2023الجو جميلُ')
+        print(output)
 
-        #putput
+        # output
         الجو جميل
 
-        name =parser.arStrip('أَلَمۡ یَأۡنِ لِلَّذِینَ ءَامَنُوۤا۟ أَن تَخۡشَعَ قُلُوبُهُمۡ لِذِكۡرِ ٱللَّهِ وَمَا نَزَلَ مِنَ ٱلۡحَقِّ وَلَا یَكُونُوا۟ كَٱلَّذِینَ أُوتُوا۟ ٱلۡكِتَـٰبَ مِن قَبۡلُ فَطَالَ عَلَیۡهِمُ ٱلۡأَمَدُ فَقَسَتۡ قُلُوبُهُمۡۖ وَكَثِیر مِّنۡهُمۡ فَـسِقُونَ' , True , True , True ,  True , True , True )
-        print(name)
-        #putput
+        output = parser.arStrip('أَلَمۡ یَأۡنِ لِلَّذِینَ ءَامَنُوۤا۟ أَن تَخۡشَعَ قُلُوبُهُمۡ لِذِكۡرِ ٱللَّهِ وَمَا نَزَلَ مِنَ ٱلۡحَقِّ وَلَا یَكُونُوا۟ كَٱلَّذِینَ أُوتُوا۟ ٱلۡكِتَـٰبَ مِن قَبۡلُ فَطَالَ عَلَیۡهِمُ ٱلۡأَمَدُ فَقَسَتۡ قُلُوبُهُمۡۖ وَكَثِیر مِّنۡهُمۡ فَـسِقُونَ' , True , True , True ,  True , True , True )
+        print(output)
+        #output
         الم یان للذین ءامنوا ان تخشع قلوبهم لذكر الله وما نزل من الحق ولا یكونوا كالذین اوتوا الكتٰب من قبل فطال علیهم الامد فقست قلوبهم وكثیر منهم فسقون
-
-
     """
     try:
         if text: # if the input string is not empty do the following
@@ -46,7 +43,7 @@ def arStrip(text , diacs=True , smallDiacs=True , shaddah=True , digit=True, ali
                 text = re.sub(r'[\u0652]+', '',text) # Remove SUKUN
             if shaddah == True:
                 text = re.sub(r'[\u0651]+', '',text) # Remove shddah
-            if smallDiacs == True:
+            if small_diacs == True:
                 text = re.sub(r'[\u06D6-\u06ED]+', '',text) # Remove all small Quranic annotation signs
             if digit == True:
                 text = re.sub('[0-9]+', ' ',text) # Remove English digits
@@ -57,7 +54,7 @@ def arStrip(text , diacs=True , smallDiacs=True , shaddah=True , digit=True, ali
                 text = re.sub('أ', 'ا',text);
                 text = re.sub('إ', 'ا',text);
                 text = re.sub('آ', 'ا',text);
-            if specialChars == True:
+            if special_chars == True:
                 text = re.sub('[?؟!@#$%-]+' , '' , text) # Remove some of special chars 
 
             text = re.sub('[\\s]+'," ",text) # Remove all spaces
@@ -103,12 +100,12 @@ def remove_punctuation(text):
                                  r'[\u061B]+', r'[\u061E]+', r'[\u061F]+', r'[\u0640]+',
                                  r'[\u0653]+', r'[\u065C]+', r'[\u066C]+', r'[\u066A]+',
                                  r'["}"]+', r'["{"]+']
-            outputString = text
+            output_string = text
             for punctuation in punctuation_marks:
-                outputString = re.sub(punctuation, '', outputString)
+                output_string = re.sub(punctuation, '', output_string)
     except:
         return text
-    return outputString
+    return output_string
 
 def remove_latin(text):
     """

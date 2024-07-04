@@ -10,7 +10,7 @@ Python API Reference
    api/morphology
    api/DataDownload
    api/utils
-   api/arabiner
+   api/ner
    api/salma
 
   

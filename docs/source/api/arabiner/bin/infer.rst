@@ -1,8 +1,8 @@
-sinatools.arabiner.bin.infer
+sinatools.ner.entity_extractor
 +++++++++++++++++++++++++++
 
 
-.. automodule:: sinatools.arabiner.bin.infer
+.. automodule:: sinatools.ner.entity_extractor
    :members:
    :show-inheritance:
 

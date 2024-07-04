@@ -8,7 +8,7 @@ SinaTools Command Line
  
    cli_tools/utils
    cli_tools/morphology
-   cli_tools/arabiner
+   cli_tools/ner
    cli_tools/salma
    cli_tools/DataDownload
          

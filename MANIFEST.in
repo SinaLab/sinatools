@@ -14,12 +14,12 @@ recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
 include setup.py
 include sinatools/VERSION
 include sinatools/utils/*.py
-include sinatools/arabiner/*.py
+include sinatools/ner/*.py
 include sinatools/arabert/*.py
 include sinatools/DataDownload/*.py
 include sinatools/morphology/*.py
 include sinatools/salma/*.py
-include sinatools/CLI/arabiner/bin/*.py
+include sinatools/CLI/ner/*.py
 include sinatools/CLI/morphology/*.py
 include sinatools/CLI/salma/*.py
 include sinatools/CLI/utils/*.py
