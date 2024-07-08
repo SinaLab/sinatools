@@ -64,7 +64,7 @@ def extract(text, batch_size=32):
     for segment in segments:
         for token in segment:
             segments_list = {}
-            segments_list["token"] = token.text
+            segments_list["word"] = token.text
             list_of_tags = [t['tag'] for t in token.pred_tag]
             list_of_tags = [i for i in list_of_tags if i not in('O',' ','')]
             if list_of_tags == []:

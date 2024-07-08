@@ -12,6 +12,10 @@ jaccard_similarity = sinatools.CLI.utils.jaccard:main
 morphology_analyzer = sinatools.CLI.morphology.morph_analyzer:main
 remove_latin = sinatools.CLI.utils.remove_latin:main
 remove_punctuation = sinatools.CLI.utils.remove_punctuation:main
-salma = sinatools.CLI.salma.salma_tools:main
+semantic_relatedness = sinatools.CLI.semantic_relatedness.compute_relatedness:main
 sentence_tokenizer = sinatools.CLI.utils.sentence_tokenizer:main
+synonyms_generator = sinatools.CLI.synonyms.synonyms_generator:main
+text_dublication_detector = sinatools.CLI.utils.text_dublication_detector:main
 transliterate = sinatools.CLI.utils.text_transliteration:main
+wsd = sinatools.CLI.wsd.disambiguator:main
+

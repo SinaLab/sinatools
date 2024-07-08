@@ -61,8 +61,8 @@ setup(
                 'sinatools.CLI.utils.remove_punctuation:main'),
             ('remove_latin='
                 'sinatools.CLI.utils.remove_latin:main'),
-            ('salma='
-                'sinatools.CLI.salma.salma_tools:main'),
+            ('wsd='
+                'sinatools.CLI.wsd.disambiguator:main'),
             ('corpus_tokenizer='
                 'sinatools.CLI.utils.corpus_tokenizer:main'),
             ('appdatadir='
@@ -70,7 +70,13 @@ setup(
             ('download_files='
                 'sinatools.CLI.DataDownload.download_files:main'),
             ('corpus_entity_extractor='
-                'sinatools.CLI.ner.corpus_entity_extractor:main')
+                'sinatools.CLI.ner.corpus_entity_extractor:main'),
+            ('text_dublication_detector='
+                'sinatools.CLI.utils.text_dublication_detector:main'),     
+            ('synonyms_generator='
+                'sinatools.CLI.synonyms.synonyms_generator:main'),   
+            ('semantic_relatedness='
+                'sinatools.CLI.semantic_relatedness.compute_relatedness:main'),                                 
         ],
     },
     data_files=[('sinatools', ['sinatools/environment.yml'])],

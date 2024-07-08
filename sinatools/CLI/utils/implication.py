@@ -37,14 +37,6 @@ Examples:
       
       implication --file1 "path/to/your/file1.txt" --file2 "path/to/your/file2.txt"
 
-Note:
------
-
-.. code-block:: none
-
-    - The results are based on the underlying logic and data sets present in the `Implication` class of SinaTools.
-    - The tool compares the implication between two words, and the relationship might vary based on linguistic nuances.
-
 """
 import argparse
 from sinatools.utils.implication import Implication

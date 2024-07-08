@@ -29,16 +29,6 @@ Examples:
     download_files -f morph ner 
     This command will download only the `morph` and `ner` files to the default directory.
 
-Note:
------
-
-.. code-block:: none
-
-    - The script automatically handles the extraction of zip and tar.gz files after downloading.
-    - Ensure you have the necessary permissions to write to the specified directory.
-    - The default download directory is based on the operating system and can be obtained using the `get_appdatadir` function.
-
-
 """
 
 import argparse

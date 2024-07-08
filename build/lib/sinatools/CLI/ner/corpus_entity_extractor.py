@@ -7,13 +7,13 @@ import argparse
 from sinatools.ner.entity_extractor import extract
 
 """
-CSV NER Tagging Tool
+This tool processes a csv file and returns named entites for each token within the text, based on the specified batch size. As follows:
 
 Usage:
 ------
 Run the script with the following command:
 
-arabi_ner2  input.csv --text-columns "TextColumn1,TextColumn2" --additional-columns "Column3,Column4" --output-csv output.csv
+corpus_entity_extractor  input.csv --text-columns "TextColumn1,TextColumn2" --additional-columns "Column3,Column4" --output-csv output.csv
 """
 
 def combine_tags(sentence):
