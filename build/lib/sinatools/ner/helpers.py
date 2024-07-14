@@ -4,11 +4,8 @@ import logging
 import importlib
 import shutil
 import torch
-import pickle
-import json
 import random
 import numpy as np
-from argparse import Namespace
 
 
 def logging_config(log_file=None):
@@ -32,47 +29,25 @@ def logging_config(log_file=None):
     )
 
 
-#def load_object(name, kwargs):
-#    """
-#    Load objects dynamically given the object name and its arguments
-#    :param name: str - object name, class name or function name
-#    :param kwargs: dict - keyword arguments
-#    :return: object
-#    """
-#    object_module, object_name = name.rsplit(".", 1)
-#    object_module = importlib.import_module(object_module)
-#    fn = getattr(object_module, object_name)(**kwargs)
-#    return fn
-
 def load_object(name, kwargs):
-    #print("Iterate: ", name, kwargs)
+
     try:
-        #print("name: ", name)
         object_module, object_name = name.rsplit(".", 1)
-        #print("object_module: ", object_module)
-        #print("object_name: ", object_name)
-        #if object_module != "sinatools.arabiner.nn":
         object_module = importlib.import_module(object_module)
-        #print("object_module 2: ", object_module)
         obj = getattr(object_module, object_name)
-        #print("obj: ", obj)
-        if callable(obj):  # Check if the object is callable (class or function)
+        if callable(obj): 
             fn = obj(**kwargs)
             return fn
         else:
             raise TypeError(f"{name} is not a callable object.")
     except (ImportError, ModuleNotFoundError) as e:
-        # Handle import errors
         print(f"Error importing module: {e}")
     except AttributeError as e:
-        # Handle attribute errors (e.g., object not found in module)
         print(f"Attribute error: {e}")
     except Exception as e:
-        # Handle other exceptions
         print(f"An error occurred: {e}")
     
-    #print("Loaded object:", name)
-    return None  # Return None in case of any error
+    return None 
 
 def make_output_dirs(path, subdirs=[], overwrite=True):
     """
@@ -90,46 +65,6 @@ def make_output_dirs(path, subdirs=[], overwrite=True):
     for subdir in subdirs:
         os.makedirs(os.path.join(path, subdir))
 
-
-def load_checkpoint(path):
-    """
-    Load model given the model path
-    :param model_path: str - path to model
-    :return: tagger - arabiner.trainers.BaseTrainer - the tagger model
-             vocab - torchtext.vocab.Vocab - indexed tags
-             train_config - argparse.Namespace - training configurations
-    """
-    _path = os.path.join(path, "tag_vocab.pkl")
-    #print('2',_path)
-    with open(_path, "rb") as fh:
-        tag_vocab = pickle.load(fh)
-
-    # Load train configurations from checkpoint
-    train_config = Namespace()
-    args_path = os.path.join(path, "args.json")
-    #print('3', args_path)
-    with open(args_path, "r") as fh:
-        train_config.__dict__ = json.load(fh)
-
-    # Initialize the loss function, not used for inference, but evaluation
-    loss = load_object(train_config.loss["fn"], train_config.loss["kwargs"])
-    #print('4')
-    # Load BERT tagger
-    model = load_object("sinatools."+train_config.network_config["fn"], train_config.network_config["kwargs"])
-    model = torch.nn.DataParallel(model)
-    #print('5')
-    if torch.cuda.is_available():
-        model = model.cuda()
-
-    # Update arguments for the tagger
-    # Attach the model, loss (used for evaluations cases)
-    train_config.trainer_config["kwargs"]["model"] = model
-    train_config.trainer_config["kwargs"]["loss"] = loss
-    #print('6') 
-    tagger = load_object("sinatools."+train_config.trainer_config["fn"], train_config.trainer_config["kwargs"])
-    tagger.load(os.path.join(path, "checkpoints"))
-    #print('7') 
-    return tagger, tag_vocab, train_config
 
 
 def set_seed(seed):

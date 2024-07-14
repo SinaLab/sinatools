@@ -73,8 +73,10 @@ setup(
                 'sinatools.CLI.ner.corpus_entity_extractor:main'),
             ('text_dublication_detector='
                 'sinatools.CLI.utils.text_dublication_detector:main'),     
-            ('synonyms_generator='
-                'sinatools.CLI.synonyms.synonyms_generator:main'),   
+            ('evaluate_synonyms='
+                'sinatools.CLI.synonyms.evaluate_synonyms:main'),  
+            ('extend_synonyms='
+                'sinatools.CLI.synonyms.extend_synonyms:main'),                    
             ('semantic_relatedness='
                 'sinatools.CLI.semantic_relatedness.compute_relatedness:main'),                                 
         ],

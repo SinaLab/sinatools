@@ -1,9 +1,7 @@
 import os
 from collections import namedtuple
-from sinatools.ner.helpers import load_checkpoint
-from sinatools.ner.data import get_dataloaders, text2segments
-from sinatools.DataDownload import downloader
-import sinatools
+from sinatools.ner.data_format import get_dataloaders, text2segments
+from . import tagger, tag_vocab, train_config
 
 def extract(text, batch_size=32):
     """
@@ -42,23 +40,22 @@ def extract(text, batch_size=32):
             "tags":"B-GPE I-ORG"
         }]
     """    
-    # Convert text to a tagger dataset and index the tokens in args.text
+    
     dataset, token_vocab = text2segments(text)
 
     vocabs = namedtuple("Vocab", ["tags", "tokens"])
-    vocab = vocabs(tokens=token_vocab, tags=sinatools.tag_vocab)
+    vocab = vocabs(tokens=token_vocab, tags=tag_vocab)
 
-    # From the datasets generate the dataloaders
     dataloader = get_dataloaders(
         (dataset,),
         vocab,
-        sinatools.train_config.data_config,
+        train_config.data_config,
         batch_size=batch_size,
         shuffle=(False,),
     )[0]
 
-    # Perform inference on the text and get back the tagged segments
-    segments = sinatools.tagger.infer(dataloader)
+
+    segments = tagger.infer(dataloader)
     segments_lists = []
     
     for segment in segments:
