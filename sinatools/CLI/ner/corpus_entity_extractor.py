@@ -16,8 +16,11 @@ Run the script with the following command:
 corpus_entity_extractor  input.csv --text-columns "TextColumn1,TextColumn2" --additional-columns "Column3,Column4" --output-csv output.csv
 """
 
+def jsons_to_list_of_lists(json_list):
+    return [[d['token'], d['tags']] for d in json_list]
+
 def combine_tags(sentence):
-    output = extract(sentence)
+    output = jsons_to_list_of_lists(extract(sentence))
     return [word[1] for word in output]
 
 

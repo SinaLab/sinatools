@@ -42,9 +42,11 @@ from sinatools.ner.entity_extractor import extract
 from sinatools.utils.tokenizer import corpus_tokenizer
 from sinatools.utils.tokenizers_words import simple_word_tokenize
 
+def jsons_to_list_of_lists(json_list):
+    return [[d['token'], d['tags']] for d in json_list]
 
 def combine_tags(sentence):
-    output = extract(sentence)
+    output = jsons_to_list_of_lists(extract(sentence))
     return [word[1] for word in output]
 
 
