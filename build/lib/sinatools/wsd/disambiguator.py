@@ -267,7 +267,7 @@ def find_named_entities(string):
 
 def find_glosses_using_ALMA(word):
 
-   data = analyze(word, language ='MSA', task ='lemmatization', flag="1")
+   data = analyze(word, language ='MSA', task ='full', flag="1")
    Diac_lemma = ""
    pos = ""
    Undiac_lemma = ""
