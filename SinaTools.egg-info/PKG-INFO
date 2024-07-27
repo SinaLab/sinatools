@@ -4,17 +4,30 @@ Version: 0.1.19
 Summary: Open-source Python toolkit for Arabic Natural Understanding, allowing people to integrate it in their system workflow.
 Home-page: https://github.com/SinaLab/sinatools
 License: MIT license
-Description: SinaTools
-        ---------
-        
-        Open-source Python toolkit for Arabic Natural Understanding, allowing people to integrate it in their system workflow.
-        
-        Python APIs, command lines, colabs, and online demos.
-        
-        * Free software: MIT license
-        * Documentation: https://sina.birzeit.edu/sinatools/
-        
-        
 Keywords: sinatools
-Platform: UNKNOWN
 Description-Content-Type: text/markdown
+License-File: LICENSE
+License-File: AUTHORS.rst
+Requires-Dist: six
+Requires-Dist: farasapy
+Requires-Dist: tqdm
+Requires-Dist: requests
+Requires-Dist: regex
+Requires-Dist: pathlib
+Requires-Dist: torch==1.13.0
+Requires-Dist: transformers==4.24.0
+Requires-Dist: torchtext==0.14.0
+Requires-Dist: torchvision==0.14.0
+Requires-Dist: seqeval==1.2.2
+Requires-Dist: natsort==7.1.1
+
+SinaTools
+---------
+
+Open-source Python toolkit for Arabic Natural Understanding, allowing people to integrate it in their system workflow.
+
+Python APIs, command lines, colabs, and online demos.
+
+* Free software: MIT license
+* Documentation: https://sina.birzeit.edu/sinatools/
+

@@ -7,6 +7,7 @@ from sinatools.utils.tokenizers_words import simple_word_tokenize
 from sinatools.morphology.ALMA_multi_word import ALMA_multi_word
 from sinatools.morphology.morph_analyzer import analyze
 from sinatools.ner.entity_extractor import extract
+from . import glosses_dic
 
 
 def distill_entities(entities):
@@ -136,8 +137,8 @@ def find_two_word_lemma(input_sentence):
             concept_count = 0
             ids = data[0]["ids"]
             for lemma_id in ids:
-               if lemma_id in settings.glosses_dic.keys(): 
-                  value = settings.glosses_dic[lemma_id]
+               if lemma_id in glosses_dic.keys(): 
+                  value = glosses_dic[lemma_id]
                   glosses_list.append(json.loads(value[1]))
                   concept_count = concept_count + value[0]
             
@@ -161,8 +162,8 @@ def find_three_word_lemma(input_sentence):
            concept_count = 0
            ids = data[0]["ids"]
            for lemma_id in ids:
-              if lemma_id in settings.glosses_dic.keys(): 
-                 value = settings.glosses_dic[lemma_id]
+              if lemma_id in glosses_dic.keys(): 
+                 value = glosses_dic[lemma_id]
                  glosses_list.append(json.loads(value[1]))
                  concept_count = concept_count + value[0]
                  
@@ -185,8 +186,8 @@ def find_four_word_lemma(input_sentence):
          concept_count = 0
          ids = data[0]["ids"]
          for lemma_id in ids:
-            if lemma_id in settings.glosses_dic.keys(): 
-               value = settings.glosses_dic[lemma_id]
+            if lemma_id in glosses_dic.keys(): 
+               value = glosses_dic[lemma_id]
                glosses_list.append(json.loads(value[1]))
                concept_count = concept_count + value[0]
          found_4Word_lemma = [four_grams, glosses_list, i, i + 3, concept_count, data[0]['undiac_multi_word_lemma'], data[0]['multi_word_lemma']]
@@ -209,8 +210,8 @@ def find_five_word_lemma(input_sentence):
          concept_count = 0
          ids = data[0]["ids"]
          for lemma_id in ids:
-            if lemma_id in settings.glosses_dic.keys(): 
-               value = settings.glosses_dic[lemma_id]
+            if lemma_id in glosses_dic.keys(): 
+               value = glosses_dic[lemma_id]
                glosses_list.append(json.loads(value[1]))
                concept_count = concept_count + value[0]
          found_5Word_lemma = [five_grams, glosses_list, i, i + 4, concept_count, data[0]['undiac_multi_word_lemma'], data[0]['multi_word_lemma']]
@@ -276,16 +277,18 @@ def find_glosses_using_ALMA(word):
    pos = data[0]["pos"]
    Undiac_lemma = arStrip(Diac_lemma, True, True, True, True, True, False) # Remove diacs , smallDiacs , shaddah ,  digit , alif , specialChars
    ids = [] 
-   glosses_list = []   
+#    glosses_list = []   
    concept_count = 0
    lemma_id = data[0]["lemma_id"]
-   if lemma_id in settings.glosses_dic.keys(): 
-      value = settings.glosses_dic[lemma_id]
-      glosses_list.append(json.loads(value[1]))
-      concept_count = concept_count + value[0]
 
-   return word, Undiac_lemma, Diac_lemma, pos , concept_count, glosses
+   if lemma_id in glosses_dic.keys(): 
+      value = glosses_dic[lemma_id]
+      glosses= json.loads(value[1])
+    #   glosses_list.append(json.loads(value[1]))
+      concept_count = concept_count + value[0]
    
+   return word, Undiac_lemma, Diac_lemma, pos , concept_count, glosses
+
 def disambiguate_glosses_using_SALMA(glosses, Diac_lemma, Undiac_lemma, word, sentence):
    word = normalizearabert(word)
    glosses_dictionary = {}
@@ -417,7 +420,7 @@ def disambiguate_glosses_main(word, sentence):
       my_json = {}    
       my_json['word'] = word['word']
       glosses = word['glosses'][0]
-      my_json['Gloss'] = glosses['gloss']
+    #   my_json['Gloss'] = glosses['gloss']
       my_json['Concept_id'] = glosses['concept_id']
       my_json['Diac_lemma'] = word['Diac_lemma']
       my_json['Undiac_lemma'] = word['Undiac_lemma']
@@ -445,7 +448,7 @@ def WSD(sentence):
    ner = find_named_entities(" ".join(input_sentence))
 
    output_list = find_glosses(input_sentence, three_word_lemma, two_word_lemma, four_word_lemma, five_word_lemma, ner)
-   
+
    results = []
    for word in output_list:
       results.append(disambiguate_glosses_main(word, sentence))

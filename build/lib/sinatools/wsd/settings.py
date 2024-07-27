@@ -9,7 +9,6 @@ import pandas as pd
 from sinatools.DataDownload import downloader
 import os 
 
-glosses_dic = {}
 
 model_file_name = "bert-base-arabertv02_22_May_2021_00h_allglosses_unused01"
 path =downloader.get_appdatadir()
