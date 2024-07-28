@@ -422,7 +422,7 @@ def disambiguate_glosses_main(word, sentence):
       my_json['word'] = word['word']
       glosses = word['glosses'][0]
       my_json['Gloss'] = glosses['gloss']
-      #my_json['Concept_id'] = glosses['concept_id']
+      my_json['Concept_id'] = glosses['concept_id']
       my_json['Diac_lemma'] = word['Diac_lemma']
       my_json['Undiac_lemma'] = word['Undiac_lemma']
       return my_json
