@@ -5,8 +5,8 @@ from sinatools.wsd.wsd import GlossPredictor
 from sinatools.utils.parser import arStrip
 from sinatools.utils.tokenizers_words import simple_word_tokenize
 from sinatools.morphology.ALMA_multi_word import ALMA_multi_word
-from sinatools.morphology.morph_analyzer import analyze
-from sinatools.ner.entity_extractor import extract
+#from sinatools.morphology.morph_analyzer import analyze
+#from sinatools.ner.entity_extractor import extract
 from . import glosses_dic
 
 
@@ -209,11 +209,9 @@ def find_five_word_lemma(input_sentence):
          glosses_list = []   
          concept_count = 0
          ids = data[0]["ids"]
-         for lemma_id in ids:
-            if lemma_id in glosses_dic.keys(): 
-               value = glosses_dic[lemma_id]
-               glosses_list.append(json.loads(value[1]))
-               concept_count = concept_count + value[0]
+         for concepts in ids:
+            glosses_list.append(json.loads(concepts))
+         concept_count = concept_count + data[0]["POS"]
          found_5Word_lemma = [five_grams, glosses_list, i, i + 4, concept_count, data[0]['undiac_multi_word_lemma'], data[0]['multi_word_lemma']]
          output.append(found_5Word_lemma) 
          i = i + 1    
@@ -224,70 +222,70 @@ def find_five_word_lemma(input_sentence):
 def jsons_to_list_of_lists(json_list):
     return [[d['token'], d['tags']] for d in json_list]
     
-def find_named_entities(string):
-   found_entities = []
-   
-   ner_entites = extract(string)
-   list_of_entites = jsons_to_list_of_lists(ner_entites)
-   entites = distill_entities(list_of_entites)
-   
-   tag_gloss = {
-      "PERS": "اسم شخص",
-      "ORG": "اسم مؤسسة",
-      #"NORP": "مجموعة من الناس", 
-      #"OCC": "منصب/مسمى وظيفي",
-      "LOC": "اسم منطقة جغرافية",
-      "FAC": "اسم لمَعلَم",
-      #"EVENT": "حدث",
-      "DATE": "فترة زمنية تدل على تاريخ",
-      "UNIT": "وحدة قياس",
-      "CURR": "عملة",
-      "GPE": "اسم بلد، له حدود إدارية/جيوسياسية",
-      "TIME": "فترة زمنية تدل على الوقت",
-      "CARDINAL": "عدد يدل على معدود",
-      "ORDINAL": "رقم، لا يدل على معدود",
-      "PERCENT": "نسبة مئوية",
-      "QUANTITY": "كمية",
-      "MONEY": "مبلغ مالي",
-      "LANGUAGE": "اسم للغة طبيعية",
-      "PRODUCT": "اسم منتج",
-      "LAW": "قانون"
-   }
-
-   for entity in entites:
-      gloss_ner = ""
-      if entity[1] in tag_gloss.keys():
-         gloss_ner = tag_gloss[entity[1]]  
-
-      if gloss_ner != "":
-         gloss = [{'concept_id': '', 'resource_id': '', 'resource_name': '', 'gloss': gloss_ner}]   
-         entity = [entity[0],gloss,int(entity[2]), int(entity[3]),1,arStrip(entity[0],True,True,True,False,True,False),entity[0]]   
-         found_entities.append(entity)
-   return found_entities   
-
-
-def find_glosses_using_ALMA(word):
-
-   data = analyze(word, language ='MSA', task ='full', flag="1")
-   Diac_lemma = ""
-   pos = ""
-   Undiac_lemma = ""
-   glosses = []
-   Diac_lemma = data[0]["lemma"]
-   pos = data[0]["pos"]
-   Undiac_lemma = arStrip(Diac_lemma, True, True, True, True, True, False) # Remove diacs , smallDiacs , shaddah ,  digit , alif , specialChars
-   ids = [] 
-#    glosses_list = []   
-   concept_count = 0
-   lemma_id = data[0]["lemma_id"]
-
-   if lemma_id in glosses_dic.keys(): 
-      value = glosses_dic[lemma_id]
-      glosses= json.loads(value[1])
-    #   glosses_list.append(json.loads(value[1]))
-      concept_count = concept_count + value[0]
-   
-   return word, Undiac_lemma, Diac_lemma, pos , concept_count, glosses
+#def find_named_entities(string):
+#   found_entities = []
+#   
+#   ner_entites = extract(string)
+#   list_of_entites = jsons_to_list_of_lists(ner_entites)
+#   entites = distill_entities(list_of_entites)
+#   
+#   tag_gloss = {
+#      "PERS": "اسم شخص",
+#      "ORG": "اسم مؤسسة",
+#      #"NORP": "مجموعة من الناس", 
+#      #"OCC": "منصب/مسمى وظيفي",
+#      "LOC": "اسم منطقة جغرافية",
+#      "FAC": "اسم لمَعلَم",
+#      #"EVENT": "حدث",
+#      "DATE": "فترة زمنية تدل على تاريخ",
+#      "UNIT": "وحدة قياس",
+#      "CURR": "عملة",
+#      "GPE": "اسم بلد، له حدود إدارية/جيوسياسية",
+#      "TIME": "فترة زمنية تدل على الوقت",
+#      "CARDINAL": "عدد يدل على معدود",
+#      "ORDINAL": "رقم، لا يدل على معدود",
+#      "PERCENT": "نسبة مئوية",
+#      "QUANTITY": "كمية",
+#      "MONEY": "مبلغ مالي",
+#      "LANGUAGE": "اسم للغة طبيعية",
+#      "PRODUCT": "اسم منتج",
+#      "LAW": "قانون"
+#   }
+#
+#   for entity in entites:
+#      gloss_ner = ""
+#      if entity[1] in tag_gloss.keys():
+#         gloss_ner = tag_gloss[entity[1]]  
+#
+#      if gloss_ner != "":
+#         gloss = [{'concept_id': '', 'resource_id': '', 'resource_name': '', 'gloss': gloss_ner}]   
+#         entity = [entity[0],gloss,int(entity[2]), int(entity[3]),1,arStrip(entity[0],True,True,True,False,True,False),entity[0]]   
+#         found_entities.append(entity)
+#   return found_entities   
+#
+#
+#def find_glosses_using_ALMA(word):
+#
+#   data = analyze(word, language ='MSA', task ='full', flag="1")
+#   Diac_lemma = ""
+#   pos = ""
+#   Undiac_lemma = ""
+#   glosses = []
+#   Diac_lemma = data[0]["lemma"]
+#   pos = data[0]["pos"]
+#   Undiac_lemma = arStrip(Diac_lemma, True, True, True, True, True, False) # Remove diacs , smallDiacs , shaddah ,  digit , alif , specialChars
+#   ids = [] 
+##    glosses_list = []   
+#   concept_count = 0
+#   lemma_id = data[0]["lemma_id"]
+#
+#   if lemma_id in glosses_dic.keys(): 
+#      value = glosses_dic[lemma_id]
+#      glosses= json.loads(value[1])
+#    #   glosses_list.append(json.loads(value[1]))
+#      concept_count = concept_count + value[0]
+#   
+#   return word, Undiac_lemma, Diac_lemma, pos , concept_count, glosses
 
 def disambiguate_glosses_using_SALMA(glosses, Diac_lemma, Undiac_lemma, word, sentence):
    word = normalizearabert(word)
@@ -312,7 +310,7 @@ def disambiguate_glosses_using_SALMA(glosses, Diac_lemma, Undiac_lemma, word, se
       return my_json
 
 
-def find_glosses(input_sentence, three_word_lemma,four_word_lemma, five_word_lemma, ner):
+def find_glosses(input_sentence, two_word_lemma, three_word_lemma,four_word_lemma, five_word_lemma, ner):
       output_list = []
       position = 0
       while position < len(input_sentence):    
@@ -363,25 +361,24 @@ def find_glosses(input_sentence, three_word_lemma,four_word_lemma, five_word_lem
 
 
 
-         # output_from2Word = delete_form_list(position, two_word_lemma)
-         # two_word_lemma = output_from2Word[0] 
-         # if output_from2Word[1] != []:  
-         #    position = output_from2Word[2]
-         #    flag = "True"
-         #    my_json = {}    
-         #    word = output_from2Word[1][0][0]
-         #    my_json['word'] = word
-         #    my_json['concept_count'] = output_from2Word[1][0][2]
-         #    my_json['glosses'] = output_from2Word[1][0][1]
-         #    my_json['Diac_lemma'] = output_from2Word[1][0][4]
-         #    my_json['Undiac_lemma'] = output_from2Word[1][0][3] 
-         #    output_list.append(my_json)
-         #    position = position + 1                 
+         output_from2Word = delete_form_list(position, two_word_lemma)
+         two_word_lemma = output_from2Word[0] 
+         if output_from2Word[1] != []:  
+            position = output_from2Word[2]
+            flag = "True"
+            my_json = {}    
+            word = output_from2Word[1][0][0]
+            my_json['word'] = word
+            my_json['concept_count'] = output_from2Word[1][0][2]
+            my_json['glosses'] = output_from2Word[1][0][1]
+            my_json['Diac_lemma'] = output_from2Word[1][0][4]
+            my_json['Undiac_lemma'] = output_from2Word[1][0][3] 
+            output_list.append(my_json)
+            position = position + 1                 
                
 
          
          output_from_ner = delete_form_list(position, ner)
-        # print("output_from_ner: ", output_from_ner)
          ner = output_from_ner[0] 
          if output_from_ner[1] != []:  
             position = output_from_ner[2]
@@ -432,12 +429,11 @@ def disambiguate_glosses_main(word, sentence):
       my_json['Undiac_lemma'] = word['Undiac_lemma']
       return my_json
    elif concept_count == '*':
-      print("concept_count == *")
       my_json = {}    
       my_json['word'] = word['word']
       glosses = word['glosses'][0]
       my_json['Gloss'] = glosses['gloss']
-      my_json['Concept_id'] = glosses['concept_id']
+      #my_json['Concept_id'] = glosses['concept_id']
       my_json['Diac_lemma'] = word['Diac_lemma']
       my_json['Undiac_lemma'] = word['Undiac_lemma']
       return my_json
@@ -455,17 +451,20 @@ def WSD(sentence):
    
    five_word_lemma = find_five_word_lemma(input_sentence)
    
-   four_word_lemma = find_four_word_lemma(input_sentence)
+#   four_word_lemma = find_four_word_lemma(input_sentence)
+#   
+#   three_word_lemma = find_three_word_lemma(input_sentence)
+#   
+#   two_word_lemma = find_two_word_lemma(input_sentence)
    
-   three_word_lemma = find_three_word_lemma(input_sentence)
-   
-   # two_word_lemma = find_two_word_lemma(input_sentence)
-   
-   ner = find_named_entities(" ".join(input_sentence))
-   print("ner: ", ner)
+   #ner = find_named_entities(" ".join(input_sentence))
 
-   output_list = find_glosses(input_sentence, three_word_lemma, four_word_lemma, five_word_lemma, ner)
-#    print("final output_list: ", output_list)
+   two_word_lemma = []  
+   three_word_lemma = [] 
+   four_word_lemma = [] 
+   ner = []
+   print("five_word_lemma : ", five_word_lemma)
+   output_list = find_glosses(input_sentence, two_word_lemma, three_word_lemma, four_word_lemma, five_word_lemma, ner)
    results = []
    for word in output_list:
       results.append(disambiguate_glosses_main(word, sentence))

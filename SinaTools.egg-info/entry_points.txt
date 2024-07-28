@@ -19,3 +19,4 @@ sentence_tokenizer = sinatools.CLI.utils.sentence_tokenizer:main
 text_dublication_detector = sinatools.CLI.utils.text_dublication_detector:main
 transliterate = sinatools.CLI.utils.text_transliteration:main
 wsd = sinatools.CLI.wsd.disambiguator:main
+

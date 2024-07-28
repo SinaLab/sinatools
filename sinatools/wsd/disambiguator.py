@@ -136,12 +136,9 @@ def find_two_word_lemma(input_sentence):
             glosses_list = []   
             concept_count = 0
             ids = data[0]["ids"]
-            for lemma_id in ids:
-               if lemma_id in glosses_dic.keys(): 
-                  value = glosses_dic[lemma_id]
-                  glosses_list.append(json.loads(value[1]))
-                  concept_count = concept_count + value[0]
-            
+            for concepts in ids:
+               glosses_list.append(json.loads(concepts))
+            concept_count = concept_count + data[0]["POS"]
             found_2Word_lemma = [two_grams, glosses_list, i, i + 1, concept_count, data[0]['undiac_multi_word_lemma'], data[0]['multi_word_lemma']]
             output.append(found_2Word_lemma) 
             i = i + 1    
@@ -161,12 +158,9 @@ def find_three_word_lemma(input_sentence):
            glosses_list = []   
            concept_count = 0
            ids = data[0]["ids"]
-           for lemma_id in ids:
-              if lemma_id in glosses_dic.keys(): 
-                 value = glosses_dic[lemma_id]
-                 glosses_list.append(json.loads(value[1]))
-                 concept_count = concept_count + value[0]
-                 
+           for concepts in ids:
+              glosses_list.append(json.loads(concepts))
+           concept_count = concept_count + data[0]["POS"]
            found_3Word_lemma = [three_grams, glosses_list, i, i + 2, concept_count, data[0]['undiac_multi_word_lemma'], data[0]['multi_word_lemma']]
            output.append(found_3Word_lemma) 
            i = i + 1    
@@ -185,11 +179,9 @@ def find_four_word_lemma(input_sentence):
          glosses_list = []   
          concept_count = 0
          ids = data[0]["ids"]
-         for lemma_id in ids:
-            if lemma_id in glosses_dic.keys(): 
-               value = glosses_dic[lemma_id]
-               glosses_list.append(json.loads(value[1]))
-               concept_count = concept_count + value[0]
+         for concepts in ids:
+            glosses_list.append(json.loads(concepts))
+         concept_count = concept_count + data[0]["POS"] 
          found_4Word_lemma = [four_grams, glosses_list, i, i + 3, concept_count, data[0]['undiac_multi_word_lemma'], data[0]['multi_word_lemma']]
          output.append(found_4Word_lemma) 
          i = i + 1    
@@ -209,11 +201,9 @@ def find_five_word_lemma(input_sentence):
          glosses_list = []   
          concept_count = 0
          ids = data[0]["ids"]
-         for lemma_id in ids:
-            if lemma_id in glosses_dic.keys(): 
-               value = glosses_dic[lemma_id]
-               glosses_list.append(json.loads(value[1]))
-               concept_count = concept_count + value[0]
+         for concepts in ids:
+            glosses_list.append(json.loads(concepts))
+         concept_count = concept_count + data[0]["POS"]
          found_5Word_lemma = [five_grams, glosses_list, i, i + 4, concept_count, data[0]['undiac_multi_word_lemma'], data[0]['multi_word_lemma']]
          output.append(found_5Word_lemma) 
          i = i + 1    
@@ -312,7 +302,7 @@ def disambiguate_glosses_using_SALMA(glosses, Diac_lemma, Undiac_lemma, word, se
       return my_json
 
 
-def find_glosses(input_sentence, three_word_lemma,four_word_lemma, five_word_lemma, ner):
+def find_glosses(input_sentence, two_word_lemma, three_word_lemma,four_word_lemma, five_word_lemma, ner):
       output_list = []
       position = 0
       while position < len(input_sentence):    
@@ -363,25 +353,24 @@ def find_glosses(input_sentence, three_word_lemma,four_word_lemma, five_word_lem
 
 
 
-         # output_from2Word = delete_form_list(position, two_word_lemma)
-         # two_word_lemma = output_from2Word[0] 
-         # if output_from2Word[1] != []:  
-         #    position = output_from2Word[2]
-         #    flag = "True"
-         #    my_json = {}    
-         #    word = output_from2Word[1][0][0]
-         #    my_json['word'] = word
-         #    my_json['concept_count'] = output_from2Word[1][0][2]
-         #    my_json['glosses'] = output_from2Word[1][0][1]
-         #    my_json['Diac_lemma'] = output_from2Word[1][0][4]
-         #    my_json['Undiac_lemma'] = output_from2Word[1][0][3] 
-         #    output_list.append(my_json)
-         #    position = position + 1                 
+         output_from2Word = delete_form_list(position, two_word_lemma)
+         two_word_lemma = output_from2Word[0] 
+         if output_from2Word[1] != []:  
+            position = output_from2Word[2]
+            flag = "True"
+            my_json = {}    
+            word = output_from2Word[1][0][0]
+            my_json['word'] = word
+            my_json['concept_count'] = output_from2Word[1][0][2]
+            my_json['glosses'] = output_from2Word[1][0][1]
+            my_json['Diac_lemma'] = output_from2Word[1][0][4]
+            my_json['Undiac_lemma'] = output_from2Word[1][0][3] 
+            output_list.append(my_json)
+            position = position + 1                 
                
 
          
          output_from_ner = delete_form_list(position, ner)
-        # print("output_from_ner: ", output_from_ner)
          ner = output_from_ner[0] 
          if output_from_ner[1] != []:  
             position = output_from_ner[2]
@@ -413,16 +402,13 @@ def find_glosses(input_sentence, three_word_lemma,four_word_lemma, five_word_lem
 
 def disambiguate_glosses_main(word, sentence):
    concept_count = word['concept_count']
-#    print("word: ", word)
    if concept_count == 0:
-      print("concept_count == 0")
       my_json = {}    
       my_json['word'] = word['word']
       my_json['Diac_lemma'] = word['Diac_lemma']
       my_json['Undiac_lemma'] = word['Undiac_lemma']
       return my_json
    elif concept_count == 1:
-      print("concept_count == 1")
       my_json = {}    
       my_json['word'] = word['word']
       glosses = word['glosses'][0]
@@ -432,12 +418,11 @@ def disambiguate_glosses_main(word, sentence):
       my_json['Undiac_lemma'] = word['Undiac_lemma']
       return my_json
    elif concept_count == '*':
-      print("concept_count == *")
       my_json = {}    
       my_json['word'] = word['word']
       glosses = word['glosses'][0]
       my_json['Gloss'] = glosses['gloss']
-      my_json['Concept_id'] = glosses['concept_id']
+      #my_json['Concept_id'] = glosses['concept_id']
       my_json['Diac_lemma'] = word['Diac_lemma']
       my_json['Undiac_lemma'] = word['Undiac_lemma']
       return my_json
@@ -459,13 +444,11 @@ def WSD(sentence):
    
    three_word_lemma = find_three_word_lemma(input_sentence)
    
-   # two_word_lemma = find_two_word_lemma(input_sentence)
+   two_word_lemma = find_two_word_lemma(input_sentence)
    
    ner = find_named_entities(" ".join(input_sentence))
-   print("ner: ", ner)
 
-   output_list = find_glosses(input_sentence, three_word_lemma, four_word_lemma, five_word_lemma, ner)
-#    print("final output_list: ", output_list)
+   output_list = find_glosses(input_sentence, two_word_lemma, three_word_lemma, four_word_lemma, five_word_lemma, ner)
    results = []
    for word in output_list:
       results.append(disambiguate_glosses_main(word, sentence))
