@@ -6,16 +6,17 @@ import zipfile
 from tqdm import tqdm
 import tarfile
 urls = {
-    'morph': 'https://portal.sina.birzeit.edu/ALMA27012000.pickle',
-    'ner': 'https://portal.sina.birzeit.edu/Wj27012000.tar.gz',
-    'salma_model': 'https://portal.sina.birzeit.edu/bert-base-arabertv02_22_May_2021_00h_allglosses_unused01.zip',
-    'salma_tokenizer': 'https://portal.sina.birzeit.edu/bert-base-arabertv02.zip',
-    'glosses_dic': 'https://portal.sina.birzeit.edu/glosses_dic.pickle',
-    'lemma_dic': 'https://portal.sina.birzeit.edu/lemmas_dic.pickle',
-    'five_grams': 'https://portal.sina.birzeit.edu/five_grams.pickle',
-    'four_grams':'https://portal.sina.birzeit.edu/four_grams.pickle',
-    'three_grams':'https://portal.sina.birzeit.edu/three_grams.pickle',
-    'two_grams':'https://portal.sina.birzeit.edu/two_grams.pickle'
+    'morph': 'https://sina.birzeit.edu/lemmas_dic.pickle',
+    'ner': 'https://sina.birzeit.edu/Wj27012000.tar.gz',
+    'wsd_model': 'https://sina.birzeit.edu/bert-base-arabertv02_22_May_2021_00h_allglosses_unused01.zip',
+    'wsd_tokenizer': 'https://sina.birzeit.edu/bert-base-arabertv02.zip',
+    'glosses_dic': 'https://sina.birzeit.edu/glosses_dic.pickle',
+    'five_grams': 'https://sina.birzeit.edu/five_grams.pickle',
+    'four_grams':'https://sina.birzeit.edu/four_grams.pickle',
+    'three_grams':'https://sina.birzeit.edu/three_grams.pickle',
+    'two_grams':'https://sina.birzeit.edu/two_grams.pickle',
+    'synonyms_level2':'https://sina.birzeit.edu/synonyms_level2.pkl',
+    'synonyms_level3':'https://sina.birzeit.edu/synonyms_level3.pkl'
 }
 
 def get_appdatadir():
