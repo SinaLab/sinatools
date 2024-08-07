@@ -288,17 +288,17 @@ def disambiguate_glosses_using_SALMA(glosses, Diac_lemma, Undiac_lemma, word, se
       concept_id, gloss = GlossPredictor(Diac_lemma, Undiac_lemma,word,sentence,glosses_dictionary)
 
       my_json = {}    
-      my_json['Concept_id'] = concept_id
+      my_json['concept_id'] = concept_id
     #   my_json['Gloss'] = gloss
       my_json['word'] = word
-      my_json['Undiac_lemma'] = Undiac_lemma
-      my_json['Diac_lemma'] = Diac_lemma
+      #my_json['Undiac_lemma'] = Undiac_lemma
+      my_json['lemma'] = Diac_lemma
       return my_json
    else:
       my_json = {}    
       my_json['word'] = word
-      my_json['Undiac_lemma'] = Undiac_lemma
-      my_json['Diac_lemma'] = Diac_lemma
+      #my_json['Undiac_lemma'] = Undiac_lemma
+      my_json['lemma'] = Diac_lemma
       return my_json
 
 
@@ -405,26 +405,26 @@ def disambiguate_glosses_main(word, sentence):
    if concept_count == 0:
       my_json = {}    
       my_json['word'] = word['word']
-      my_json['Diac_lemma'] = word['Diac_lemma']
-      my_json['Undiac_lemma'] = word['Undiac_lemma']
+      my_json['lemma'] = word['Diac_lemma']
+      #my_json['Undiac_lemma'] = word['Undiac_lemma']
       return my_json
    elif concept_count == 1:
       my_json = {}    
       my_json['word'] = word['word']
       glosses = word['glosses'][0]
     #   my_json['Gloss'] = glosses['gloss']
-      my_json['Concept_id'] = glosses['concept_id']
-      my_json['Diac_lemma'] = word['Diac_lemma']
-      my_json['Undiac_lemma'] = word['Undiac_lemma']
+      my_json['concept_id'] = glosses['concept_id']
+      my_json['lemma'] = word['Diac_lemma']
+      #my_json['Undiac_lemma'] = word['Undiac_lemma']
       return my_json
    elif concept_count == '*':
       my_json = {}    
       my_json['word'] = word['word']
       glosses = word['glosses'][0]
       my_json['Gloss'] = glosses['gloss']
-      my_json['Concept_id'] = glosses['concept_id']
-      my_json['Diac_lemma'] = word['Diac_lemma']
-      my_json['Undiac_lemma'] = word['Undiac_lemma']
+      my_json['concept_id'] = glosses['concept_id']
+      my_json['lemma'] = word['Diac_lemma']
+      #my_json['Undiac_lemma'] = word['Undiac_lemma']
       return my_json
    else:   
       input_word = word['word']
@@ -477,21 +477,18 @@ def disambiguate(sentence):
         #output
          [
              {
-                 "Concept_id": "303019218",
+                 "concept_id": "303019218",
                  "word": "ذهبت",
-                 "Undiac_lemma": "ذهب",
-                 "Diac_lemma": "ذَهَبَ۪ 1"
+                 "lemma": "ذَهَبَ۪ 1"
              },
              {
                  "word": "إلى",
-                 "Diac_lemma": إِلَى 1,
-                 "Undiac_lemma": "الى"
+                 "lemma": "إِلَى 1"
              },
              {
                  "word": "جامعة بيرزيت",
-                 "Concept_id": "334000099",
-                 "Diac_lemma": جامِعَة بيرزَيت,
-                 "Undiac_lemma": "جامعة بيرزيت"
+                 "concept_id": "334000099",
+                 "lemma": "جامِعَة بيرزَيت"
              }
          ]
     """      
