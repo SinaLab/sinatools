@@ -1,4 +1,4 @@
-#SinaTools
+##SinaTools
 
 Open Source Toolkit for Arabic Natural Language Processing and Understanding
 
