@@ -1,4 +1,5 @@
 #SinaTools
+
 Open Source Toolkit for Arabic Natural Language Processing and Understanding
 
 SinaTools is a Python-based toolkit designed to facilitate Arabic NLP and NLU. It encompasses various modules tailored to address key tasks, including Named Entity Recognition (NER), Word Sense Disambiguation (WSD), Semantic Relatedness, Synonymy Extraction and Evaluation, Lemmatization, Part-of-speech (POS) Tagging, Root Tagging, and additional helper utilities such as corpus processing, stripping methods, and Diacritic-Based Matching of Arabic Words.
