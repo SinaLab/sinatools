@@ -7,6 +7,7 @@ import torch
 import pickle
 import json
 from argparse import Namespace
+from transformers import pipeline
 
 tagger = None
 tag_vocab = None
@@ -36,3 +37,5 @@ if torch.cuda.is_available():
 train_config.trainer_config["kwargs"]["model"] = model
 tagger = load_object(train_config.trainer_config["fn"], train_config.trainer_config["kwargs"])
 tagger.load(os.path.join(model_path,"checkpoints"))
+
+pipe = pipeline("sentiment-analysis", model="best_model", device=0, return_all_scores =True, max_length=128, truncation=True)
