@@ -46,7 +46,7 @@ Examples:
 """
 
 import argparse
-from sinatools.utils.jaccard import jaccard
+from sinatools.utils.similarity import get_jaccard
 from sinatools.utils.readfile import read_file
 
 
@@ -76,7 +76,7 @@ def main():
         print("Either --file1 and --file2 arguments or both --set1 and --set2 arguments must be provided.")
         return
 
-    similarity = jaccard(args.delimiter, set1, set2, args.selection, args.ignoreAllDiacriticsButNotShadda, args.ignoreShaddaDiacritic)
+    similarity = get_jaccard(args.delimiter, set1, set2, args.selection, args.ignoreAllDiacriticsButNotShadda, args.ignoreShaddaDiacritic)
     
     print("Jaccard Result:", similarity)
 

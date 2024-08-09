@@ -40,7 +40,7 @@ from sinatools.DataDownload.downloader import urls
 
 def main():
     parser = argparse.ArgumentParser(description="Download files from specified URLs.")
-    parser.add_argument('-f', '--files', nargs="*", choices=urls.keys(),
+    parser.add_argument('-f', '--files', nargs="*",
                         help="Names of the files to download. Available files are: "
                              f"{', '.join(urls.keys())}. If no file is specified, all files will be downloaded.")
     
@@ -50,8 +50,23 @@ def main():
 
     if args.files:
         for file in args.files:
-            url = urls[file]
-            download_file(url)
+            print("file: ", file)
+            if file == "wsd":
+                download_file(urls["morph"])
+                download_file(urls["ner"])
+                download_file(urls["wsd_model"])
+                download_file(urls["wsd_tokenizer"])
+                download_file(urls["glosses_dic"])
+                download_file(urls["five_grams"])
+                download_file(urls["four_grams"])
+                download_file(urls["three_grams"])
+                download_file(urls["two_grams"])
+            elif file == "synonyms":
+                download_file(urls["synonyms_level2"])
+                download_file(urls["synonyms_level3"])
+            else:
+               url = urls[file]
+               download_file(url)
     else:
         download_files()
 

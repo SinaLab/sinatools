@@ -20,7 +20,7 @@ def jsons_to_list_of_lists(json_list):
     return [[d['token'], d['tags']] for d in json_list]
 
 def combine_tags(sentence):
-    output = jsons_to_list_of_lists(extract(sentence))
+    output = jsons_to_list_of_lists(extract(sentence, "nested"))
     return [word[1] for word in output]
 
 

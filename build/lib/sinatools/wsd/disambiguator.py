@@ -217,7 +217,7 @@ def jsons_to_list_of_lists(json_list):
 def find_named_entities(string):
    found_entities = []
    
-   ner_entites = extract(string)
+   ner_entites = extract(string, "nested")
    list_of_entites = jsons_to_list_of_lists(ner_entites)
    entites = distill_entities(list_of_entites)
    

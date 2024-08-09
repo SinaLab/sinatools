@@ -86,7 +86,7 @@ sinatools/CLI/utils/__init__.py
 sinatools/CLI/utils/arStrip.py
 sinatools/CLI/utils/corpus_tokenizer.py
 sinatools/CLI/utils/implication.py
-sinatools/CLI/utils/jaccard.py
+sinatools/CLI/utils/similarity.py
 sinatools/CLI/utils/remove_latin.py
 sinatools/CLI/utils/remove_punctuation.py
 sinatools/CLI/utils/sentence_tokenizer.py
@@ -174,7 +174,7 @@ sinatools/synonyms/synonyms_generator.py
 sinatools/utils/__init__.py
 sinatools/utils/charsets.py
 sinatools/utils/implication.py
-sinatools/utils/jaccard.py
+sinatools/utils/similarity.py
 sinatools/utils/parser.py
 sinatools/utils/readfile.py
 sinatools/utils/text_dublication_detector.py

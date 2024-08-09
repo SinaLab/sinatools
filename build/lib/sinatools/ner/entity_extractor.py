@@ -3,43 +3,31 @@ from collections import namedtuple
 from sinatools.ner.data_format import get_dataloaders, text2segments
 from . import tagger, tag_vocab, train_config
 
-def extract(text, batch_size=32):
-    """
-    This method processes an input text and returns named entites for each token within the text, based on the specified batch size. As follows:
 
-    Args:
-        text (:obj:`str`): The Arabic text to be tagged.
-        batch_size (int, optional): Batch size for inference. Default is 32.
+def convert_nested_to_flat(nested_tags):
+    flat_tags = []
+    
+    for entry in nested_tags:
+        word = entry['token']
+        tags = entry['tags'].split()
+        
+        # Initialize with the first tag in the sequence
+        flat_tag = tags[0]
+        
+        for tag in tags[1:]:
+            # Check if the tag is an "I-" tag, indicating continuation of an entity
+            if tag.startswith('I-'):
+                flat_tag = tag
+                break
+        
+        flat_tags.append({
+            'token': word,
+            'tags': flat_tag
+        })
+    
+    return flat_tags
 
-    Returns:
-        list (:obj:`list`): A list of JSON objects, where each JSON could be contains:
-        token: The token from the original text.
-        NER tag: The label pairs for each segment.
-
-    **Example:**
-
-     .. highlight:: python
-     .. code-block:: python
-
-        from sinatools.ner.entity_extractor import extract
-        extract('ذهب محمد إلى جامعة بيرزيت')
-        [{
-            "word":"ذهب",
-            "tags":"O"
-          },{
-            "word":"محمد",
-            "tags":"B-PERS"
-          },{
-            "word":"إلى",
-            "tags":"O"
-          },{
-            "word":"جامعة",
-            "tags":"B-ORG"
-          },{
-            "word":"بيرزيت",
-            "tags":"B-GPE I-ORG"
-        }]
-    """    
+def extract(text, ner_method):
     
     dataset, token_vocab = text2segments(text)
 
@@ -50,7 +38,7 @@ def extract(text, batch_size=32):
         (dataset,),
         vocab,
         train_config.data_config,
-        batch_size=batch_size,
+        batch_size=32,
         shuffle=(False,),
     )[0]
 
@@ -69,4 +57,7 @@ def extract(text, batch_size=32):
             else:
                segments_list["tags"] = ' '.join(list_of_tags)
             segments_lists.append(segments_list)  
+    
+    if ner_method == "flat":
+      segments_lists = convert_nested_to_flat(segments_lists)          
     return segments_lists

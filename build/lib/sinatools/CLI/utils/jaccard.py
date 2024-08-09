@@ -46,7 +46,7 @@ Examples:
 """
 
 import argparse
-from sinatools.utils.jaccard import jaccard
+from sinatools.utils.similarity import jaccard
 from sinatools.utils.readfile import read_file
 
 
