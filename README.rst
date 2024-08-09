@@ -33,5 +33,5 @@ SinaTools is available under the MIT License. See the [LICENSE](https://sina.bir
 
 Reporting Issues
 --------
-To report any issues or bugs, please contact us at "sina.institute.bzu@gmail.com" or visit SinaTools Issues.
+To report any issues or bugs, please contact us at "sina.institute.bzu@gmail.com" or visit (SinaTools Issues)[https://github.com/SinaLab/sinatools/issues].
 
