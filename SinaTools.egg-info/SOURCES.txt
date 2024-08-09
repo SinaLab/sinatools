@@ -155,6 +155,7 @@ sinatools/ner/datasets.py
 sinatools/ner/entity_extractor.py
 sinatools/ner/helpers.py
 sinatools/ner/metrics.py
+sinatools/ner/relation_extractor.py
 sinatools/ner/transforms.py
 sinatools/ner/data/__init__.py
 sinatools/ner/data/datasets.py
