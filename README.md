@@ -25,7 +25,7 @@ For detailed information on utilizing SinaTools, please refer to the [documentat
 
 Citation
 -------
-Tymaa Hammouda, Mustafa Jarrar, Mohammed Khalilia: [SinaTools: Open Source Toolkit for Arabic Natural Language Understanding.](http://www.jarrar.info/publications/HJK24.pdf ). In Proceedings of the 2024 AI in Computational Linguistics (ACLing 2024), Procedia Computer Science, Dubai. ELSEVIER.
+Tymaa Hammouda, Mustafa Jarrar, Mohammed Khalilia: [SinaTools: Open Source Toolkit for Arabic Natural Language Understanding](http://www.jarrar.info/publications/HJK24.pdf). In Proceedings of the 2024 AI in Computational Linguistics (ACLing 2024), Procedia Computer Science, Dubai. ELSEVIER.
 
 License
 --------
