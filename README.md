@@ -2,7 +2,7 @@ SinaTools
 ======================
 Open Source Toolkit for Arabic NLP and NLU developed by [SinaLab](http://sina.birzeit.edu/) at Birzeit University. SinaTools is available through Python APIs, command lines, colabs, and online demos.
 
-See the full list of [Available Packages](https://sina.birzeit.edu/sinatools/), which include: (1) Morphology Tagging, (2) Named Entity Recognition (NER), (3) Word Sense Disambiguation (WSD), (4) Semantic Relatedness, (5) Synonymy Extraction and Evaluation, (6) Relation Extraction, (7) Utilities (diacritic-based word matching, Jaccard similarly, parser, tokenizers, corpora processing, transliteration, etc).
+See the full list of [Available Packages](https://sina.birzeit.edu/sinatools/), which include: (1) Morphology Tagging, (2) [Named Entity Recognition (NER)](https://sina.birzeit.edu/sinatools/index.html#ner), (3) Word Sense Disambiguation (WSD), (4) Semantic Relatedness, (5) Synonymy Extraction and Evaluation, (6) Relation Extraction, (7) Utilities (diacritic-based word matching, Jaccard similarly, parser, tokenizers, corpora processing, transliteration, etc).
 
 See [Demo Pages](https://sina.birzeit.edu/sinatools/).
 
