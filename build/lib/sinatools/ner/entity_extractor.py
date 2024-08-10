@@ -27,7 +27,7 @@ def convert_nested_to_flat(nested_tags):
     
     return flat_tags
 
-def extract(text, ner_method):
+def extract(text, ner_method="nested"):
     
     dataset, token_vocab = text2segments(text)
 

@@ -6,25 +6,15 @@ from . import pipe
 
 
 # ============================ Extract entities and their types ========================
+def jsons_to_list_of_lists(json_list):
+    return [[d['token'], d['tags']] for d in json_list]
+
 def entities_and_types(sentence):
+    output_list = jsons_to_list_of_lists(extract(sentence))
+    json_short = distill_entities(output_list)
 
-    '''
-    data = {"sentence": sentence, "mode": "4"}
-    data = json.dumps(data).encode('utf8')
-
-    req = Request(
-        url="https://ontology.birzeit.edu/sina/v2/api/wojood/?apikey=samplekey",
-        data=data,
-        headers={'User-Agent': 'Mozilla/5.0', 'Content-Type': 'application/json'},
-        method='POST'
-    )
-
-    webpage = urlopen(req).read().decode()
-    response_data = json.loads(webpage)
-    '''
-    token_tags=extract(sentence)
-    entities = distill_entities(token_tags)
-    for entity in entities:
+    entities = {}
+    for entity in json_short:
         name = entity[0]
         entity_type = entity[1]
         entities[name] = entity_type
@@ -179,9 +169,8 @@ def get_entity_category(entity_type, categories):
 
 # ============ Extract entities, their types and categorize them ===============
 def relation_extraction(sentence):
-    #test_sentence="صورة إعتقال طفل فلسطيني خلال انتفاضة الأقصى ."
+    
     entities=entities_and_types(sentence)
-    #print(entities)
 
     event_indices = [i for i, (_, entity_type) in enumerate(entities.items()) if entity_type == 'EVENT']
     arg_event_indices = [i for i, (_, entity_type) in enumerate(entities.items()) if entity_type != 'EVENT']
@@ -201,10 +190,12 @@ def relation_extraction(sentence):
                 score = predicted_relation[0][0]['score']  
                 if score > 0.50:
                     #print(f"Event:{event_entity} Relation:{category} Argument:{arg_name}\n")
-                    output_list.append([{event_entity} ,{category}, {arg_name}])
+                    #output_list.append([{event_entity} ,{category}, {arg_name}])
+                    output_list.append(f"Event:{event_entity}, Relation:{category}, Argument:{arg_name}")
 
                 else:
                     #print(f"Event:{event_entity} Relation:No relation Argument:{arg_name}\n")
-                    output_list.append([{event_entity} ,'No relation', {arg_name}])
+                    #output_list.append([{event_entity} ,'No relation', {arg_name}])
+                    output_list.append(f"Event:{event_entity}, Relation:No relation, Argument:{arg_name}")
     
     return output_list

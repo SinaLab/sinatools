@@ -8,6 +8,7 @@ import pickle
 import json
 from argparse import Namespace
 from transformers import pipeline
+#from transformers import AutoModelForSequenceClassification
 
 tagger = None
 tag_vocab = None
@@ -38,4 +39,5 @@ train_config.trainer_config["kwargs"]["model"] = model
 tagger = load_object(train_config.trainer_config["fn"], train_config.trainer_config["kwargs"])
 tagger.load(os.path.join(model_path,"checkpoints"))
 
-pipe = pipeline("sentiment-analysis", model="best_model", device=0, return_all_scores =True, max_length=128, truncation=True)
+pipe = pipeline("sentiment-analysis", model= os.path.join(path, "best_model"), return_all_scores =True, max_length=128, truncation=True)
+#pipe = AutoModelForSequenceClassification.from_pretrained(os.path.join(path, "best_model"))
