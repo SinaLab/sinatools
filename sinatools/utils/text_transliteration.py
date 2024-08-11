@@ -165,7 +165,7 @@ bw2ar_map = {
 #It takes a text and the schema as input and return 2-values: the transliteration and a flag of whether all chars are transliterated or not
 def perform_transliteration(text , schema ):
     """
-    This method takes a text and a schema as input and returns a tuple of two values: the transliteration of the text based on the given schema and a flag indicating whether all characters in the text were transliterated or not.
+    This method takes a text and a schema as input and returns a tuple of two values: the transliteration of the text is based on the given schema and a flag indicating whether all characters in the text were transliterated or not.
 
     Args:
         text (:obj:`str`): The input text to be transliterated.

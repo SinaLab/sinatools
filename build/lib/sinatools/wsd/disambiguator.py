@@ -457,13 +457,13 @@ def WSD(sentence):
 
 def disambiguate(sentence):
     """
-    This method disambiguate words within a sentence.
+    This method is a pipeline of five methods. Given a sentence as input, this method tags each word in the sentence with the following: Lemma, single-word sense, multi-word sense, and NER tag. The disambiguation of single/multi-word senses is done using our ArabGlossBERT TSV model. You can try the demo online. For more details read the article.
 
     Args:
-        sentence (:obj:`str`): The Arabic text to be disambiguated, it should be limited to less than 500 characters.
+        sentence (:obj:`str`): The Arabic text to be disambiguated.
 
     Returns:
-        :obj:`list`: The JSON output includes a list of words, with each word having a gloss if it exists or a lemma if no gloss is found.
+        :obj:`list`: A list of JSON objects, with each word having a concept id if it exists or a lemma if no gloss is found.
 
     **Example:**
 
@@ -475,22 +475,23 @@ def disambiguate(sentence):
         print(result)
 
         #output
-         [
-             {
-                 "concept_id": "303019218",
-                 "word": "ذهبت",
-                 "lemma": "ذَهَبَ۪ 1"
-             },
-             {
-                 "word": "إلى",
-                 "lemma": "إِلَى 1"
-             },
-             {
-                 "word": "جامعة بيرزيت",
-                 "concept_id": "334000099",
-                 "lemma": "جامِعَة بيرزَيت"
-             }
-         ]
+        [{
+            'concept_id': '303051631',
+            'word': 'تمشيت',
+            'lemma': 'تَمَشَّى'
+        },{
+            'concept_id': '303005470',
+            'word': 'بين',
+            'lemma': 'بَيْن'
+        },{
+            'concept_id': '303007335',
+            'word': 'الجداول',
+            'lemma': 'جَدْوَلٌ'
+        },{
+            'concept_id': '303056588',
+            'word': 'والأنهار',
+            'lemma': 'نَهْرٌ'
+        }]        
     """      
     if len(sentence) > 500:
        content = ["Input is too long"]

@@ -39,7 +39,7 @@ Examples:
 
 """
 import argparse
-from sinatools.utils.implication import Implication
+from sinatools.utils.word_compare import Implication
 
 def read_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -72,8 +72,8 @@ def main():
     # Instantiate the Implication class
     implication_obj = Implication(word1, word2)
     
-    # For this example, assuming there is a method `get_result()` in the Implication class.
-    result = implication_obj.get_result()
+    # For this example, assuming there is a method `get_verdict()` in the Implication class.
+    result = implication_obj.get_verdict()
     print(result)
 
 if __name__ == '__main__':

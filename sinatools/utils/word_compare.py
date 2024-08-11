@@ -6,8 +6,13 @@
 from sinatools.utils.parser import arStrip
 class Implication:
     """
-    The implication class computes whether the two Arabic words are the same or not, regardless of how they are diacritized. The output also contains implication direction, distance, number of conflicts, and other outputs. 
-    Argd:
+    Compares two Arabic words to find out whether they have compatible diacratization (i.e., implication between the diacrtics).
+
+    For example: (فَعل) and (فَعَل) are compatible words. The first implies the second because it has less diacritics. Based on the implication direction score, the class determines the verdict (Same or different), as well as the diacritic distance and the number of diacritic conflicts between them. The class also returns the preferredWord, which is the “implied” word that has more diacritics.
+
+    You can try the demo online, and see the article for more details.
+    
+    Args:
         :obj:`str' word1: input text
         :obj:`str' word2: input text
 
@@ -440,12 +445,12 @@ class Implication:
         word2Diac = 0
   
         for i in range ( 0 , len(self.word1Diacritics) - 1) :
-            word1Diac = self.word1Diacritics[i];
-            word2Diac = self.word2Diacritics[i];
+            word1Diac = self.word1Diacritics[i]
+            word2Diac = self.word2Diacritics[i]
 
-            self.lettersDirection[i + 1] = self.directionTable[word1Diac][word2Diac];
-            self.conflictFlags[self.lettersDirection[i + 1] + 1] = True;
-            self.distance = self.distance + self.distanceTable[word1Diac][word2Diac];
+            self.lettersDirection[i + 1] = self.directionTable[word1Diac][word2Diac]
+            self.conflictFlags[self.lettersDirection[i + 1] + 1] = True
+            self.distance = self.distance + self.distanceTable[word1Diac][word2Diac]
 
                
         word1Diac = int( self.word1Diacritics[len(self.word1Diacritics) - 1] ) # last letter diacritics to word1
@@ -609,8 +614,8 @@ class Implication:
         word = arStrip(word, diacs=False, shaddah=False)
         return list(word)
 
-    def get_verdict(self ): 
-        return self.verdict
+    #def get_verdict(self ): 
+    #    return self.verdict
 
 
     def get_direction(self): 
@@ -632,7 +637,7 @@ class Implication:
     def get_word2(self) :
         return self.word2 
 
-    def get_result(self):
+    def get_verdict(self):
         """
         This method returns the result of the comparison between two words.
 

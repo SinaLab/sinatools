@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sinatools.utils.parser import arStrip
-from sinatools.utils.implication import Implication
+from sinatools.utils.word_compare import Implication
 import argparse
 
 def normalize_word(word: str, ignore_all_diacritics_but_not_shadda: bool=True, ignore_shadda_diacritic: bool=True) -> str:

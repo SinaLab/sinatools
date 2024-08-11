@@ -76,7 +76,28 @@ def find_fuzzy_value_for_candidates(level, list_of_unique_synonyms, number_of_cy
 
 
 def extend_synonyms(synset, level):
-   
+    """
+    This method receives a set of one or more synonyms and a level number, then extends this set with additional synonyms. The more synonyms in the input, the more accurate in the results. Each synonym in the output is assigned a fuzzy value to indicate how much it is likely to be a synonymy. You can try the demo online. Read the article for more details.
+
+    Args:
+        synset (:obj:`str`) – A set of initial synonyms to be extended (string of synonyms seperated by |).
+        level (:obj:`int`) – The level number indicates the depth of the synonym graph that the method should explore. The level could be 2 or 3. The 3rd level is richer, but the 2nd is faster.
+    
+    Returns:
+        :obj:`list`: A list of lists, where each list could be contains:
+            synonym: Synonym related to the given synset (set of synonyms).
+            fuzzy_value: The synonyms strength as a percentage out of 100.
+
+    **Example:**
+
+    .. highlight:: python
+    .. code-block:: python
+
+        from sinatools.synonyms.synonyms_generator import extend_synonyms
+        extend_synonyms('ممر | طريق', 2)
+        [["مَسْلَك","61%"],["سبيل","61%"],["وَجْه","30%"],["نَهْج", "30%"],["نَمَطٌ","30%"],["مِنْهَج","30%"],["مِنهاج", "30%"],["مَوْر","30%"],["مَسَار","30%"],["مَرصَد", "30%"],["مَذْهَبٌ","30%"],["مَدْرَج","30%"],["مَجَاز","30%"]]
+
+    """         
     used_graph = {}
     if level == 2:
        used_graph = synonyms_level2_dict
@@ -118,6 +139,29 @@ def extend_synonyms(synset, level):
     return list_of_synon_with_fuzzy_value
 
 def evaluate_synonyms(synset, level):
+
+   """
+    This method receives a set of synonyms and a level number, then evaluates how much each of these input synonyms is really a synonym (i.e., how much it belongs to the set). You can try the demo online.
+
+    Args:
+        synset (:obj:`str`) – A set of initial synonyms to be evaluated (string of synonyms seperated by |).
+        level (:obj:`int`) – The level number indicating the depth of synonym graph that the method will explore, which could be 2 or 3.
+    
+    Returns:
+        :obj:`list`: A list of lists, where each list could be contains:
+            synonym: Synonym related to the given synset (set of synonyms).
+            fuzzy_value: The synonyms strength as a percentage out of 100.
+
+    **Example:**
+
+    .. highlight:: python
+    .. code-block:: python
+
+    from sinatools.synonyms.synonyms_generator import evaluate_synonyms
+    
+    evaluate_synonyms('ممر | طريق | مَسْلَك | سبيل') 
+    [["مَسْلَك","61%"],["سبيل","60%"],["طريق","40%"],["ممر", "40%"]]
+   """         
 
    used_graph = {}
    if level == 2:

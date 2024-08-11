@@ -15,6 +15,28 @@ def validator(sentence, max_tokens=500):
 
 
 def removal(csv_file, columnName, finalFileName, deletedFileName, similarityThreshold=0.8):
+    """
+    This method is designed to identify dublicate text in a given corpora/text. It processes a CSV file of sentences to identify and remove duplicate sentences based on a specified threshold. We used cosine similarity to measure similarity between words and sentences. The method saves the filtered results and the identified duplicates to separate files.
+    
+    Args:
+        csv_file (:obj:`str`) – The CSV file contains Arabic text that needs to be cleaned.
+        column_name (:obj:`str`) – This is the name of the column containing the text that needs to be checked for duplicate removal.
+        final_file_name (:obj:`str`) – This is the name of the CSV file that will contain the data after duplicate removal.        
+        deleted_file_name (:obj:`str`) – This is the name of the file that will contain all the duplicate records that are deleted.        
+        similarity_threshold (:obj:`float`) – This is a floating-point number. The default value is 0.8, indicating the percentage of similarity that the function should use when deleting duplicates from the text column.    
+    
+    Returns:
+        csv files.
+    
+    **Example:**
+    
+    .. highlight:: python
+    .. code-block:: python
+    
+        from sinatools.utils.text_dublication_detector import removal
+        removal("/path/to/csv/file1", sentences, "/path/to/csv/file2", 0.8)
+    """
+
     # Read CSV file
     try:
         df = pd.read_csv(csv_file)

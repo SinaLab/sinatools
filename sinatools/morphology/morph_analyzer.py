@@ -24,27 +24,27 @@ def find_solution(token, language, flag):
 
 def analyze(text, language ='MSA', task ='full', flag="1"):
    """
-    This method processes an input text and returns morphological analysis for each token within the text, based on the specified language, task, and flag. As follows:
-    If:
-        The task is lemmatization, the morphological solution includes only the lemma_id, lemma, token, and token frequency.
-        The task is pos, the morphological solution includes only the part-of-speech, token, and token frequency.
-        The task is root, the morphological solution includes only the root, token, and token frequency.
-        The task is full, the morphological solution includes the lemma_id, lemma, part-of-speech, root, token, and token frequency.
+    This method processes an input text and returns morphological analysis for each token within the text, based on the specified language, task, and flag. You can try the demo online. See article for more details
+    
+        * If the task is lemmatization, the morphological solution includes only the lemma_id, lemma, token, and token frequency.
+        * If the task is pos, the morphological solution includes only the part-of-speech, token, and token frequency.
+        * If the task is root, the morphological solution includes only the root, token, and token frequency.
+        * If the task is full, the morphological solution includes the lemma_id, lemma, part-of-speech, root, token, and token frequency.    
      
-    Args:
+    Parameters:
         text (:obj:`str`): The Arabic text to be morphologically analyzed.
-        language (:obj:`str`): The type of the input text. Currently, only Modern Standard Arabic (MSA) is supported.
+        language (:obj:`str`): Currently, only Modern Standard Arabic (MSA) is supported.
         task (:obj:`str`): The task to filter the results by. Options are [lemmatization, pos, root, full]. The default task if not specified is `full`.
-        flag (:obj:`str`): The flag to filter the returned results. If the flag is `1`, the solution with the highest frequency will be returned. If the flag is `*`, all solutions will be returned, ordered descendingly, with the highest frequency solution first. The default flag if not specified is `1`.
+        flag (:obj:`str`):  The flag to filter the returned results. If the flag is `1`, the solution with the highest frequency will be returned. If the flag is `*`, all solutions will be returned, ordered descendingly, with the highest frequency solution first. The default flag if not specified is `1`.
          
     Returns:
         list (:obj:`list`): A list of JSON objects, where each JSON could be contains:
             token: The token from the original text.
-            lemma: The lemma of the token.
-            lemma_id: The id of the lemma.
-            pos: The part-of-speech of the token.
-            root: The root of the token.
-            frequency: The frequency of the token.
+            lemma: The lemma of the token (Lemmas from the Qabas lexicon).
+            lemma_id: The id of the lemma (qabas lemma ids).
+            pos: The part-of-speech of the token (see Qabas POS tags).
+            root: The root of the token (qabas roots).
+            frequency: The frequency of the token (see section 3 in article).        
 
     **Example:**
 
@@ -57,37 +57,36 @@ def analyze(text, language ='MSA', task ='full', flag="1"):
         #Example: task = full 
         analyze('ذهب الولد الى المدرسة')
 
-        [
-            { 
-              "token": "ذهب",
-              "lemma": "ذَهَبَ",
-              "lemma_id": "202001617",
-              "root": "ذ ه ب",
-              "pos": "فعل ماضي",
-              "frequency": "82202"
-            },{ 
-               "token": "الولد",
-               "lemma": "وَلَدٌ",
-               "lemma_id": "202003092",
-               "root": "و ل د",
-               "pos": "اسم",
-               "frequency": "19066"
-            },{ 
-               "token": "إلى",
-               "lemma": "إِلَى",
-               "lemma_id": "202000856",
-               "root": "إ ل ى",
-               "pos": "حرف جر",
-               "frequency": "7367507"
-            },{ 
-               "token": "المدرسة",
-               "lemma": "مَدْرَسَةٌ",
-               "lemma_id": "202002620",
-               "root": "د ر س",
-               "pos": "اسم",
-               "frequency": "145285"
-            }
-        ]
+        [{ 
+            "token": "ذهب",
+            "lemma": "ذَهَبَ",
+            "lemma_id": "202001617",
+            "root": "ذ ه ب",
+            "pos": "فعل ماضي",
+            "frequency": "82202"
+          },{ 
+            "token": "الولد",
+            "lemma": "وَلَدٌ",
+            "lemma_id": "202003092",
+            "root": "و ل د",
+            "pos": "اسم",
+            "frequency": "19066"
+          },{ 
+            "token": "إلى",
+            "lemma": "إِلَى",
+            "lemma_id": "202000856",
+            "root": "إ ل ى",
+            "pos": "حرف جر",
+            "frequency": "7367507"
+          },{ 
+            "token": "المدرسة",
+            "lemma": "مَدْرَسَةٌ",
+            "lemma_id": "202002620",
+            "root": "د ر س",
+            "pos": "اسم",
+            "frequency": "145285"
+        }]
+
    """
 
    output_list = []

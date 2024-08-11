@@ -28,7 +28,48 @@ def convert_nested_to_flat(nested_tags):
     return flat_tags
 
 def extract(text, ner_method="nested"):
+    """
+    This method processes an input text and returns named entites for each token within the text. It support 21 class of entites. The method also support flat and nested NER. You can try the demo online. See article for details.
     
+    Args:
+        * text (:obj:`str`) – The Arabic text to be tagged.
+        * ner_method (:obj:`str`) – The NER method can produce either flat or nested output formats. The default method is nested.
+            nested method: If the method is nested, the output will include nested tags.
+            flat method: If the method is flat, the output will consist of only flat tags.
+        The choice between flat and nested methods determines the structure and detail of the named entity recognition output.    
+    
+    Returns:
+        A list of JSON objects, where each object could be contains:
+            token: The token from the original text.
+            NER tag: The label pairs for each segment.
+    
+    **Example:**
+    
+    .. highlight:: python
+    .. code-block:: python
+    
+        from sinatools.ner.entity_extractor import extract
+        #Example of nested ner. Notice that the last word in this sentense contains nested tags.
+        extract('ذهب محمد الى جامعة بيرزيت')
+        #the output
+        [{
+            "token":"ذهب",
+            "tags":"O"
+          },{
+            "token":"محمد",
+            "tags":"B-PERS"
+          },{
+            "token":"إلى",
+            "tags":"O"
+          },{
+            "token":"جامعة",
+            "tags":"B-ORG"
+          },{
+            "token":"بيرزيت",
+            "tags":"B-GPE I-ORG"
+        }]    
+    """
+
     dataset, token_vocab = text2segments(text)
 
     vocabs = namedtuple("Vocab", ["tags", "tokens"])

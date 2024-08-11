@@ -1,7 +1,7 @@
 """
 About:
 ------
-The morphology_analyzer command is designed to provide morphological analysis for Arabic text using the SinaTools morph_analyzer component. Users can specify the language and desired analysis task (lemmatization, part-of-speech tagging, or full morphological analysis), and flag.
+The morphology_analyzer command is designed to provide morphological analysis for Arabic text using the SinaTools morph_analyzer API. Users can specify the language and desired analysis task (lemmatization, part-of-speech tagging, or full morphological analysis), and flag.
 
 Usage:
 ------

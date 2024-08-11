@@ -169,7 +169,7 @@ def get_entity_category(entity_type, categories):
 
 # ============ Extract entities, their types and categorize them ===============
 def relation_extraction(sentence):
-    
+    #test_sentence="صورة إعتقال طفل فلسطيني خلال انتفاضة الأقصى ."
     entities=entities_and_types(sentence)
 
     event_indices = [i for i, (_, entity_type) in enumerate(entities.items()) if entity_type == 'EVENT']

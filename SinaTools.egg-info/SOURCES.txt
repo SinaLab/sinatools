@@ -174,7 +174,6 @@ sinatools/synonyms/__init__.py
 sinatools/synonyms/synonyms_generator.py
 sinatools/utils/__init__.py
 sinatools/utils/charsets.py
-sinatools/utils/implication.py
 sinatools/utils/parser.py
 sinatools/utils/readfile.py
 sinatools/utils/similarity.py
@@ -182,6 +181,7 @@ sinatools/utils/text_dublication_detector.py
 sinatools/utils/text_transliteration.py
 sinatools/utils/tokenizer.py
 sinatools/utils/tokenizers_words.py
+sinatools/utils/word_compare.py
 sinatools/wsd/__init__.py
 sinatools/wsd/disambiguator.py
 sinatools/wsd/settings.py

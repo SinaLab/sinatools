@@ -4,16 +4,16 @@ import argparse
 def arStrip(text , diacs=True , small_diacs=True , shaddah=True , digit=True, alif=True , special_chars=True ):
     
     """
-    This method removes Arabic diacritics, small diacritcs, shaddah, Latin and Arabic digits, unify alif, remove special characters, extra spaces, underscore and Arabic tatwelah from the input text.
+    This method allows one to optionally remove (Arabic diacritics, small diacritics, shaddah, Latin and Arabic digits, unify alif, remove special characters, extra spaces, underscore and Arabic tatwelah) from the input text.
 
     Args:
         text (:obj:`str`): Arabic text to be processed.
-        diacs (:obj:`bool`): flag to remove Arabic diacretics [ ًٌٍَُِْ] (default is True).
-        small_diacs (:obj:`bool`): flag to remove small diacretics (default is True).
+        diacs (:obj:`bool`): flag to remove these 7 Arabic diacretics [ ٍ ِ ْ ٌ ُ َ ً] (default is True).
+        small_diacs (:obj:`bool`): flag to remove all Quranic annotation signs from this range [06D6-06ED] in addition to small alif. (default is True).
         shaddah (:obj:`bool`): flag to remove shaddah (default is True).
         digit (:obj:`bool`): flag to remove Latin and Arabic digits (default is True).
-        alif (:obj:`bool`): flag to unify alif (default is True).
-        special_chars (:obj:`bool`): flag to remove special characters (default is True).
+        alif (:obj:`bool`): flag to unify alif. Replace [ٱ أ إ آ] into [ا] (default is True).
+        special_chars (:obj:`bool`): flag to remove these special characters [?؟!@#$%] (default is True).
 
     Returns:
         :obj:`str`: stripped text.
@@ -30,10 +30,10 @@ def arStrip(text , diacs=True , small_diacs=True , shaddah=True , digit=True, al
         # output
         الجو جميل
 
-        output = parser.arStrip('أَلَمۡ یَأۡنِ لِلَّذِینَ ءَامَنُوۤا۟ أَن تَخۡشَعَ قُلُوبُهُمۡ لِذِكۡرِ ٱللَّهِ وَمَا نَزَلَ مِنَ ٱلۡحَقِّ وَلَا یَكُونُوا۟ كَٱلَّذِینَ أُوتُوا۟ ٱلۡكِتَـٰبَ مِن قَبۡلُ فَطَالَ عَلَیۡهِمُ ٱلۡأَمَدُ فَقَسَتۡ قُلُوبُهُمۡۖ وَكَثِیر مِّنۡهُمۡ فَـسِقُونَ' , True , True , True ,  True , True , True )
+        output =parser.arStrip('أَلَمۡ یَأۡنِ لِلَّذِینَ ءَامَنُوۤا۟ أَن تَخۡشَعَ قُلُوبُهُمۡ لِذِكۡرِ ٱللَّهِ وَمَا نَزَلَ مِنَ ٱلۡحَقِّ وَلَا یَكُونُوا۟ كَٱلَّذِینَ أُوتُوا۟ ٱلۡكِتَـٰبَ مِن قَبۡلُ فَطَالَ عَلَیۡهِمُ ٱلۡأَمَدُ فَقَسَتۡ قُلُوبُهُمۡۖ وَكَثِیر مِّنۡهُمۡ فَـسِقُونَ', True, True, True, True, False, False )
         print(output)
         #output
-        الم یان للذین ءامنوا ان تخشع قلوبهم لذكر الله وما نزل من الحق ولا یكونوا كالذین اوتوا الكتٰب من قبل فطال علیهم الامد فقست قلوبهم وكثیر منهم فسقون
+        ألم یأن للذین ءامنوا أن تخشع قلوبهم لذكر ٱلله وما نزل من ٱلحق ولا یكونوا كٱلذین أوتوا ٱلكتب من قبل فطال علیهم ٱلأمد فقست قلوبهم وكثیر منهم فسقون
     """
     try:
         if text: # if the input string is not empty do the following
@@ -67,13 +67,13 @@ def arStrip(text , diacs=True , small_diacs=True , shaddah=True , digit=True, al
     
 def remove_punctuation(text):
     """
-    Removes punctuation marks from the text.
+    Removes these arabic and english punctuation marks from the text [! " # $ % & ' ( ) * + , - . / : ; > = < ? @ [ \ ] ^ _ ` { | } ~ ، ؛ ؞ ؟ ـ ٓ ٬ ٪ ٫ ٭ ۔].
     
     Args:
       text (:obj:`str`): The input text.
     
     Returns:
-      :obj:`str`: The output text without punctuation marks.
+       :obj:`str`
 
     **Example:**
 
@@ -109,15 +109,12 @@ def remove_punctuation(text):
 
 def remove_latin(text):
     """
-    This method removes all Latin characters from the input text.
+    This method removes all Latin letters from the input text.
 
-    Args:
+    Parameters:
         text (:obj:`str`): The input text.
-
     Returns:
-         outputString (:obj:`str`): The text without Latin characters.
-    Note:
-        If an error occurs during processing, the original text is returned.
+        :obj:`str`
     **Example:**
 
     .. highlight:: python

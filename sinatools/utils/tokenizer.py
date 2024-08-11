@@ -58,7 +58,7 @@ def sentence_tokenizer(text, dot=True, new_line=True, question_mark=True, exclam
 
 def corpus_tokenizer(dir_path, output_csv, row_id = 1, global_sentence_id = 1):
     """
-    This method receives a directory and tokenizes all files within the input directory, as well as all files within subdirectories within the main directory. The results are then stored in a CSV file.
+    This method is designed to tokenize a corpus into words. It receives a directory and tokenizes all files within the input directory, as well as all files within subdirectories within the main directory. The results are then stored in one CSV file. The data within files was split into sentences using the sentence_tokenizer module and into words using a word tokenizer. Additionally, it added a set of ids (row_id, docs_sentence_word_id, global_sentence_id, sentence_id, word_position).
 
     Args:
         dir_path (:obj:`str`): The path of the directory containing multiple Arabic txt files.
