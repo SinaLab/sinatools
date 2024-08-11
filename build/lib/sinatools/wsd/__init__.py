@@ -4,7 +4,7 @@ from sinatools.DataDownload import downloader
 import os 
 
 glosses_dic = {}
-filename = 'glosses_dic.pickle'
+filename = 'one_gram.pickle'
 path =downloader.get_appdatadir()
 file_path = os.path.join(path, filename)
 with open(file_path, 'rb') as f:

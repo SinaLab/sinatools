@@ -56,14 +56,14 @@ def main():
                 download_file(urls["ner"])
                 download_file(urls["wsd_model"])
                 download_file(urls["wsd_tokenizer"])
-                download_file(urls["glosses_dic"])
+                download_file(urls["one_gram"])
                 download_file(urls["five_grams"])
                 download_file(urls["four_grams"])
                 download_file(urls["three_grams"])
                 download_file(urls["two_grams"])
             elif file == "synonyms":
-                download_file(urls["synonyms_level2"])
-                download_file(urls["synonyms_level3"])
+                download_file(urls["graph_l2"])
+                download_file(urls["graph_l3"])
             else:
                url = urls[file]
                download_file(url)

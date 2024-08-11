@@ -15,8 +15,8 @@ urls = {
     'four_grams':'https://sina.birzeit.edu/four_grams.pickle',
     'three_grams':'https://sina.birzeit.edu/three_grams.pickle',
     'two_grams':'https://sina.birzeit.edu/two_grams.pickle',
-    'synonyms_level2':'https://sina.birzeit.edu/synonyms_level2.pkl',
-    'synonyms_level3':'https://sina.birzeit.edu/synonyms_level3.pkl'
+    'synonyms_level2':'https://sina.birzeit.edu/graph_l2.pkl',
+    'synonyms_level3':'https://sina.birzeit.edu/graph_l3.pkl'
 }
 
 def get_appdatadir():
