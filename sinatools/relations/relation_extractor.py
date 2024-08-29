@@ -1,9 +1,7 @@
-import torch
-import json
 from urllib.request import Request, urlopen
 from sinatools.ner.entity_extractor import extract
+from sinatools.utils.tokenizer import sentence_tokenizer
 from . import pipe
-
 
 # ============================ Extract entities and their types ========================
 def jsons_to_list_of_lists(json_list):
@@ -168,34 +166,34 @@ def get_entity_category(entity_type, categories):
 
 
 # ============ Extract entities, their types and categorize them ===============
-def relation_extraction(sentence):
-    #test_sentence="صورة إعتقال طفل فلسطيني خلال انتفاضة الأقصى ."
-    entities=entities_and_types(sentence)
+def event_argument_relation_extraction(documnet):
 
-    event_indices = [i for i, (_, entity_type) in enumerate(entities.items()) if entity_type == 'EVENT']
-    arg_event_indices = [i for i, (_, entity_type) in enumerate(entities.items()) if entity_type != 'EVENT']
-
+    sentences=sentence_tokenizer(documnet)
     output_list=[]
+    relation={}
+    triple_id=0
+    for sentence in sentences:
+        entities=entities_and_types(sentence)
+        entity_identifier={entity:i for entity, i in zip(entities,range(1,len(entities)+1))}
 
-    for i in event_indices:
-        event_entity=list(entities.keys())[i]
-        for j in arg_event_indices:
-            arg_name= list(entities.keys())[j]
-            arg_type=entities[arg_name]
-            category = get_entity_category(arg_type, categories)
-            
-            if category in temp03:
-                relation_sentence=f"[CLS] {sentence} [SEP] {event_entity} {temp03[category]} {arg_name}"
-                predicted_relation=pipe(relation_sentence)
-                score = predicted_relation[0][0]['score']  
-                if score > 0.50:
-                    #print(f"Event:{event_entity} Relation:{category} Argument:{arg_name}\n")
-                    #output_list.append([{event_entity} ,{category}, {arg_name}])
-                    output_list.append(f"Event:{event_entity}, Relation:{category}, Argument:{arg_name}")
+        event_indices = [i for i, (_, entity_type) in enumerate(entities.items()) if entity_type == 'EVENT']
+        arg_event_indices = [i for i, (_, entity_type) in enumerate(entities.items()) if entity_type != 'EVENT']
 
-                else:
-                    #print(f"Event:{event_entity} Relation:No relation Argument:{arg_name}\n")
-                    #output_list.append([{event_entity} ,'No relation', {arg_name}])
-                    output_list.append(f"Event:{event_entity}, Relation:No relation, Argument:{arg_name}")
+
+        for i in event_indices:
+            event_entity=list(entities.keys())[i]
+            for j in arg_event_indices:
+                arg_name= list(entities.keys())[j]
+                arg_type=entities[arg_name]
+                category = get_entity_category(arg_type, categories)
+                
+                if category in temp03:
+                    relation_sentence=f"[CLS] {sentence} [SEP] {event_entity} {temp03[category]} {arg_name}"
+                    predicted_relation=pipe(relation_sentence)
+                    score = predicted_relation[0][0]['score']  
+                    if score > 0.50:
+                        triple_id+=1
+                        relation={"TripleID":triple_id,"Subject":{"ID":entity_identifier[event_entity],"Type": entities[event_entity], "Label":event_entity}, "Relation": category, "Object":{"ID":entity_identifier[arg_name],"Type": entities[arg_name], "Label":arg_name,}}
+                        output_list.append(relation)
     
     return output_list

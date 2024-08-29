@@ -155,7 +155,6 @@ sinatools/ner/datasets.py
 sinatools/ner/entity_extractor.py
 sinatools/ner/helpers.py
 sinatools/ner/metrics.py
-sinatools/ner/relation_extractor.py
 sinatools/ner/transforms.py
 sinatools/ner/data/__init__.py
 sinatools/ner/data/datasets.py
@@ -168,6 +167,8 @@ sinatools/ner/trainers/BaseTrainer.py
 sinatools/ner/trainers/BertNestedTrainer.py
 sinatools/ner/trainers/BertTrainer.py
 sinatools/ner/trainers/__init__.py
+sinatools/relations/__init__.py
+sinatools/relations/relation_extractor.py
 sinatools/semantic_relatedness/__init__.py
 sinatools/semantic_relatedness/compute_relatedness.py
 sinatools/synonyms/__init__.py

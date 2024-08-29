@@ -1,0 +1,22 @@
+[console_scripts]
+alma_multi_word = sinatools.CLI.morphology.ALMA_multi_word:main
+appdatadir = sinatools.CLI.DataDownload.get_appdatadir:main
+arStrip = sinatools.CLI.utils.arStrip:main
+corpus_entity_extractor = sinatools.CLI.ner.corpus_entity_extractor:main
+corpus_tokenizer = sinatools.CLI.utils.corpus_tokenizer:main
+download_files = sinatools.CLI.DataDownload.download_files:main
+entity_extractor = sinatools.CLI.ner.entity_extractor:main
+evaluate_synonyms = sinatools.CLI.synonyms.evaluate_synonyms:main
+extend_synonyms = sinatools.CLI.synonyms.extend_synonyms:main
+implication = sinatools.CLI.utils.implication:main
+install_env = sinatools.install_env:main
+jaccard_similarity = sinatools.CLI.utils.jaccard:main
+morphology_analyzer = sinatools.CLI.morphology.morph_analyzer:main
+remove_latin = sinatools.CLI.utils.remove_latin:main
+remove_punctuation = sinatools.CLI.utils.remove_punctuation:main
+semantic_relatedness = sinatools.CLI.semantic_relatedness.compute_relatedness:main
+sentence_tokenizer = sinatools.CLI.utils.sentence_tokenizer:main
+text_dublication_detector = sinatools.CLI.utils.text_dublication_detector:main
+transliterate = sinatools.CLI.utils.text_transliteration:main
+wsd = sinatools.CLI.wsd.disambiguator:main
+

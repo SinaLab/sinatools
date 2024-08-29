@@ -1,0 +1,28 @@
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include HISTORY.rst
+include LICENSE
+include README.rst
+
+recursive-include tests *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
+
+
+include setup.py
+include sinatools/VERSION
+include sinatools/utils/*.py
+include sinatools/ner/*.py
+include sinatools/arabert/*.py
+include sinatools/DataDownload/*.py
+include sinatools/morphology/*.py
+include sinatools/salma/*.py
+include sinatools/CLI/ner/*.py
+include sinatools/CLI/morphology/*.py
+include sinatools/CLI/salma/*.py
+include sinatools/CLI/utils/*.py
+include sinatools/CLI/DataDownload/*.py
+include tests/*.py
+global-exclude *~

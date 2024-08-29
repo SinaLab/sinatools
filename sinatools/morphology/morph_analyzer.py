@@ -3,6 +3,7 @@ from sinatools.utils.tokenizers_words import simple_word_tokenize
 from sinatools.utils.parser import arStrip
 from sinatools.utils.charsets import AR_CHARSET, AR_DIAC_CHARSET
 from sinatools.DataDownload.downloader import get_appdatadir
+from sinatools.morphology.morph_analyzer import remove_punctuation
 from . import dictionary
 
 _IS_AR_RE = re.compile(u'^[' + re.escape(u''.join(AR_CHARSET)) + u']+$')
@@ -98,13 +99,16 @@ def analyze(text, language ='MSA', task ='full', flag="1"):
          token = arStrip(token , False , True , False , False , False , False) 
          token = re.sub('[ٱ]','ﺍ',token)
          # token, freq, lemma, lemma_id, root, pos
-         solution = [token, 0, token+"_0", 0, token, ""]
+         solution = [token, 0, token, 0, token, ""]
 
          if token.isdigit():
-            solution[5] = "digit" #pos
+            solution[5] = "رقم" #pos
+
+         elif remove_punctuation(token).strip() == "":
+            solution[5] = "علامة ترقيم" #pos
 
          elif not _is_ar(token):
-            solution[5] = "Foreign" #pos
+            solution[5] = "أجنبي" #pos
 
          else:
             result_token = find_solution(token,language,flag)

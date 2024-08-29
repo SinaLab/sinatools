@@ -16,7 +16,8 @@ urls = {
     'three_grams':'https://sina.birzeit.edu/three_grams.pickle',
     'two_grams':'https://sina.birzeit.edu/two_grams.pickle',
     'graph_l2':'https://sina.birzeit.edu/graph_l2.pkl',
-    'graph_l3':'https://sina.birzeit.edu/graph_l3.pkl'
+    'graph_l3':'https://sina.birzeit.edu/graph_l3.pkl',
+    'relation':'https://sina.birzeit.edu/relation_model.zip'
 }
 
 def get_appdatadir():

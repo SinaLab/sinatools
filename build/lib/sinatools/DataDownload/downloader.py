@@ -10,13 +10,14 @@ urls = {
     'ner': 'https://sina.birzeit.edu/Wj27012000.tar.gz',
     'wsd_model': 'https://sina.birzeit.edu/bert-base-arabertv02_22_May_2021_00h_allglosses_unused01.zip',
     'wsd_tokenizer': 'https://sina.birzeit.edu/bert-base-arabertv02.zip',
-    'glosses_dic': 'https://sina.birzeit.edu/glosses_dic.pickle',
+    'one_gram': 'https://sina.birzeit.edu/one_gram.pickle',
     'five_grams': 'https://sina.birzeit.edu/five_grams.pickle',
     'four_grams':'https://sina.birzeit.edu/four_grams.pickle',
     'three_grams':'https://sina.birzeit.edu/three_grams.pickle',
     'two_grams':'https://sina.birzeit.edu/two_grams.pickle',
-    'synonyms_level2':'https://sina.birzeit.edu/graph_l2.pkl',
-    'synonyms_level3':'https://sina.birzeit.edu/graph_l3.pkl'
+    'graph_l2':'https://sina.birzeit.edu/graph_l2.pkl',
+    'graph_l3':'https://sina.birzeit.edu/graph_l3.pkl',
+    'relation':'https://sina.birzeit.edu/relation_model.zip'
 }
 
 def get_appdatadir():
