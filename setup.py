@@ -78,7 +78,9 @@ setup(
             ('extend_synonyms='
                 'sinatools.CLI.synonyms.extend_synonyms:main'),                    
             ('semantic_relatedness='
-                'sinatools.CLI.semantic_relatedness.compute_relatedness:main'),                                 
+                'sinatools.CLI.semantic_relatedness.compute_relatedness:main'),
+            ('relation_extractor='
+                'sinatools.CLI.relations.relation_extractor:main'),
         ],
     },
     data_files=[('sinatools', ['sinatools/environment.yml'])],

@@ -12,6 +12,7 @@ implication = sinatools.CLI.utils.implication:main
 install_env = sinatools.install_env:main
 jaccard_similarity = sinatools.CLI.utils.jaccard:main
 morphology_analyzer = sinatools.CLI.morphology.morph_analyzer:main
+relation_extractor = sinatools.CLI.relations.relation_extractor:main
 remove_latin = sinatools.CLI.utils.remove_latin:main
 remove_punctuation = sinatools.CLI.utils.remove_punctuation:main
 semantic_relatedness = sinatools.CLI.semantic_relatedness.compute_relatedness:main

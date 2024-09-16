@@ -16,7 +16,7 @@ def find_solution(token, language, flag):
            solutions = [solutions[0]]
         for solution in solutions:
             # token, freq, lemma, lemma_id, root, pos
-            resulted_solutions.append([token, solution[0], solution[1], solution[2], solution[3], solution[4]])
+            resulted_solutions.append([token, solution[1], solution[2], solution[3], solution[4], solution[5]])
         return resulted_solutions
     else:
         return []
