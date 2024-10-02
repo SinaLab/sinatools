@@ -8,8 +8,8 @@ import tarfile
 urls = {
     'morph': 'https://sina.birzeit.edu/lemmas_dic.pickle',
     'ner': 'https://sina.birzeit.edu/Wj27012000.tar.gz',
-    'wsd_model': 'https://sina.birzeit.edu/bert-base-arabertv02_22_May_2021_00h_allglosses_unused01.zip',
-    'wsd_tokenizer': 'https://sina.birzeit.edu/bert-base-arabertv02.zip',
+    # 'wsd_model': 'https://sina.birzeit.edu/bert-base-arabertv02_22_May_2021_00h_allglosses_unused01.zip',
+    # 'wsd_tokenizer': 'https://sina.birzeit.edu/bert-base-arabertv02.zip',
     'one_gram': 'https://sina.birzeit.edu/one_gram.pickle',
     'five_grams': 'https://sina.birzeit.edu/five_grams.pickle',
     'four_grams':'https://sina.birzeit.edu/four_grams.pickle',
@@ -185,3 +185,34 @@ def download_files():
     """
     for url in urls.values():
         download_file(url)
+
+
+def download_folder_from_hf(repo_url, folder_name):
+    
+    # Hugging Face API to fetch files from the repository
+    api_url = f"https://huggingface.co/api/models/{repo_url}/tree/main/{folder_name}"
+
+    # Make the request to get the folder structure
+    response = requests.get(api_url)
+    if response.status_code != 200:
+        print(f"Failed to fetch folder contents. Status code: {response.status_code}")
+        return
+    
+    folder_content = response.json()
+    
+    # Download each file in the folder
+    for file_info in folder_content:
+        file_name = file_info["path"]
+        file_url = f"https://huggingface.co/{repo_url}/resolve/main/{file_name}"
+        
+        # Download the file and save it to the output directory
+        file_response = requests.get(file_url)
+        if file_response.status_code == 200:
+            # Create any necessary directories
+            output_file_path = os.path.join(get_appdatadir(), file_name)
+            os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
+            with open(output_file_path, 'wb') as f:
+                f.write(file_response.content)
+            print(f"Downloaded: {file_name}")
+        else:
+            print(f"Failed to download {file_name}. Status code: {file_response.status_code}")

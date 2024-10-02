@@ -8,6 +8,10 @@ from sinatools.morphology.ALMA_multi_word import ALMA_multi_word
 from sinatools.morphology.morph_analyzer import analyze
 from sinatools.ner.entity_extractor import extract
 from . import glosses_dic
+import time
+#import concurrent
+#import threading
+import multiprocessing
 
 
 def distill_entities(entities):
@@ -256,7 +260,7 @@ def find_named_entities(string):
    return found_entities   
 
 
-def find_glosses_using_ALMA(word):
+def find_glosses_using_ALMA(word, glosses_dic):
 
    data = analyze(word, language ='MSA', task ='full', flag="1")
    Diac_lemma = ""
@@ -302,7 +306,7 @@ def disambiguate_glosses_using_SALMA(glosses, Diac_lemma, Undiac_lemma, word, se
       return my_json
 
 
-def find_glosses(input_sentence, two_word_lemma, three_word_lemma,four_word_lemma, five_word_lemma, ner):
+def find_glosses(input_sentence, two_word_lemma, three_word_lemma,four_word_lemma, five_word_lemma, ner, glosses_dic):
       output_list = []
       position = 0
       while position < len(input_sentence):    
@@ -389,7 +393,7 @@ def find_glosses(input_sentence, two_word_lemma, three_word_lemma,four_word_lemm
          
          if flag == "False": # Not found in ner or in multi_word_dictionary, ASK ALMA 
             word = input_sentence[position]
-            word, Undiac_lemma, Diac_lemma, pos , concept_count, glosses = find_glosses_using_ALMA(word)   
+            word, Undiac_lemma, Diac_lemma, pos , concept_count, glosses = find_glosses_using_ALMA(word, glosses_dic)   
             my_json = {}    
             my_json['word'] = word
             my_json['concept_count'] = concept_count
@@ -432,26 +436,95 @@ def disambiguate_glosses_main(word, sentence):
       glosses = word['glosses']
       Diac_lemma = word['Diac_lemma']
       Undiac_lemma = word['Undiac_lemma']
-      return disambiguate_glosses_using_SALMA(glosses, Diac_lemma, Undiac_lemma, input_word, sentence)
+      start = time.time()
+      x = disambiguate_glosses_using_SALMA(glosses, Diac_lemma, Undiac_lemma, input_word, sentence)
+      end = time.time()
+      print(f"disambiguate time: {end - start}")
+      return x
+
+
+def init_resources():
+    global glosses_dic
+
+
+# Wrapper function for multiprocessing
+def disambiguate_glosses_in_parallel(word_and_sentence):
+    word, sentence = word_and_sentence
+    return disambiguate_glosses_main(word, sentence)
 
 def WSD(sentence):
-   
+   start = time.time()
    input_sentence = simple_word_tokenize(sentence)
-   
-   five_word_lemma = find_five_word_lemma(input_sentence)
-   
-   four_word_lemma = find_four_word_lemma(input_sentence)
-   
-   three_word_lemma = find_three_word_lemma(input_sentence)
-   
-   two_word_lemma = find_two_word_lemma(input_sentence)
-   
-   ner = find_named_entities(" ".join(input_sentence))
+   end = time.time()
+   print(f"tokenizer time: {end - start}")
 
-   output_list = find_glosses(input_sentence, two_word_lemma, three_word_lemma, four_word_lemma, five_word_lemma, ner)
-   results = []
-   for word in output_list:
-      results.append(disambiguate_glosses_main(word, sentence))
+   start = time.time()
+   five_word_lemma = find_five_word_lemma(input_sentence)
+   end = time.time()
+   print(f"5grams time: {end - start}")
+   
+   start = time.time()   
+   four_word_lemma = find_four_word_lemma(input_sentence)
+   end = time.time()
+   print(f"4grams time: {end - start}")
+
+   start = time.time()
+   three_word_lemma = find_three_word_lemma(input_sentence)
+   end = time.time()
+   print(f"3grams time: {end - start}")
+
+   start = time.time()
+   two_word_lemma = find_two_word_lemma(input_sentence)
+   end = time.time()
+   print(f"2grams time: {end - start}")
+
+   start = time.time()
+   ner = find_named_entities(" ".join(input_sentence))
+   end = time.time()
+   print(f"ner time: {end - start}")
+
+
+   start = time.time()
+   output_list = find_glosses(input_sentence, two_word_lemma, three_word_lemma, four_word_lemma, five_word_lemma, ner, glosses_dic_shared)
+   end = time.time()
+   print(f"lookup time: {end - start}")
+
+#    for word in output_list:
+    #  start = time.time()
+    #  results.append(disambiguate_glosses_main(word, sentence))
+    #  end = time.time()
+    #  print(f"disambiguate time: {end - start}")     
+#    return results
+
+#    with concurrent.futures.ProcessPoolExecutor() as executor:
+    #    results = list(executor.map(lambda word: disambiguate_glosses_main(word, sentence), output_list))
+#    return results
+
+   # Create and start threads
+#    for word in output_list:
+    #    thread = threading.Thread(target=worker, args=(word, sentence))
+    #    threads.append(thread)
+    #    thread.start()
+# 
+#    for thread in threads:
+    #    thread.join()
+#    
+#    return threading_results
+
+    # Number of CPUs
+   num_cpus = multiprocessing.cpu_count()
+   print("num_cpus : ", num_cpus)
+
+   # Create a manager to hold shared data
+#    with multiprocessing.Manager() as manager:
+    #    glosses_dic_shared = manager.dict(glosses_dic)
+    #    with multiprocessing.Pool(num_cpus) as pool:
+            # arguments = [(word, sentence) for word in output_list]
+            # results = pool.starmap(disambiguate_glosses_main, arguments)
+
+   with multiprocessing.Pool(initializer=init_resources) as pool:
+        # Map the list of words to the disambiguation function in parallel
+        results = pool.map(disambiguate_glosses_in_parallel, [(word, sentence) for word in output_list])
    return results
 
 
@@ -497,5 +570,8 @@ def disambiguate(sentence):
        content = ["Input is too long"]
        return content
     else: 
+       start = time.time()
        results = WSD(sentence)
+       end = time.time()
+       print(f"WSD total time: {end - start}")     
        return results 

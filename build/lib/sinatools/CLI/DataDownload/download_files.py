@@ -34,6 +34,7 @@ import argparse
 from sinatools.DataDownload.downloader import download_file
 from sinatools.DataDownload.downloader import download_files
 from sinatools.DataDownload.downloader import get_appdatadir
+from sinatools.DataDownload.downloader import download_folder_from_hf
 from sinatools.DataDownload.downloader import urls
 
 
@@ -51,15 +52,16 @@ def main():
         for file in args.files:
             print("file: ", file)
             if file == "wsd":
-                download_file(urls["morph"])
-                download_file(urls["ner"])
-                download_file(urls["wsd_model"])
-                download_file(urls["wsd_tokenizer"])
-                download_file(urls["one_gram"])
-                download_file(urls["five_grams"])
-                download_file(urls["four_grams"])
-                download_file(urls["three_grams"])
-                download_file(urls["two_grams"])
+                #download_file(urls["morph"])
+                #download_file(urls["ner"])
+                #download_file(urls["wsd_model"])
+                download_folder_from_hf("SinaLab/ArabGlossBERT", "bert-base-arabertv02_22_May_2021_00h_allglosses_unused01")
+                #download_file(urls["wsd_tokenizer"])
+                #download_file(urls["one_gram"])
+                #download_file(urls["five_grams"])
+                #download_file(urls["four_grams"])
+                #download_file(urls["three_grams"])
+                #download_file(urls["two_grams"])
             elif file == "synonyms":
                 download_file(urls["graph_l2"])
                 download_file(urls["graph_l3"])
