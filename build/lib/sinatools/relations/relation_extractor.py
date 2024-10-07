@@ -193,7 +193,7 @@ def event_argument_relation_extraction(documnet):
                     score = predicted_relation[0][0]['score']  
                     if score > 0.50:
                         triple_id+=1
-                        relation={"TripleID":triple_id,"Subject":{"ID":entity_identifier[event_entity],"Type": entities[event_entity], "Label":event_entity}, "Relation": category, "Object":{"ID":entity_identifier[arg_name],"Type": entities[arg_name], "Label":arg_name,}}
+                        relation={"TripleID":triple_id,"Subject":{"ID":entity_identifier[event_entity],"Type": entities[event_entity], "Label":event_entity}, "Relation": category, "Object":{"ID":entity_identifier[arg_name],"Type": entities[arg_name], "Label":arg_name,},"confidence": f"{score: .2f}"}
                         output_list.append(relation)
     
     return output_list
