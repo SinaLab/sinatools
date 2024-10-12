@@ -38,5 +38,3 @@ Reporting Issues
 --------
 To report any issues or bugs, please contact us at "sina.institute.bzu@gmail.com" or visit [SinaTools Issues](https://github.com/SinaLab/sinatools/issues).
 
-![GitHub release downloads](https://img.shields.io/github/downloads/SinaLab/sinatools/total)
-
