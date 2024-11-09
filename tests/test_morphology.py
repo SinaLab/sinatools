@@ -44,7 +44,7 @@ def test_analyze_empty():
     assert morph_analyzer.analyze("") == []
 
 
-def test_analyze_single_tasks():
+def test_analyze_single_task():
     base_dict = {"token": "المدرسة", "frequency": 561184}
     assert morph_analyzer.analyze("المدرسة", task="pos") == [base_dict | {"pos": "اسم"}]
     assert morph_analyzer.analyze("المدرسة", task="root") == [
