@@ -32,7 +32,9 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
     - name: Run setup.py develop
-      run: python setup.py develop
+      run: |
+        python setup.py develop
+        pip install pytest
     
     - name: Download files
       run: |
@@ -41,5 +43,4 @@ jobs:
     
     - name: Run pytest
       run: |
-        pip install pytest
-        python -m pytest tests/
+        python -m pytest -vv tests/
