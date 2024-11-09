@@ -1,6 +1,6 @@
 import pytest
 
-from sinatools.utils import parser
+from sinatools.utils import parser, word_compare
 
 
 class TestParser:
@@ -39,3 +39,15 @@ class TestParser:
     )
     def test_remove_punctuation(self, input_text, expected_output):
         assert parser.remove_punctuation(input_text) == expected_output
+
+
+class TestWordCompare:
+    def test_implication(self):
+        implication = word_compare.Implication("ذهب", "ذهب")
+        assert implication.get_verdict() == "Same"
+        assert implication.get_conflicts() == 0
+        assert implication.get_distance() == 0
+
+        # # TODO: Fix this test. Should return "Same" instead of "Different".
+        assert word_compare.Implication("ذَهَب", "ذهب").get_verdict() == "Same"
+    
