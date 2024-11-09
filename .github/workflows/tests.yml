@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
+        python-version: ['3.9', '3.10', '3.11', '3.12']
+        # '3.13' is not yet available for torchvision
       fail-fast: false  # Continue with other versions if one fails
     
     steps:
@@ -29,10 +30,14 @@ jobs:
         path: ~/.sinatools
         key: sinatools-models-v1
     
-    - name: Install dependencies
+    - name: Install Rust
+      if: matrix.python-version == '3.12'
+      uses: dtolnay/rust-toolchain@stable
+  
+    - name: Install dev dependencies
+      if: matrix.python-version == '3.12'
       run: |
-        python -m pip install --upgrade pip setuptools wheel setuptools_rust
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        python -m pip install --upgrade pip setuptools wheel setuptools_rust maturin
     
     - name: Run setup.py develop
       run: |
