@@ -1,0 +1,45 @@
+name: Python Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.10.8
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10.8'
+    
+    - name: Cache downloaded files
+      uses: actions/cache@v4
+      with:
+        path: ~/.sinatools
+        key: ${{ runner.os }}-sinatools-${{ hashFiles('sinatools/VERSION') }}
+        restore-keys: |
+          ${{ runner.os }}-sinatools-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    
+    - name: Run setup.py develop
+      run: python setup.py develop
+    
+    - name: Download files
+      run: |
+        mkdir -p ~/.sinatools
+        download_files
+    
+    - name: Run pytest
+      run: |
+        pip install pytest
+        python -m pytest tests/
