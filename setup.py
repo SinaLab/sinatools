@@ -21,9 +21,9 @@ requirements = [
     'pyarabic',
     'transformers>=4.36.0',  # compatible with torch versions
 
-    'torch==2.5.1',  # python versions: 3.9 - 3.13
-    'torchtext==0.18.0',  # python versions: 3.8 - 3.12
-    'torchvision==0.20.1',  # python versions: 3.9 - 3.12
+    'torch==2.3.1',  # python versions: 3.8 - 3.12
+    'torchtext==0.18.0',  # python versions: 3.8 - 3.12. !! Project is not maintained anymore !!
+    'torchvision==0.18.1',  # python versions: 3.9 - 3.12
 
     'seqeval==1.2.2',
     'natsort==7.1.1'
