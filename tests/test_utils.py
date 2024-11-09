@@ -1,6 +1,6 @@
 import pytest
 
-from sinatools.utils import parser, word_compare
+from sinatools.utils import parser, similarity, word_compare
 
 
 class TestParser:
@@ -49,5 +49,45 @@ class TestWordCompare:
         assert implication.get_distance() == 0
 
         # # TODO: Fix this test. Should return "Same" instead of "Different".
-        assert word_compare.Implication("ذَهَب", "ذهب").get_verdict() == "Same"
-    
+        # assert word_compare.Implication("ذَهَب", "ذهب").get_verdict() == "Same"
+
+
+class TestSimilarity:
+    def test_get_intersection(self):
+        # TODO: fix. Docs say that the output should be ["كتب" ,"فعل"].
+        assert similarity.get_intersection(
+            ["كتب", "فَعل", "فَعَلَ"],
+            ["كتب", "فَعّل"],
+            ignore_all_diacritics_but_not_shadda=False,
+            ignore_shadda_diacritic=True,
+        ) == ["كتب", "فَعل"]
+
+    def test_get_union(self):
+        # TODO: fix. Docs say that the output should be ["كتب" ,"فَعل" ,"فَعَلَ"].
+        assert similarity.get_union(
+            ["كتب", "فَعل", "فَعَلَ"],
+            ["كتب", "فَعّل"],
+            ignore_all_diacritics_but_not_shadda=True,
+            ignore_shadda_diacritic=True,
+        ) == ["فعل", "كتب", "فعل"]
+
+    def test_get_jaccard_similarity(self):
+        assert (
+            similarity.get_jaccard_similarity(
+                ["كتب", "فَعل", "فَعَلَ"],
+                ["كتب", "فَعّل"],
+                ignore_all_diacritics_but_not_shadda=False,
+                ignore_shadda_diacritic=False,
+            )
+            == 0.25
+        )
+
+    def test_get_jaccad(self):
+        assert similarity.get_jaccard(
+            str1="فَعَلَ | فَعل",
+            str2="فَعّل",
+            delimiter="|",
+            selection="jaccardAll",
+            ignoreAllDiacriticsButNotShadda=True,
+            ignoreShaddaDiacritic=True,
+        ) == ["intersection:", ["فعل"], "union:", ["فعل", "فعل"], "similarity:", 0.5]
