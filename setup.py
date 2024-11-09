@@ -18,7 +18,7 @@ requirements = [
     'requests',
     'regex',
     'pathlib',
-    'transformers==4.24.0',  # tar.gz & py3-none-any.whl
+    'transformers>=4.36.0',  # compatible with torch versions
 
     # 'torch==1.13.0',  # py3.10 (may be 3.11 max)
     # 'torchtext==0.14.0',  # py3.10
@@ -89,6 +89,7 @@ setup(
                 'sinatools.CLI.relations.relation_extractor:main'),
         ],
     },
+    python_requires='>=3.10,<3.13',
     data_files=[('sinatools', ['sinatools/environment.yml'])],
     package_data={'sinatools': ['data/*.pickle', 'environment.yml']},
     install_requires=requirements,
