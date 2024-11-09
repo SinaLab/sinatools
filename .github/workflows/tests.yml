@@ -29,13 +29,8 @@ jobs:
       with:
         path: ~/.sinatools
         key: sinatools-models-v1
-    
-    - name: Install Rust
-      if: matrix.python-version == '3.12'
-      uses: dtolnay/rust-toolchain@stable
-  
+
     - name: Install dev dependencies
-      if: matrix.python-version == '3.12'
       run: |
         python -m pip install --upgrade pip setuptools wheel setuptools_rust maturin
     

@@ -17,16 +17,16 @@ requirements = [
     'tqdm',
     'requests',
     'regex',
-    'pathlib',
+    'numpy>=1.26.0,<=2.0.2',  # python versions: 3.9 - 3.12
     'transformers>=4.36.0',  # compatible with torch versions
 
     # 'torch==1.13.0',  # py3.10 (may be 3.11 max)
     # 'torchtext==0.14.0',  # py3.10
     # 'torchvision==0.14.0',  # py3.10
 
-    'torch==2.5.1',
-    'torchtext==0.18.0',
-    'torchvision==0.20.1',
+    'torch==2.5.1',  # python versions: 3.9 - 3.13
+    'torchtext==0.18.0',  # python versions: 3.8 - 3.12
+    'torchvision==0.20.1',  # python versions: 3.9 - 3.12
 
     'seqeval==1.2.2',
     'natsort==7.1.1'
