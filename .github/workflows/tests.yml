@@ -27,6 +27,7 @@ jobs:
     - name: Cache downloaded files
       uses: actions/cache@v4
       id: cache-files
+      if: always()
       with:
         path: ~/.sinatools
         key: sinatools-models-v1
@@ -46,6 +47,10 @@ jobs:
         mkdir -p ~/.sinatools
         download_files --files wsd synonyms relation
     
+    - name: 'run pip freeze (TODO: remove)'
+      run: |
+        pip freeze
+
     - name: Run pytest
       run: |
         python -m pytest -vv tests/
