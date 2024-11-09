@@ -17,7 +17,6 @@ requirements = [
     'tqdm',
     'requests',
     'regex',
-    'numpy>=1.26.0,<=2.0.2',  # python versions: 3.9 - 3.12
     'transformers>=4.36.0',  # compatible with torch versions
 
     # 'torch==1.13.0',  # py3.10 (may be 3.11 max)
