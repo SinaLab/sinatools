@@ -20,11 +20,10 @@ jobs:
     
     - name: Cache downloaded files
       uses: actions/cache@v4
+      id: cache-files
       with:
         path: ~/.sinatools
-        key: ${{ runner.os }}-sinatools-${{ hashFiles('sinatools/VERSION') }}
-        restore-keys: |
-          ${{ runner.os }}-sinatools-
+        key: sinatools-models-v1
     
     - name: Install dependencies
       run: |
@@ -37,6 +36,7 @@ jobs:
         pip install pytest
     
     - name: Download files
+      if: steps.cache-files.outputs.cache-hit != 'true'
       run: |
         mkdir -p ~/.sinatools
         download_files
