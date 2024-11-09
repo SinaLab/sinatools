@@ -44,7 +44,7 @@ jobs:
       if: steps.cache-files.outputs.cache-hit != 'true'
       run: |
         mkdir -p ~/.sinatools
-        download_files wsd synonyms relation
+        download_files --files wsd synonyms relation
     
     - name: Run pytest
       run: |
