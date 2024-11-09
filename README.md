@@ -2,7 +2,7 @@ SinaTools
 ======================
 Open Source Toolkit for Arabic NLP and NLU developed by [SinaLab](http://sina.birzeit.edu/) at Birzeit University. SinaTools is available through Python APIs, command lines, colabs, and online demos.
 
-See the full list of [Available Packages](https://sina.birzeit.edu/sinatools/), which include: (1) [Morphology Tagging](https://sina.birzeit.edu/sinatools/index.html#morph), (2) [Named Entity Recognition (NER)](https://sina.birzeit.edu/sinatools/index.html#ner), (3) [Word Sense Disambiguation (WSD)](https://sina.birzeit.edu/sinatools/index.html#wsd), (4) [Semantic Relatedness](https://sina.birzeit.edu/sinatools/index.html#sr), (5) [Synonymy Extraction and Evaluation](https://sina.birzeit.edu/sinatools/index.html#se), (6) [Relation Extraction](https://sina.birzeit.edu/sinatools/index.html#re), (7) [Utilities](https://sina.birzeit.edu/sinatools/index.html#u) (diacritic-based word matching, Jaccard similarly, parser, tokenizers, corpora processing, transliteration, etc).
+See the full list of [Available Packages](https://sina.birzeit.edu/sinatools/), which include: (1) [Morphology Tagging](https://sina.birzeit.edu/sinatools/index.html#morph), (2) [Named Entity Recognition (NER)](https://sina.birzeit.edu/sinatools/index.html#ner), (3) [Word Sense Disambiguation (WSD)](https://sina.birzeit.edu/sinatools/index.html#wsd), (4) [Semantic Relatedness](https://sina.birzeit.edu/sinatools/index.html#sr), (5) [Synonymy Extraction and Evaluation](https://sina.birzeit.edu/sinatools/index.html#se), (6) [Relation Extraction](https://sina.birzeit.edu/sinatools/index.html#re), (7) [Utilities](https://sina.birzeit.edu/sinatools/index.html#u) (diacritic-based word matching, Jaccard similarity, parser, tokenizers, corpora processing, transliteration, etc).
 
 See [Demo Pages](https://sina.birzeit.edu/sinatools/).
 
@@ -24,7 +24,7 @@ Some modules in SinaTools require some data files and fine-tuned models to be do
 
 Documentation
 --------
-For information, please refer to the [main page](https://sina.birzeit.edu/sinatools) or the [online domuementation](https://sina.birzeit.edu/sinatools/documentation). 
+For information, please refer to the [main page](https://sina.birzeit.edu/sinatools) or the [online documentation](https://sina.birzeit.edu/sinatools/documentation). 
 
 Citation
 -------
