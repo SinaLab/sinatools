@@ -15,7 +15,7 @@ jobs:
       FORCE_CUDA: "0"          # Additional safety measure
     strategy:
       matrix:
-        python-version: ['3.10']
+        python-version: ['3.10', '3.11', '3.12']
         # '3.9' is too old for numpy/scipy/...
         # '3.13' is not yet available for torchvision
       fail-fast: false  # Continue with other versions if one fails
@@ -54,6 +54,6 @@ jobs:
       run: |
         pip freeze
 
-    # - name: Run pytest
-    #   run: |
-    #     python -m pytest -vv tests/
+    - name: Run pytest
+      run: |
+        python -m pytest -vv tests/
