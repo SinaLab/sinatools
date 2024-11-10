@@ -9,6 +9,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      CUDA_VISIBLE_DEVICES: ""  # Force CPU usage
+      TORCH_CUDA_ARCH_LIST: ""  # Prevent CUDA architecture detection
+      FORCE_CUDA: "0"          # Additional safety measure
     strategy:
       matrix:
         python-version: ['3.10', '3.11', '3.12']
