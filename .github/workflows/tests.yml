@@ -10,9 +10,22 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      CUDA_VISIBLE_DEVICES: ""  # Force CPU usage
-      TORCH_CUDA_ARCH_LIST: ""  # Prevent CUDA architecture detection
-      FORCE_CUDA: "0"          # Additional safety measure
+      # Disable CUDA visibility
+      CUDA_VISIBLE_DEVICES: ""
+      CUDA_LAUNCH_BLOCKING: "1"
+      PYTORCH_CUDA_ALLOC_CONF: "max_split_size_mb:32"
+      # Prevent CUDA initialization
+      FORCE_CUDA: "0"
+      TORCH_USE_CUDA_DSA: "0"
+      # Disable CUDA toolkit detection
+      TORCH_CUDA_ARCH_LIST: ""
+      TORCH_CUDA_HOME: ""
+      # Force CPU
+      TORCH_DEVICE: "cpu"
+      TRANSFORMERS_OFFLINE: "1"
+      # Additional safety
+      NVIDIA_VISIBLE_DEVICES: "void"
+      NO_CUDA: "1"
     strategy:
       matrix:
         python-version: ['3.10', '3.11', '3.12']
@@ -38,6 +51,21 @@ jobs:
     - name: Install dev dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel setuptools_rust maturin
+    
+    - name: Install PyTorch CPU
+      run: |
+        python -m pip install --upgrade pip
+        # Force CPU-only installation
+        pip install torch torchvision torchtext --index-url https://download.pytorch.org/whl/cpu
+
+    - name: Verify CPU-only PyTorch
+      run: |
+        python -c "
+        import torch
+        print('CUDA available:', torch.cuda.is_available())
+        print('Device:', torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
+        assert not torch.cuda.is_available(), 'CUDA should not be available!'
+        "
     
     - name: Run setup.py develop
       run: |

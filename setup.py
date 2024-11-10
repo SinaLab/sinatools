@@ -19,16 +19,16 @@ requirements = [
     'regex',
     'pandas',
     'pyarabic',
-    # 'transformers>=4.36.0',  # compatible with torch versions
+    'transformers>=4.36.0',  # compatible with torch versions
 
-    # 'torch',  # python versions: 3.8 - 3.12
-    # 'torchtext',  # python versions: 3.8 - 3.12. !! Project is not maintained anymore !!
-    # 'torchvision',  # python versions: 3.9 - 3.12
+    'torch==2.5.1+cpu',  # python versions: 3.8 - 3.12
+    'torchtext==0.18.0+cpu',  # python versions: 3.8 - 3.12. !! Project is not maintained anymore !!
+    'torchvision==0.20.1+cpu',  # python versions: 3.9 - 3.12
 
-    'torch==1.13.0',
-    'transformers==4.24.0',
-    'torchtext==0.14.0',
-    'torchvision==0.14.0',
+    # 'torch==1.13.0',
+    # 'transformers==4.24.0',
+    # 'torchtext==0.14.0',
+    # 'torchvision==0.14.0',
 
     'seqeval==1.2.2',
     'natsort==7.1.1'
