@@ -41,6 +41,7 @@ jobs:
     
     - name: Run setup.py develop
       run: |
+        pip install torch torchtext torchvision --index-url https://download.pytorch.org/whl/cpu
         python setup.py develop
         pip install pytest
     
