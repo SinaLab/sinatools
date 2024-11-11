@@ -23,10 +23,6 @@ sinatools/ner/__init__.py:22: in <module>
     self._handle = _dlopen(self._name, mode)
 E   OSError: /opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/torchtext/lib/libtorchtext.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
 """
-try:
-    from sinatools.wsd.disambiguator import disambiguate
-except Exception as e:
-    print(e)
 
 
 @pytest.mark.skip(
@@ -35,6 +31,10 @@ except Exception as e:
     "TODO 2: datasets not available by default in download_files."
 )
 def test_disambiguate():
+    try:
+        from sinatools.wsd.disambiguator import disambiguate
+    except Exception as e:
+        print(e)
     assert disambiguate("تمشيت بين الجداول والأنهار") == [
         {"concept_id": "303051631", "word": "تمشيت", "lemma": "تَمَشَّى"},
         {"concept_id": "303005470", "word": "بين", "lemma": "بَيْن"},
@@ -49,6 +49,10 @@ def test_disambiguate():
     "TODO 2: datasets not available by default in download_files."
 )
 def test_disambiguate_2():
+    try:
+        from sinatools.wsd.disambiguator import disambiguate
+    except Exception as e:
+        print(e)
     assert disambiguate(
         "أعلنت وزارة المالية في فلسطين"
         " عن تخفيض ضريبة الدخل في الضفة الغربية وقطاع غزة"

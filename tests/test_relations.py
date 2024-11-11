@@ -23,12 +23,6 @@ sinatools/ner/__init__.py:22: in <module>
     self._handle = _dlopen(self._name, mode)
 E   OSError: /opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/torchtext/lib/libtorchtext.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
 """
-try:
-    from sinatools.relations.relation_extractor import (
-        event_argument_relation_extraction,
-    )
-except Exception as e:
-    print(e)
 
 
 @pytest.mark.skip(
@@ -36,6 +30,13 @@ except Exception as e:
     "Apparently, it needs numpy<2."
 )
 def test_event_argument_relation_extraction():
+    try:
+        from sinatools.relations.relation_extractor import (
+            event_argument_relation_extraction,
+        )
+    except Exception as e:
+        print(e)
+        return
     assert event_argument_relation_extraction(
         "اندلعت انتفاضة الأقصى في 28 سبتمبر 2000"
     ) == [
