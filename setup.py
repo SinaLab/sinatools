@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """The setup script."""
-import os 
+import os
 from setuptools import setup, find_packages
 VERSION_FILE = os.path.join(os.path.dirname(__file__),
                             'sinatools',
@@ -17,11 +17,14 @@ requirements = [
     'tqdm',
     'requests',
     'regex',
-    'pathlib',
-    'torch==1.13.0',
-    'transformers==4.24.0',
-    'torchtext==0.14.0',
-    'torchvision==0.14.0',
+    'pandas',
+    'pyarabic',
+    'transformers>=4.36.0',  # compatible with torch versions
+
+    'torch==2.5.1',  # python versions: 3.8 - 3.12
+    'torchtext==0.18.0',  # python versions: 3.8 - 3.12. !! Project is not maintained anymore !!
+    'torchvision==0.20.1',  # python versions: 3.9 - 3.12
+
     'seqeval==1.2.2',
     'natsort==7.1.1'
 ]
@@ -83,6 +86,7 @@ setup(
                 'sinatools.CLI.relations.relation_extractor:main'),
         ],
     },
+    python_requires='>=3.10,<3.13',
     data_files=[('sinatools', ['sinatools/environment.yml'])],
     package_data={'sinatools': ['data/*.pickle', 'environment.yml']},
     install_requires=requirements,
