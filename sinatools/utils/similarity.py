@@ -101,56 +101,91 @@ def get_intersection(list1, list2, ignore_all_diacritics_but_not_shadda=False, i
              
 
 
-def get_union(list1, list2, ignore_all_diacritics_but_not_shadda, ignore_shadda_diacritic):
-    """
-    Computes the union of two sets of Arabic words, considering the differences in their diacritization. The method provides two options for handling diacritics: (i) ignore all diacritics except for shadda, and (ii) ignore the shadda diacritic as well. You can try the demo online.
+# def get_union(list1, list2, ignore_all_diacritics_but_not_shadda, ignore_shadda_diacritic):
+#     """
+#     Computes the union of two sets of Arabic words, considering the differences in their diacritization. The method provides two options for handling diacritics: (i) ignore all diacritics except for shadda, and (ii) ignore the shadda diacritic as well. You can try the demo online.
     
-    Args:
-        list1 (:obj:`list`): The first list.
-        list2 (:obj:`bool`): The second list.
-        ignore_all_diacratics_but_not_shadda (:obj:`bool`, optional) – A flag to ignore all diacratics except for the shadda. Defaults to False.
-        ignore_shadda_diacritic (:obj:`bool`, optional) – A flag to ignore the shadda diacritic. Defaults to False. 
+#     Args:
+#         list1 (:obj:`list`): The first list.
+#         list2 (:obj:`bool`): The second list.
+#         ignore_all_diacratics_but_not_shadda (:obj:`bool`, optional) – A flag to ignore all diacratics except for the shadda. Defaults to False.
+#         ignore_shadda_diacritic (:obj:`bool`, optional) – A flag to ignore the shadda diacritic. Defaults to False. 
     
-    Returns:
-        :obj:`list`: The union of the two lists, ignoring diacritics if flags are true.
+#     Returns:
+#         :obj:`list`: The union of the two lists, ignoring diacritics if flags are true.
     
-    **Example:**
+#     **Example:**
     
-    .. highlight:: python
-    .. code-block:: python
+#     .. highlight:: python
+#     .. code-block:: python
     
-        from sinatools.utils.similarity import get_union
-        list1 = ["كتب","فَعل","فَعَلَ"]
-        list2 = ["كتب","فَعّل"]
-        print(get_union(list1, list2, False, True))
-        #output: ["كتب" ,"فَعل" ,"فَعَلَ"]
-    """
-    list1 = [str(i) for i in list1 if i not in (None, ' ', '')]
+#         from sinatools.utils.similarity import get_union
+#         list1 = ["كتب","فَعل","فَعَلَ"]
+#         list2 = ["كتب","فَعّل"]
+#         print(get_union(list1, list2, False, True))
+#         #output: ["كتب" ,"فَعل" ,"فَعَلَ"]
+#     """
+#     list1 = [str(i) for i in list1 if i not in (None, ' ', '')]
 
+#     list2 = [str(i) for i in list2 if i not in (None, ' ', '')]
+
+#     union_list = []
+
+#     for list1_word in list1:
+#         word1 = normalize_word(list1_word, ignore_all_diacritics_but_not_shadda, ignore_shadda_diacritic)
+#         union_list.append(word1)
+
+#     for list2_word in list2:
+#         word2 = normalize_word(list2_word, ignore_all_diacritics_but_not_shadda, ignore_shadda_diacritic)
+#         union_list.append(word2)
+
+#     i = 0
+#     while i < len(union_list):
+#         j = i + 1
+#         while j < len(union_list):
+#             non_preferred_word = get_non_preferred_word(union_list[i], union_list[j])
+#             if (non_preferred_word != "#"):
+#                 union_list.remove(non_preferred_word)
+#             j = j + 1
+#         i = i + 1
+
+#     return union_list
+def get_union(list1, list2, ignore_all_diacritics_but_not_shadda, ignore_shadda_diacritic):
+  
+    
+    list1 = [str(i) for i in list1 if i not in (None, ' ', '')]
     list2 = [str(i) for i in list2 if i not in (None, ' ', '')]
 
+    
     union_list = []
 
+    # Normalize and add words from list1
     for list1_word in list1:
         word1 = normalize_word(list1_word, ignore_all_diacritics_but_not_shadda, ignore_shadda_diacritic)
-        union_list.append(word1)
+        if word1 not in union_list:  
+            union_list.append(word1)
 
+    # Normalize and add words from list2
     for list2_word in list2:
         word2 = normalize_word(list2_word, ignore_all_diacritics_but_not_shadda, ignore_shadda_diacritic)
-        union_list.append(word2)
+        if word2 not in union_list:  
+            union_list.append(word2)
 
+    
     i = 0
     while i < len(union_list):
         j = i + 1
         while j < len(union_list):
             non_preferred_word = get_non_preferred_word(union_list[i], union_list[j])
-            if (non_preferred_word != "#"):
+            if non_preferred_word != "#":
                 union_list.remove(non_preferred_word)
-            j = j + 1
-        i = i + 1
+                j -= 1  
+            j += 1
+        i += 1
 
     return union_list
-      
+
+
 
 
 def get_jaccard_similarity(list1: list, list2: list, ignore_all_diacritics_but_not_shadda: bool, ignore_shadda_diacritic: bool) -> float:
@@ -184,7 +219,7 @@ def get_jaccard_similarity(list1: list, list2: list, ignore_all_diacritics_but_n
     
     return float(len(intersection_list)) / float(len(union_list))
 
-def get_jaccard(delimiter, str1, str2, selection, ignoreAllDiacriticsButNotShadda=True, ignoreShaddaDiacritic=True):
+def get_jaccard(delimiter, selection, str1, str2, ignoreAllDiacriticsButNotShadda=True, ignoreShaddaDiacritic=True):
     """
     Calculates and returns the Jaccard similarity values (union, intersection, or Jaccard similarity) between two lists of Arabic words, considering the differences in their diacritization. The method provides two options for handling diacritics: (i) ignore all diacritics except for shadda, and (ii) ignore the shadda diacritic as well. You can try the demo online.
     
