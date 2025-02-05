@@ -16,7 +16,7 @@ requirements = [
     'farasapy',
     'tqdm',
     'requests',
-    'regex',
+    # 'regex',
     'pathlib',
     'torch==1.13.0',
     'transformers==4.24.0',
