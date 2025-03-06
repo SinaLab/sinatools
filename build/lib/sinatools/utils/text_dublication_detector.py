@@ -34,7 +34,7 @@ def removal(csv_file, columnName, finalFileName, deletedFileName, similarityThre
     .. code-block:: python
     
         from sinatools.utils.text_dublication_detector import removal
-        removal("/path/to/csv/file1", sentences, "/path/to/csv/file2", 0.8)
+        removal("/path/to/csv/file1", "sentences", "/path/to/final/file", "/path/to/deleted/file", 0.8)
     """
 
     # Read CSV file
@@ -47,11 +47,11 @@ def removal(csv_file, columnName, finalFileName, deletedFileName, similarityThre
     if columnName not in df.columns:
         return f"Error: Column '{columnName}' does not exist in the CSV file."
 
-    # Create an empty DataFrame to store the final results
-    finalDf = pd.DataFrame(columns=df.columns)
+    # Create a list to accumulate Series for the final results
+    finalSeries = []
 
-    # Create temporary DataFrames for deleted sentences
-    deletedSentencesDf = pd.DataFrame(columns=df.columns)
+    # Create a list to accumulate Series for the deleted results
+    deletedSeries = []
 
     # Iterate through each row in the DataFrame
     for index, row in df.iterrows():
@@ -65,10 +65,10 @@ def removal(csv_file, columnName, finalFileName, deletedFileName, similarityThre
             # Check cosine similarity with all sentences in the final DataFrame
             isDuplicate = False
             DublicatedRow = ""
-            for _, finalRow in finalDf.iterrows():
+            for finalRow in finalSeries:
                 finalSentence = str(finalRow[columnName])
-                currentSentence = remove_punctuation(arStrip(currentSentence, diacs = False, smallDiacs = False, shaddah = False,  digit = True, alif = False, specialChars = True))
-                finalSentence = remove_punctuation(arStrip(finalSentence, diacs = False, smallDiacs = False, shaddah = False,  digit = True, alif = False, specialChars = True))
+                currentSentence = remove_punctuation(arStrip(currentSentence, diacs = False, small_diacs = False, shaddah = False,  digit = True, alif = False, special_chars = True))
+                finalSentence = remove_punctuation(arStrip(finalSentence, diacs = False, small_diacs = False, shaddah = False,  digit = True, alif = False, special_chars = True))
                 if currentSentence != "" and finalSentence != "":
                    similarity = calculateCosineSimilarity(currentSentence, finalSentence)
 
@@ -79,16 +79,20 @@ def removal(csv_file, columnName, finalFileName, deletedFileName, similarityThre
                        break
 
             if not isDuplicate:
-                # If not a duplicate, add the sentence to the final DataFrame
-                finalDf = finalDf.append(row, ignore_index=True)
+                # If not a duplicate, add the sentence to the final Series list
+                finalSeries.append(row)
             else:
-                # If a duplicate, add the sentence to the deleted sentences DataFrame
-                #deletedSentencesDf = deletedSentencesDf.append(row, ignore_index=True)
-                deletedSentencesDf = deletedSentencesDf.append({**row, 'Dublicated': DublicatedRow}, ignore_index=True)
+                # If a duplicate, add the sentence to the deleted sentences list
+                deletedSeries.append(row)
         else:
             # If validation fails, return the error message
             return validationResult
-
+            
+    # Iinitalize final DataFrame using the final Series list
+    finalDf = pd.DataFrame(finalSeries)
+    # Iinitalize deleted sentences DataFrame using the deleted Series list
+    deletedSentencesDf = pd.DataFrame(deletedSeries)
+    
     # Save the final results to CSV files
     finalDf.to_csv(finalFileName, index=False)
     deletedSentencesDf.to_csv(deletedFileName, index=False)
@@ -124,8 +128,8 @@ def textToVector(text):
 
 # columnName = "Message"
 # csvFile = "Arabic-Oct7-Feb12.csv"
-# similarityThreshold = 0.8 
-# finalFileName = "Arabic-Oct7-Feb12FINAL.csv" 
+# similarityThreshold = 0.8
+# finalFileName = "Arabic-Oct7-Feb12FINAL.csv"
 # deletedFileName = "Arabic-Oct7-Feb12DeletedSent.csv"
 
 # result = removal(csvFile, columnName, finalFileName, deletedFileName, similarityThreshold)
