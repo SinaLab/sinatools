@@ -1,14 +1,28 @@
 from torch.utils.data import DataLoader
-from torchtext.vocab import vocab
 from collections import Counter, namedtuple
 import logging
 import re
 import itertools
-from sinatools.ner.helpers import load_object
-from sinatools.ner.datasets import Token
-from sinatools.utils.tokenizers_words import simple_word_tokenize
+from arabiner.utils.helpers import load_object
+from arabiner.data.datasets import Token
 
 logger = logging.getLogger(__name__)
+
+
+class Vocab:
+    def __init__(self, counter, specials=[]) -> None:
+        self.itos = list(counter.keys()) + specials
+        self.stoi = {s: i for i, s in enumerate(self.itos)}
+        self.word_count = counter
+
+    def get_itos(self) -> list[str]:
+        return self.itos
+
+    def get_stoi(self) -> dict[str, int]:
+        return self.stoi
+
+    def __len__(self):
+        return len(self.itos)
 
 
 def conll_to_segments(filename):
@@ -60,8 +74,8 @@ def parse_conll_files(data_paths):
 
     # Generate vocabs for tags and tokens
     tag_vocabs = tag_vocab_by_type(tags)
-    tag_vocabs.insert(0, vocab(Counter(tags)))
-    vocabs = vocabs(tokens=vocab(Counter(tokens), specials=["UNK"]), tags=tag_vocabs)
+    tag_vocabs.insert(0, Vocab(Counter(tags)))
+    vocabs = vocabs(tokens=Vocab(Counter(tokens), specials=["UNK"]), tags=tag_vocabs)
     return tuple(datasets), vocabs
 
 
@@ -72,9 +86,9 @@ def tag_vocab_by_type(tags):
     tag_types = sorted(list(set([tag.split("-", 1)[1] for tag in tag_names if "-" in tag])))
 
     for tag_type in tag_types:
-        r = re.compile(".*-" + tag_type)
+        r = re.compile(".*-" + tag_type + "$")
         t = list(filter(r.match, tags)) + ["O"]
-        vocabs.append(vocab(Counter(t), specials=["<pad>"]))
+        vocabs.append(Vocab(Counter(t)))
 
     return vocabs
 
@@ -83,13 +97,11 @@ def text2segments(text):
     """
     Convert text to a datasets and index the tokens
     """
-    #dataset = [[Token(text=token, gold_tag=["O"]) for token in text.split()]]
-    list_of_tokens = simple_word_tokenize(text)
-    dataset = [[Token(text=token, gold_tag=["O"]) for token in list_of_tokens]]
+    dataset = [[Token(text=token, gold_tag=["O"]) for token in text.split()]]
     tokens = [token.text for segment in dataset for token in segment]
 
     # Generate vocabs for the tokens
-    segment_vocab = vocab(Counter(tokens), specials=["UNK"])
+    segment_vocab = Vocab(Counter(tokens), specials=["UNK"])
     return dataset, segment_vocab
 
 
