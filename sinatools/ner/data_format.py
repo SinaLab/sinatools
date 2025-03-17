@@ -3,8 +3,8 @@ from collections import Counter, namedtuple
 import logging
 import re
 import itertools
-from arabiner.utils.helpers import load_object
-from arabiner.data.datasets import Token
+from sinatools.ner.helpers import load_object
+from sinatools.ner.data.datasets import Token
 
 logger = logging.getLogger(__name__)
 
