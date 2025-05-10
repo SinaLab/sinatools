@@ -4,8 +4,11 @@ import logging
 import importlib
 import shutil
 import torch
+import pickle
+import json
 import random
 import numpy as np
+from argparse import Namespace
 
 
 def logging_config(log_file=None):
@@ -30,24 +33,17 @@ def logging_config(log_file=None):
 
 
 def load_object(name, kwargs):
+    """
+    Load objects dynamically given the object name and its arguments
+    :param name: str - object name, class name or function name
+    :param kwargs: dict - keyword arguments
+    :return: object
+    """
+    object_module, object_name = name.rsplit(".", 1)
+    object_module = importlib.import_module(object_module)
+    fn = getattr(object_module, object_name)(**kwargs)
+    return fn
 
-    try:
-        object_module, object_name = name.rsplit(".", 1)
-        object_module = importlib.import_module(object_module)
-        obj = getattr(object_module, object_name)
-        if callable(obj): 
-            fn = obj(**kwargs)
-            return fn
-        else:
-            raise TypeError(f"{name} is not a callable object.")
-    except (ImportError, ModuleNotFoundError) as e:
-        print(f"Error importing module: {e}")
-    except AttributeError as e:
-        print(f"Attribute error: {e}")
-    except Exception as e:
-        print(f"An error occurred: {e}")
-    
-    return None 
 
 def make_output_dirs(path, subdirs=[], overwrite=True):
     """
@@ -65,6 +61,41 @@ def make_output_dirs(path, subdirs=[], overwrite=True):
     for subdir in subdirs:
         os.makedirs(os.path.join(path, subdir))
 
+
+def load_checkpoint(model_path):
+    """
+    Load model given the model path
+    :param model_path: str - path to model
+    :return: tagger - arabiner.trainers.BaseTrainer - the tagger model
+             vocab - arabicner.utils.data.Vocab - indexed tags
+             train_config - argparse.Namespace - training configurations
+    """
+    with open(os.path.join(model_path, "tag_vocab.pkl"), "rb") as fh:
+        tag_vocab = pickle.load(fh)
+
+    # Load train configurations from checkpoint
+    train_config = Namespace()
+    with open(os.path.join(model_path, "args.json"), "r") as fh:
+        train_config.__dict__ = json.load(fh)
+
+    # Initialize the loss function, not used for inference, but evaluation
+    loss = load_object(train_config.loss["fn"], train_config.loss["kwargs"])
+
+    # Load BERT tagger
+    model = load_object(train_config.network_config["fn"], train_config.network_config["kwargs"])
+    model = torch.nn.DataParallel(model)
+
+    if torch.cuda.is_available():
+        model = model.cuda()
+
+    # Update arguments for the tagger
+    # Attach the model, loss (used for evaluations cases)
+    train_config.trainer_config["kwargs"]["model"] = model
+    train_config.trainer_config["kwargs"]["loss"] = loss
+
+    tagger = load_object(train_config.trainer_config["fn"], train_config.trainer_config["kwargs"])
+    tagger.load(os.path.join(model_path, "checkpoints"))
+    return tagger, tag_vocab, train_config
 
 
 def set_seed(seed):
