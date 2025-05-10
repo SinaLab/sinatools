@@ -10,7 +10,7 @@ See the [benchmarking](https://www.jarrar.info/publications/HJK24.pdf), which sh
 
 Installation 
 --------
-To install SinaTools, ensure you are using Python version 3.10.8, then clone the [GitHub](git://github.com/SinaLab/SinaTools) repository.
+To install SinaTools, ensure you are using Python version 3.11.11, then clone the [GitHub](git://github.com/SinaLab/SinaTools) repository.
 
 Alternatively, you can execute the following command:
 
