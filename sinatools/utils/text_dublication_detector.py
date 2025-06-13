@@ -34,7 +34,7 @@ def removal(csv_file, columnName, finalFileName, deletedFileName, similarityThre
     .. code-block:: python
     
         from sinatools.utils.text_dublication_detector import removal
-        removal("/path/to/csv/file1", sentences, "/path/to/csv/file2", 0.8)
+        removal("/path/to/csv/file1", "sentences", "/path/to/final/file", "/path/to/deleted/file", 0.8)
     """
 
     # Read CSV file
