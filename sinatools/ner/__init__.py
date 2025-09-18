@@ -1,10 +1,8 @@
 from sinatools.DataDownload import downloader
 import os
 from sinatools.ner.helpers import load_object
-import pickle
-import os
+from sinatools.ner.tag_vocab import load_tag_vocab
 import torch
-import pickle
 import json
 from argparse import Namespace
 
@@ -17,9 +15,7 @@ path =downloader.get_appdatadir()
 model_path = os.path.join(path, filename)
 
 _path = os.path.join(model_path, "tag_vocab.pkl")
-
-with open(_path, "rb") as fh:
-    tag_vocab = pickle.load(fh)
+tag_vocab = load_tag_vocab(_path)
 
 train_config = Namespace()
 args_path = os.path.join(model_path, "args.json")

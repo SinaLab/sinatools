@@ -81,6 +81,8 @@ setup(
                 'sinatools.CLI.semantic_relatedness.compute_relatedness:main'),
             ('relation_extractor='
                 'sinatools.CLI.relations.relation_extractor:main'),
+            ('convert_tag_vocab='
+                'sinatools.CLI.ner.convert_tag_vocab:main'),
         ],
     },
     data_files=[('sinatools', ['sinatools/environment.yml'])],
