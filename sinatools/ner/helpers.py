@@ -4,11 +4,11 @@ import logging
 import importlib
 import shutil
 import torch
-import pickle
 import json
 import random
 import numpy as np
 from argparse import Namespace
+from sinatools.ner.tag_vocab import load_tag_vocab
 
 
 def logging_config(log_file=None):
@@ -70,8 +70,7 @@ def load_checkpoint(model_path):
              vocab - arabicner.utils.data.Vocab - indexed tags
              train_config - argparse.Namespace - training configurations
     """
-    with open(os.path.join(model_path, "tag_vocab.pkl"), "rb") as fh:
-        tag_vocab = pickle.load(fh)
+    tag_vocab = load_tag_vocab(os.path.join(model_path, "tag_vocab.pkl"))
 
     # Load train configurations from checkpoint
     train_config = Namespace()
