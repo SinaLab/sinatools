@@ -5,6 +5,7 @@ import re
 import itertools
 from sinatools.ner.helpers import load_object
 from sinatools.ner.data.datasets import Token
+from sinatools.utils.tokenizers_words import simple_word_tokenize
 
 logger = logging.getLogger(__name__)
 
@@ -97,7 +98,8 @@ def text2segments(text):
     """
     Convert text to a datasets and index the tokens
     """
-    dataset = [[Token(text=token, gold_tag=["O"]) for token in text.split()]]
+    text = simple_word_tokenize(text)
+    dataset = [[Token(text=token, gold_tag=["O"]) for token in text]]
     tokens = [token.text for segment in dataset for token in segment]
 
     # Generate vocabs for the tokens

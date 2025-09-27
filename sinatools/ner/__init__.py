@@ -4,7 +4,7 @@ from sinatools.ner.helpers import load_object
 import pickle
 import os
 import torch
-import pickle
+from sinatools.ner.data_format import Vocab
 import json
 from argparse import Namespace
 

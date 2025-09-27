@@ -20,7 +20,6 @@ requirements = [
     'pathlib',
     # 'torch==2.5.1',
     'transformers==4.47.1',
-    # 'torchtext==0.14.0',
     'torchvision==0.20.1',
     'seqeval==1.2.2',
     'natsort==7.1.1'
