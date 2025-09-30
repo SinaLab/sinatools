@@ -42,7 +42,7 @@ def main():
     parser = argparse.ArgumentParser(description="Download files from specified URLs.")
     parser.add_argument('-f', '--files', nargs="*",
                         help="Names of the files to download. Available files are: "
-                             f"{', '.join(urls.keys().append("wsd", "semantic"))}. If no file is specified, all files will be downloaded.")
+                             f"{', '.join(list(urls.keys()).append("wsd", "semantic"))}. If no file is specified, all files will be downloaded.")
     
     get_appdatadir()
 
