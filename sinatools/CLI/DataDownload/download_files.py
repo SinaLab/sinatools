@@ -42,7 +42,7 @@ def main():
     parser = argparse.ArgumentParser(description="Download files from specified URLs.")
     parser.add_argument('-f', '--files', nargs="*",
                         help="Names of the files to download. Available files are: "
-                             f"{', '.join(urls.keys())}. If no file is specified, all files will be downloaded.")
+                             f"{', '.join(urls.keys().append("wsd", "semantic"))}. If no file is specified, all files will be downloaded.")
     
     get_appdatadir()
 
@@ -66,6 +66,15 @@ def main():
             elif file == "synonyms":
                 download_file(urls["graph_l2"])
                 download_file(urls["graph_l3"])
+            elif file == "morph":
+                download_file(urls["five_grams"])
+                download_file(urls["four_grams"])
+                download_file(urls["three_grams"])
+                download_file(urls["two_grams"])
+                download_file(urls["morph"])
+            if file == "semantic":
+                download_folder_from_hf("SinaLab/ArabGlossBERT", "bert-base-arabertv02_22_May_2021_00h_allglosses_unused01")
+                download_folder_from_hf("SinaLab/ArabGlossBERT", "bert-base-arabertv02")    
             else:
                url = urls[file]
                download_file(url)

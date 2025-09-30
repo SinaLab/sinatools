@@ -52,7 +52,7 @@ class BaseTrainer:
                     valid_len (B x 1) - int - valiud length of each sequence
                     logits (B x T x NUM_LABELS) - logits for each token and each tag
         """
-        for subwords, gold_tags, tokens, valid_len in dataloader:
+        for subwords, gold_tags, tokens, masks, valid_len in dataloader:
             self.model.train(is_train)
 
             if torch.cuda.is_available():

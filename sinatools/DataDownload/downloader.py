@@ -185,6 +185,8 @@ def download_files():
     """
     for url in urls.values():
         download_file(url)
+        download_folder_from_hf("SinaLab/ArabGlossBERT", "bert-base-arabertv02_22_May_2021_00h_allglosses_unused01")
+        download_folder_from_hf("SinaLab/ArabGlossBERT", "bert-base-arabertv02")    
 
 
 def download_folder_from_hf(repo_url, folder_name):

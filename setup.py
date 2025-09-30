@@ -22,7 +22,8 @@ requirements = [
     'transformers==4.47.1',
     'torchvision==0.20.1',
     'seqeval==1.2.2',
-    'natsort==7.1.1'
+    'natsort==7.1.1',
+    'pandas'
 ]
 
 
