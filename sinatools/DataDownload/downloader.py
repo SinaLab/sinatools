@@ -118,7 +118,7 @@ def download_file(url, dest_path=get_appdatadir()):
         elif file_extension == '.gz':
 
             extract_tar(file_path, extracted_folder_name)
-        elif file_extension =='.pickle':
+        elif file_extension =='.pickle' or file_extension =='.pkl':
             print(f'Done: {file_extension}')
 
         else:
@@ -185,8 +185,8 @@ def download_files():
     """
     for url in urls.values():
         download_file(url)
-        download_folder_from_hf("SinaLab/ArabGlossBERT", "bert-base-arabertv02_22_May_2021_00h_allglosses_unused01")
-        download_folder_from_hf("SinaLab/ArabGlossBERT", "bert-base-arabertv02")    
+    download_folder_from_hf("SinaLab/ArabGlossBERT", "bert-base-arabertv02_22_May_2021_00h_allglosses_unused01")
+    download_folder_from_hf("SinaLab/ArabGlossBERT", "bert-base-arabertv02")    
 
 
 def download_folder_from_hf(repo_url, folder_name):

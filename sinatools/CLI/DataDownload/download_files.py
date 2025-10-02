@@ -53,7 +53,7 @@ def main():
         all_files.append("wsd")
         all_files.append("semantic")
         for file in all_files:
-            print("file: ", file)
+            #print("file: ", file)
             if file == "wsd":
                 download_file(urls["morph"])
                 download_file(urls["ner"])
