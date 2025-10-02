@@ -23,7 +23,8 @@ requirements = [
     'torchvision==0.20.1',
     'seqeval==1.2.2',
     'natsort==7.1.1',
-    'pandas'
+    'pandas',
+    'pyarabic'
 ]
 
 
