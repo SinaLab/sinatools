@@ -93,6 +93,7 @@ def remove_punctuation(text):
         يَا أَيُّهَا الَّذِينَ آمَنُوا لِيَسْتَأْذِنْكُمُ  
 
     """
+    output_string = text
     try:
         if text:
             punctuation_marks = [r'[\u0021-\u002F]+', r'[U+060C]+', r'[\u003A-\u0040]+',
@@ -100,7 +101,6 @@ def remove_punctuation(text):
                                  r'[\u061B]+', r'[\u061E]+', r'[\u061F]+', r'[\u0640]+',
                                  r'[\u0653]+', r'[\u065C]+', r'[\u066C]+', r'[\u066A]+',
                                  r'["}"]+', r'["{"]+']
-            output_string = text
             for punctuation in punctuation_marks:
                 output_string = re.sub(punctuation, '', output_string)
     except:
