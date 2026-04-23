@@ -1,16 +1,17 @@
 import argparse
-from sinatools.morphology.ALMA_multi_word import ALMA_multi_word
 import json
-from sinatools.utils.readfile import read_file
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='Multi-Word Analysis using SinaTools')
     
     # Adding arguments for the multi-word input or file containing the multi-word input
     parser.add_argument('--multi_word', type=str, help='Multi-word text to be analyzed')
     parser.add_argument('--file', type=str, help='File containing the multi-word text to be analyzed')
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.morphology.ALMA_multi_word import ALMA_multi_word
+    from sinatools.utils.readfile import read_file
 
     if args.multi_word is None and args.file is None:
         print("Error: Either --multi_word or --file argument must be provided.")

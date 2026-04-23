@@ -39,10 +39,8 @@ Examples:
 
 """
 import argparse
-from sinatools.utils.text_transliteration import perform_transliteration
-from sinatools.utils.readfile import read_file
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='Perform text transliteration using SinaTools')
     
     # Adding arguments for the text, file, and schema
@@ -50,7 +48,10 @@ def main():
     parser.add_argument('--file', type=str, help='File containing the text to be transliterated')
     parser.add_argument('--schema', type=str, required=True, help='Transliteration schema to be used')
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.utils.readfile import read_file
+    from sinatools.utils.text_transliteration import perform_transliteration
 
     # Check if either text or file is provided
     if args.text is None and args.file is None:

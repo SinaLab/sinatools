@@ -42,10 +42,8 @@ Examples:
 
 """
 import argparse
-from sinatools.utils.tokenizer import sentence_tokenizer
-from sinatools.utils.readfile import read_file
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='Sentence Tokenization using SinaTools')
     
     # Adding arguments for the text, file, and tokenization options
@@ -56,7 +54,10 @@ def main():
     parser.add_argument('--question_mark', action='store_true', help='Tokenize at question marks')
     parser.add_argument('--exclamation_mark', action='store_true', help='Tokenize at exclamation marks')
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.utils.readfile import read_file
+    from sinatools.utils.tokenizer import sentence_tokenizer
 
     # Check if either text or file is provided
     if args.text is None and args.file is None:

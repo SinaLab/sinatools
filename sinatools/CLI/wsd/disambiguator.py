@@ -32,16 +32,17 @@ Examples:
 
 import argparse
 import json
-from sinatools.wsd.disambiguator import disambiguate
-from sinatools.utils.readfile import read_file
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='Arabic text stripping tool using SinaTools')
     
     parser.add_argument('--text', type=str, help='Input sentence to process')
     parser.add_argument('--file', type=str, help='File containing the Arabic sentence to process')
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.utils.readfile import read_file
+    from sinatools.wsd.disambiguator import disambiguate
 
     if args.text is None and args.file is None:
         print("Either --text or --file argument must be provided.")

@@ -27,10 +27,9 @@ Examples:
 """
 
 import argparse
-from sinatools.utils.tokenizer import corpus_tokenizer
 
 # Define the main function that will parse the arguments
-def main():
+def main(argv=None):
     # Create an ArgumentParser object
     parser = argparse.ArgumentParser(description='Tokenize the corpus and write the results to a CSV file.')
     
@@ -39,7 +38,9 @@ def main():
     parser.add_argument('--output_csv', type=str, help='The path to the output CSV file.')
     
     # Parse the command-line arguments
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.utils.tokenizer import corpus_tokenizer
     
     # Call the corpus_tokenizer function with the parsed arguments
     corpus_tokenizer(args.dir_path, args.output_csv)
@@ -47,4 +48,3 @@ def main():
 # Call the main function when the script is executed
 if __name__ == '__main__':
     main()
-

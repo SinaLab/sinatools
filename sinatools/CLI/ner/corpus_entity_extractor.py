@@ -1,10 +1,6 @@
 import os
 import csv
-from sinatools.utils.tokenizer import sentence_tokenizer
-from sinatools.utils.tokenizers_words import simple_word_tokenize
-import pandas as pd
 import argparse
-from sinatools.ner.entity_extractor import extract
 
 """
 The following command takes a CSV file as input. It splits a specific column into tokens and tags them using named entity recognition (NER). It retains all other columns as they are, and it also adds sentences and tokens. Additionally, it assigns an auto-incrementing ID, a sentence ID, and a global sentence ID to each token. As follows:
@@ -33,11 +29,18 @@ def jsons_to_list_of_lists(json_list):
     return [[d['token'], d['tags']] for d in json_list]
 
 def combine_tags(sentence):
+    from sinatools.ner.entity_extractor import extract
+
     output = jsons_to_list_of_lists(extract(sentence, "nested"))
     return [word[1] for word in output]
 
 
 def corpus_tokenizer(input_csv, output_csv, text_column, additional_columns, row_id, global_sentence_id):
+    import pandas as pd
+
+    from sinatools.utils.tokenizer import sentence_tokenizer
+    from sinatools.utils.tokenizers_words import simple_word_tokenize
+
     print(input_csv, output_csv, text_column, additional_columns)
     row_id = row_id - 1
     global_sentence_id = global_sentence_id - 1
@@ -68,7 +71,7 @@ def corpus_tokenizer(input_csv, output_csv, text_column, additional_columns, row
 
                     writer.writerow(output_dic)                                                                                                                                                                                                                                          
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description="CSV NER Tagging Tool")
     parser.add_argument("--input_csv", help="Path to the input CSV file")
     parser.add_argument("--text_column", required=True,
@@ -82,12 +85,11 @@ def main():
     parser.add_argument("--global_sentence_id", default="1",
                     help="global_sentence_id to starts with")
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     corpus_tokenizer(args.input_csv, args.output_csv, args.text_column, args.additional_columns, int(args.row_id), int(args.global_sentence_id))
 
 
 if __name__ == "__main__":
     main()
-
 
 

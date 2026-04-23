@@ -37,33 +37,38 @@ Examples:
 
 import argparse
 import json
-import pandas as pd
-from sinatools.ner.entity_extractor import extract
-from sinatools.utils.tokenizer import corpus_tokenizer
-from sinatools.utils.tokenizers_words import simple_word_tokenize
 
 def jsons_to_list_of_lists(json_list):
     return [[d['token'], d['tags']] for d in json_list]
 
 def combine_tags(sentence):
+    from sinatools.ner.entity_extractor import extract
+
     output = jsons_to_list_of_lists(extract(sentence, "nested"))
     return [word[1] for word in output]
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='NER Analysis using ArabiNER')
 
     parser.add_argument('--text', type=str, help='Text to be analyzed for Named Entity Recognition')
     parser.add_argument('--dir', type=str, help='dir containing the text files to be analyzed for Named Entity Recognition')
     parser.add_argument('--output_csv', type=str, help='Output CSV file to write the results')
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.ner.entity_extractor import extract
 
     if args.text is not None:
         results = extract(args.text)
         # Print the results in JSON format
         print(json.dumps(results, ensure_ascii=False, indent=4))
     elif args.dir is not None:
+        import pandas as pd
+
+        from sinatools.utils.tokenizer import corpus_tokenizer
+        from sinatools.utils.tokenizers_words import simple_word_tokenize
+
         corpus_tokenizer(args.dir, args.output_csv)
         df = pd.read_csv(args.output_csv)
         df['NER tags'] = None

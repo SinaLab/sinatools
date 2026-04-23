@@ -57,12 +57,11 @@ def get_appdatadir():
     else:
         path = Path(home, '.sinatools')
 
-    if not os.path.exists(path):
-        os.makedirs(path)
+    os.makedirs(path, exist_ok=True)
 
     return path
 
-def download_file(url, dest_path=get_appdatadir()):
+def download_file(url, dest_path=None):
     """
     Downloads a file from the specified URL and saves it to the specified destination path.
 
@@ -90,6 +89,9 @@ def download_file(url, dest_path=get_appdatadir()):
           download_file(url='https://example.com/data.zip', dest_path='data/')
 
     """
+    if dest_path is None:
+        dest_path = get_appdatadir()
+
     filename = os.path.basename(url)
     file_path = os.path.join(dest_path, filename)
 
