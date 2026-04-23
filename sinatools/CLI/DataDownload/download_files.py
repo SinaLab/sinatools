@@ -31,14 +31,15 @@ Examples:
 """
 
 import argparse
-from sinatools.DataDownload.downloader import download_file
-from sinatools.DataDownload.downloader import download_files
-from sinatools.DataDownload.downloader import get_appdatadir
-from sinatools.DataDownload.downloader import download_folder_from_hf
-from sinatools.DataDownload.downloader import urls
 
 
-def main():
+def main(argv=None):
+    from sinatools.DataDownload.downloader import download_file
+    from sinatools.DataDownload.downloader import download_files
+    from sinatools.DataDownload.downloader import download_folder_from_hf
+    from sinatools.DataDownload.downloader import get_appdatadir
+    from sinatools.DataDownload.downloader import urls
+
     parser = argparse.ArgumentParser(description="Download files from specified URLs.")
     parser.add_argument('-f', '--files', nargs="*",
                         help="Names of the files to download. Available files are: "
@@ -46,7 +47,7 @@ def main():
     
     get_appdatadir()
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if args.files:
         all_files = args.files

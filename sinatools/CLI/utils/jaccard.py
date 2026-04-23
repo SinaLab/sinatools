@@ -46,11 +46,9 @@ Examples:
 """
 
 import argparse
-from sinatools.utils.similarity import get_jaccard
-from sinatools.utils.readfile import read_file
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='Compute Jaccard similarity between two sets of strings')
     
     # Adding optional arguments for the two sets and the files
@@ -64,7 +62,10 @@ def main():
     parser.add_argument('--ignoreShaddaDiacritic', action='store_true', help='Ignore shadda diacritic')
     
  
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.utils.readfile import read_file
+    from sinatools.utils.similarity import get_jaccard
 
     if args.file1 and args.file2:
         set1 = " ".join(read_file(args.file1))
@@ -76,7 +77,7 @@ def main():
         print("Either --file1 and --file2 arguments or both --set1 and --set2 arguments must be provided.")
         return
 
-    similarity = get_jaccard(args.delimiter, set1, set2, args.selection, args.ignoreAllDiacriticsButNotShadda, args.ignoreShaddaDiacritic)
+    similarity = get_jaccard(args.delimiter, args.selection, set1, set2, args.ignoreAllDiacriticsButNotShadda, args.ignoreShaddaDiacritic)
     
     print("Jaccard Result:", similarity)
 

@@ -19,16 +19,20 @@ Examples:
 """
 
 import argparse
-from sinatools.utils.parser import remove_latin
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='remove latin characters from the text')
 
     parser.add_argument('--text', type=str, required=True, help='The input text')
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.utils.parser import remove_latin
+
     result = remove_latin(args.text)
  
     print(result)
-    if __name__ == '__main__':
-        main()
+
+
+if __name__ == '__main__':
+    main()

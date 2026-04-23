@@ -39,7 +39,6 @@ Examples:
 
 """
 import argparse
-from sinatools.utils.word_compare import Implication
 
 def read_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -49,7 +48,7 @@ def read_file(file_path):
         else:
             raise ValueError(f"File {file_path} must contain at least one word.")
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='Evaluate Implication between two words using SinaTools')
     
     # Adding optional arguments for the two input words and the files
@@ -58,7 +57,7 @@ def main():
     parser.add_argument('--file1', type=str, help='File containing the first word to evaluate implication')
     parser.add_argument('--file2', type=str, help='File containing the second word to evaluate implication')
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if args.file1 and args.file2:
         word1 = read_file(args.file1)
@@ -69,7 +68,8 @@ def main():
         print("Either --file1 and --file2 arguments or both --inputWord1 and --inputWord2 arguments must be provided.")
         return
 
-    # Instantiate the Implication class
+    from sinatools.utils.word_compare import Implication
+
     implication_obj = Implication(word1, word2)
     
     # For this example, assuming there is a method `get_verdict()` in the Implication class.
@@ -80,5 +80,4 @@ if __name__ == '__main__':
     main()
 # implication --inputWord1 "word1" --inputWord2 "word2"
 # implication --file1 "path/to/your/firstfile.txt" --file2 "path/to/your/secondfile.txt"
-
 

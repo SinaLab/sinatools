@@ -48,10 +48,8 @@ Examples:
 """
 
 import argparse
-from sinatools.morphology.morph_analyzer import analyze
-from sinatools.utils.readfile import read_file
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='Morphological Analysis using SinaTools')
       
     parser.add_argument('--text', type=str, help='Text to be morphologically analyzed')
@@ -60,7 +58,10 @@ def main():
     parser.add_argument('--task', type=str, default='full', choices=['lemmatization', 'pos', 'root', 'full'], help='Task for the result filter [lemmatization, pos, root, full] (default: full)')
     parser.add_argument('--flag', type=str, default='1', choices=['1','*'], help='The flag to filter the returned results')
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.morphology.morph_analyzer import analyze
+    from sinatools.utils.readfile import read_file
 
     if args.text is None and args.file is None:
         print("Error: Either --text or --file argument must be provided.")

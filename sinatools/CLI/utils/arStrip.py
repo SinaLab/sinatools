@@ -51,10 +51,8 @@ Examples:
 """
 
 import argparse
-from sinatools.utils.parser import arStrip
-from sinatools.utils.readfile import read_file
 
-def main():                             
+def main(argv=None):                             
     parser = argparse.ArgumentParser(description='Arabic text stripping tool using SinaTools')
     
     parser.add_argument('--text', type=str, help='Text to be stripped')
@@ -66,7 +64,10 @@ def main():
     parser.add_argument('--alif', type=bool, default=True, help='Whether to strip alif')
     parser.add_argument('--special_chars', type=bool, default=True, help='Whether to strip special characters')
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.utils.parser import arStrip
+    from sinatools.utils.readfile import read_file
 
     if args.file:
         text_content = read_file(args.file)

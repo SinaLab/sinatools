@@ -22,21 +22,24 @@ Examples:
 """
 
 import argparse
-from sinatools.utils.parser import remove_punctuation
 #from sinatools.utils.parser import read_file
 #from sinatools.utils.parser import write_file
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='remove punctuation marks from the text')
 
     parser.add_argument('--text',required=True,help="input text")
    # parser.add_argument('myFile', type=argparse.FileType('r'),help='Input file csv')
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+
+    from sinatools.utils.parser import remove_punctuation
+
     result = remove_punctuation(args.text)
  
     print(result)
-    if __name__ == '__main__':
-        main()
 
+
+if __name__ == '__main__':
+    main()
 

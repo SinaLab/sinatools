@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-def main():
+def main(argv=None):
     # Determine the path to the 'environment.yml' file within the package
     package_dir = os.path.dirname(__file__)
     env_file = os.path.join(package_dir, 'environment.yml')

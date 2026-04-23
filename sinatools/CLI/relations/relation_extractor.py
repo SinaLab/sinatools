@@ -34,22 +34,27 @@ Examples:
 """
 
 import argparse
-from sinatools.relations.relation_extractor import event_argument_relation_extraction
-from sinatools.utils.readfile import read_file
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description='Relation Extraction using SinaTools')
       
     parser.add_argument('--text', type=str, help='The text from which events need to be extracted.')
     parser.add_argument('--file', type=str, help='File containing the text from which events need to be extracted.')
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if args.text is None and args.file is None:
         print("Error: Either --text or --file argument must be provided.")
         return
 
-    input_text = args.text if args.text else " ".join(read_file(args.file))
+    if args.file:
+        from sinatools.utils.readfile import read_file
+
+        input_text = " ".join(read_file(args.file))
+    else:
+        input_text = args.text
+
+    from sinatools.relations.relation_extractor import event_argument_relation_extraction
 
     results = event_argument_relation_extraction(input_text)
 

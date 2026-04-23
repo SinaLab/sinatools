@@ -1,5 +1,10 @@
 SinaTools Command Line
 =======================
+
+All command-line tools are available through the unified ``sinatools`` entrypoint::
+
+   sinatools <command> [options]
+
 .. toctree::
    :maxdepth: 2
    :titlesonly:
