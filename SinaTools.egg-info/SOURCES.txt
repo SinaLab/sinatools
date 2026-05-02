@@ -137,3 +137,5 @@ sinatools/wsd/__init__.py
 sinatools/wsd/disambiguator.py
 sinatools/wsd/settings.py
 sinatools/wsd/wsd.py
+tests/test_dependency_metadata.py
+tests/test_sentence_tokenizer_cli.py

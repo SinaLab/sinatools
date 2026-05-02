@@ -111,7 +111,6 @@ dependencies:
   - tk=8.6.14=h39e8969_0
   - torchaudio=2.5.1=py311_cu124
   - torchtriton=3.1.0=py311
-  - torchvision=0.20.1=py311_cu124
   - typing_extensions=4.12.2=py311h06a4308_0
   - urllib3=2.2.3=py311h06a4308_0
   - wheel=0.44.0=py311h06a4308_0
@@ -171,9 +170,9 @@ dependencies:
       - tensorboard==2.19.0
       - tensorboard-data-server==0.7.2
       - threadpoolctl==3.5.0
-      - tokenizers==0.21.0
+      - tokenizers==0.19.1
       - tqdm==4.67.1
-      - transformers==4.47.1
+      - transformers==4.43.4
       - trl==0.12.0
       - tzdata==2024.2
       - werkzeug==3.1.3

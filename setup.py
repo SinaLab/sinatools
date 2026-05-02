@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """The setup script."""
-import os 
+import os
 from setuptools import setup, find_packages
 VERSION_FILE = os.path.join(os.path.dirname(__file__),
                             'sinatools',
@@ -18,9 +18,8 @@ requirements = [
     'requests',
     # 'regex',
     'pathlib',
-    # 'torch==2.5.1',
-    'transformers==4.47.1',
-    'torchvision==0.20.1',
+    'torch>=2.0',
+    'transformers>=4.0,<4.44',
     'seqeval==1.2.2',
     'natsort==7.1.1',
     'pandas',
@@ -39,7 +38,7 @@ test_requirements = [
 
 setup(
     entry_points={
-        'console_scripts':[
+        'console_scripts': [
             ('install_env='
                 'sinatools.install_env:main'),
             ('arStrip='
@@ -73,11 +72,11 @@ setup(
             ('corpus_entity_extractor='
                 'sinatools.CLI.ner.corpus_entity_extractor:main'),
             ('text_dublication_detector='
-                'sinatools.CLI.utils.text_dublication_detector:main'),     
+                'sinatools.CLI.utils.text_dublication_detector:main'),
             ('evaluate_synonyms='
-                'sinatools.CLI.synonyms.evaluate_synonyms:main'),  
+                'sinatools.CLI.synonyms.evaluate_synonyms:main'),
             ('extend_synonyms='
-                'sinatools.CLI.synonyms.extend_synonyms:main'),                    
+                'sinatools.CLI.synonyms.extend_synonyms:main'),
             ('semantic_relatedness='
                 'sinatools.CLI.semantic_relatedness.compute_relatedness:main'),
             ('relation_extractor='
@@ -88,8 +87,11 @@ setup(
     package_data={'sinatools': ['data/*.pickle', 'environment.yml']},
     install_requires=requirements,
     license="MIT license",
-    description='Open-source Python toolkit for Arabic Natural Understanding, allowing people to integrate it in their system workflow.',
-    long_description = readme + "\n",
+    description=(
+        'Open-source Python toolkit for Arabic Natural Understanding, '
+        'allowing people to integrate it in their system workflow.'
+    ),
+    long_description=readme + "\n",
     long_description_content_type='text/markdown',
     include_package_data=True,
     keywords='sinatools',
